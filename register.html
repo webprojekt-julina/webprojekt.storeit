@@ -14,12 +14,35 @@
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
-
+    <style>
+        a {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+        }
+        .block {
+            display: block;
+            width: 47%;
+            border: none;
+            background-color: #007bff;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+            margin: 15px;
+        }
+        a:hover{
+            color: white;
+            text-decoration: none;
+            background-color: #0069d9;
+        }
+    </style>
 </head>
 
 <body class="text-center">
 <form class="form-signin" action="register_do.php">
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+    <a class="block" href="sign_in.html">&laquo; Zurück zur Anmeldung</a><br>
     <h1 class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
     <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
     <br>
@@ -34,6 +57,9 @@
     <br>
         <label for="inputPassword" class="sr-only">Neues Passwort</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Neues Passwort" name="password" required>
+
+    <!--<a href="register.html">Doch schon registriert? Zurück zur Anmeldung</a>-->
+    <br>
     <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
