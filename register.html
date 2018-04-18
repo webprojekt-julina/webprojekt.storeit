@@ -7,35 +7,35 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Willkommen bei store.it</title>
+    <title>Registrierung</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
+
 </head>
 
 <body class="text-center">
-<form class="form-signin" action="login_do.php">
+<form class="form-signin" action="register_do.php">
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-    <h1 class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>
-    <h2 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h2>
+    <h1 class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
+    <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
+    <br>
+        <label for="inputName" class="sr-only">Vorname</label>
+        <input type="text" id="inputName" class="form-control" placeholder="Vorname" name="name" required autofocus>
+    <br>
+        <label for="inputSurname" class="sr-only">Nachname</label>
+        <input type="text" id="inputSurname" class="form-control" placeholder="Nachname" name="surname" required autofocus>
     <br>
         <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
     <br>
-        <label for="inputPassword" class="sr-only">Passwort</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
-    <a href="register.html">Neu bei store.it? Jetzt registrieren!</a>
+        <label for="inputPassword" class="sr-only">Neues Passwort</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Neues Passwort" name="password" required>
     <br>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me">Angemeldet bleiben
-        </label>
-
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>
 </body>
