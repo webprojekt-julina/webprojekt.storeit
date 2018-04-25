@@ -1,5 +1,6 @@
-html,
-body {
+@media screen {
+
+html, body {
     height: 100%;
 }
 
@@ -32,7 +33,7 @@ h1 {
     color: white;
     text-shadow: 0 0 5px #007bff;
 
-    background: url("https://cdn.pixabay.com/photo/2016/06/22/16/22/clouds-1473311_1280.jpg") no-repeat center center fixed;
+    background: url("https://images.pexels.com/photos/46160/field-clouds-sky-earth-46160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
     -moz-background-size: cover;
     background-size: cover;
     position: static;
@@ -65,11 +66,15 @@ h1 {
     border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-    margin-bottom: 10px;
+    margin-bottom: -1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
+.form-signin input[id="inputpassword2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 #copyright{
     margin-top: 15px;
     margin-right: 15px;
@@ -83,6 +88,12 @@ a [id="data, impressum"]{
     text-decoration: none;
     display: inline-block;
     color: white;
+}
+a:hover [id="data, impressum"]{
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    background-color: #0069d9;
 }
 .container {
     display: block;
@@ -102,11 +113,11 @@ a [id="data, impressum"]{
     margin-right: 15px;
     padding: 10px;
 }
-a:hover{
+/*a:hover{
     color: white;
     text-decoration: none;
     background-color: #0069d9;
-}
+}*/
 footer {
     display: -ms-flexbox;
     display: flex;
@@ -122,4 +133,4 @@ footer {
     border-radius: 7px;
     color: white;
 }
-
+}

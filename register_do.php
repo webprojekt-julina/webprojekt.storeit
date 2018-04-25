@@ -1,83 +1,85 @@
-<?php
-session_start();
-$dsn="mysql:: host=mars.iuk.hdm-stuttgart.de; dbname=u-lb107";
-?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="de">
 <head>
-    <title>Registrierung</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Willkommen bei store.it</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+    <style>
+        p {
+            width: auto;
+            color: black;
+
+
+        }
+    </style>
 </head>
 <body>
+    <p>
+    <?php
+    session_start();
+    include ("server.php");
 
-<?php
-$db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
-$showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
+    // $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
-/* Passwort steht noch in URL -> Unbedingt ändern*/
+    /* Passwort steht noch in URL -> Unbedingt ändern*/
 
-if(isset($_GET['register'])) {
-    $error = false;
-    $email = $_POST['email'];
-    $passwort = $_POST['passwort'];
-    $passwort2 = $_POST['passwort2'];
+    if(isset($_GET['register'])) {
+        $error = false;
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password2 = $_POST['password2'];
 
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo 'Bitte eine gültige E-Mail-Adresse eingeben<br>';
-        $error = true;
-    }
-    if(strlen($passwort) == 0) {
-        echo 'Bitte ein Passwort angeben<br>';
-        $error = true;
-    }
-    if($passwort != $passwort2) {
-        echo 'Die Passwörter müssen übereinstimmen<br>';
-        $error = true;
-    }
-
-    //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
-    if(!$error) {
-        $statement = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $result = $statement->execute(array('email' => $email));
-        $user = $statement->fetch();
-
-        if($user !== false) {
-            echo 'Diese E-Mail-Adresse ist bereits vergeben<br>';
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo 'Bitte eine gültige E-Mail-Adresse eingeben<br>';
             $error = true;
         }
-    }
+        if(strlen($password) == 0) {
+            echo 'Bitte ein Passwort angeben<br>';
+            $error = true;
+        }
+        if($password != $password2) {
+            echo 'Die Passwörter müssen übereinstimmen<br>';
+            $error = true;
+        }
+        //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
+        if(!$error) {
+            $statement = $db->prepare("SELECT * FROM webprojekt_user WHERE email = :email");
+            $result = $statement->execute(array('email' => $email));
+            $email = $statement->fetch();
 
-    //Keine Fehler, wir können den Nutzer registrieren
-    if(!$error) {
-        $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
+            if($email !== false) {
+                echo 'Diese E-Mail-Adresse ist bereits vergeben<br>';
+                $error = true;
+            }
+        }
 
-        $statement = $pdo->prepare("INSERT INTO users (email, passwort) VALUES (:email, :passwort)");
-        $result = $statement->execute(array('email' => $email, 'passwort' => $passwort_hash));
+        //Keine Fehler, wir können den Nutzer registrieren
+        if(!$error) {
+            $passwort_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        if($result) {
-            echo 'Du wurdest erfolgreich registriert. <a href="login.php">Zum Login</a>';
-            $showFormular = false;
-        } else {
-            echo 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';
+            $statement = $db->prepare("INSERT INTO webprojekt_user (name, surname, email, password) VALUES (:name,:surname, :email, :password)");
+            $result = $statement->execute(array('name' => $name, 'surname' => $surname, 'email' => $email, 'passwort' => $passwort_hash));
+
+            if($result) {
+                echo 'Du wurdest erfolgreich registriert. <a href="sign_in.html">Zum Login</a>';
+                $showFormular = false;
+            } else {
+                echo 'Beim Abspeichern ist leider ein Fehler aufgetreten<br>';
+            }
         }
     }
-}
-
-if($showFormular) {
-    ?>
-
-    <form action="?register=1" method="post">
-        E-Mail:<br>
-        <input type="email" size="40" maxlength="250" name="email"><br><br>
-        Dein Passwort:<br>
-        <input type="password" size="40"  maxlength="250" name="passwort"><br>
-        Passwort wiederholen:<br>
-        <input type="password" size="40" maxlength="250" name="passwort2"><br><br>
-        <input type="submit" value="Abschicken">
-    </form>
-
-    <?php
-} //Ende von if($showFormular)
-?>
-
+?></p>
 </body>
 </html>

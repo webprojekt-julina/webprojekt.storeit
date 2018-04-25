@@ -1,15 +1,14 @@
 <?php
-$dsn="mysql:: host=mars.iuk.hdm-stuttgart.de; dbname=u-lb107";
 session_start();
-if(isset($_POST['login']) and isset($_POST['password'])) {
-    $db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
-    //$userid = $_POST['user_id'];
-    $login = $_POST['email'];
+include ("server.php");
+if(isset($_POST['email']) and isset($_POST['password'])) {
+    //$db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    echo($login);
+    echo($email);
 
-    $statement = $db->prepare("SELECT * FROM webprojekt WHERE email=:email and password=:password");
-    $result = $statement->execute(array(':email' => $login, ':password' => $password));
+    $statement = $db->prepare("SELECT * FROM webprojekt_user WHERE email=:email and password=:password");
+    $result = $statement->execute(array(':email' => $email, ':password' => $password));
     $user = $statement->fetch();
 
     //Überprüfung des Passworts
@@ -20,7 +19,7 @@ if(isset($_POST['login']) and isset($_POST['password'])) {
         $errorMessage = ", dein Benutzername oder dein Passwort ist ungültig!<br>";
     }
 }
-        if(isset($errorMessage)) {
-            echo $errorMessage;
-        }
-    ?>
+if(isset($errorMessage)) {
+    echo $errorMessage;
+}
+?>
