@@ -15,10 +15,37 @@
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
     <style>
-        a:hover [id="datalogin, impressumlogin"]{
+        #datalogin {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: #007bff;
+        }
+        #impressumlogin{
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: #007bff;
+        }
+        #datalogin:hover{
             color: white;
             text-decoration: none;
             background-color: #0069d9;
+        }
+        #impressumlogin:hover{
+            color: white;
+            text-decoration: none;
+            background-color: #0069d9;
+        }
+        #staysigned {
+            text-decoration: none;
+            display: inline-block;
+            color: #007bff;
+        }
+
+        #staysigned:hover{
+            color: #007bff;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -27,7 +54,7 @@
 <div class="page-header">
     <h1 id="h1login" class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>
 </div>
-<form class="form-signin" action="login_do.php">
+<form action="login_do.php" class="form-signin" method="post">
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <!--<h1 class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>-->
     <h2 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h2>
@@ -37,8 +64,7 @@
     <br>
         <label for="inputPassword" class="sr-only">Passwort</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
-    <a href="register.html">Neu bei store.it? Jetzt registrieren!</a>
-    <br>
+    <br><a id="staysigned" href="register.html">Neu bei store.it? Jetzt registrieren!</a>
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me">Angemeldet bleiben

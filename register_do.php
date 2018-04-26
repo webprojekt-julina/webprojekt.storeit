@@ -1,33 +1,6 @@
-<!doctype html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Willkommen bei store.it</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-    <style>
-        p {
-            width: auto;
-            color: black;
-
-
-        }
-    </style>
-</head>
-<body>
-    <p>
-    <?php
+<?php
     session_start();
-    include ("server.php");
+    include ("connection.php");
 
     // $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
@@ -69,8 +42,8 @@
         if(!$error) {
             $passwort_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $statement = $db->prepare("INSERT INTO webprojekt_user (name, surname, email, password) VALUES (:name,:surname, :email, :password)");
-            $result = $statement->execute(array('name' => $name, 'surname' => $surname, 'email' => $email, 'passwort' => $passwort_hash));
+            $statement = $db->prepare("INSERT INTO webprojekt_user (firstname, surname, email, password) VALUES (:firstname,:surname, :email, :password)");
+            $result = $statement->execute(array('name' => $name, 'surname' => $surname, 'email' => $email, 'password' => $password));
 
             if($result) {
                 echo 'Du wurdest erfolgreich registriert. <a href="sign_in.html">Zum Login</a>';
@@ -80,6 +53,4 @@
             }
         }
     }
-?></p>
-</body>
-</html>
+?>

@@ -1,4 +1,4 @@
-@media screen {
+@media all {
 
 html, body {
     height: 100%;
@@ -89,7 +89,7 @@ a [id="data, impressum"]{
     display: inline-block;
     color: white;
 }
-a:hover [id="data, impressum"]{
+#data, #impressum:hover {
     text-decoration: none;
     display: inline-block;
     color: white;
@@ -113,11 +113,7 @@ a:hover [id="data, impressum"]{
     margin-right: 15px;
     padding: 10px;
 }
-/*a:hover{
-    color: white;
-    text-decoration: none;
-    background-color: #0069d9;
-}*/
+
 footer {
     display: -ms-flexbox;
     display: flex;
