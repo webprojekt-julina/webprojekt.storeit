@@ -28,7 +28,7 @@
         }
         //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
         if(!$error) {
-            $statement = $db->prepare("SELECT * FROM webprojekt_user WHERE email = :email");
+            $statement = $db->prepare("SELECT * FROM webprojekt WHERE email = :email");
             $result = $statement->execute(array('email' => $email));
             $email = $statement->fetch();
 
@@ -42,7 +42,7 @@
         if(!$error) {
             $passwort_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $statement = $db->prepare("INSERT INTO webprojekt_user (firstname, surname, email, password) VALUES (:firstname,:surname, :email, :password)");
+            $statement = $db->prepare("INSERT INTO webprojekt (firstname, surname, email, password) VALUES (:firstname,:surname, :email, :password)");
             $result = $statement->execute(array('name' => $name, 'surname' => $surname, 'email' => $email, 'password' => $password));
 
             if($result) {
