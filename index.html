@@ -10,7 +10,7 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
@@ -25,9 +25,18 @@
         <li class="nav-item text-nowrap">
 
           <!--Dropdown einfügen mit Bild + Name, EInstellungen, Abmelden-->
+          <!--auskommentierter Button
           <button class="btn btn-sm btn-outline-secondary dropdown-toggle">Profil</button>
+          -->
+
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Profil</button>
+            <div id="myDropdown" class="dropdown-content">
+              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+              <li class="#profile">Profil</li>
+              <li class="#settings">Einstellungen</li>
+              <li class="#log">Logout</li>
           <!--Bei Klick auf "Abmelden" automatische Weiterleitung auf "Log In Seite"-->
-          <a class="nav-link" href="#">Sign out</a>
         </li>
       </ul>
     </nav>
@@ -87,12 +96,35 @@
             </div>
           </div>
 
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
           <h2>Section title</h2>
         </main>
       </div>
     </div>
+
+    <!-- script für die dropdowns-->
+    <script>
+      /* When the user clicks on the button,
+       toggle between hiding and showing the dropdown content */
+      function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      function filterFunction() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown");
+          a = div.getElementsByTagName("a");
+          for (i = 0; i < a.length; i++) {
+              if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  a[i].style.display = "";
+              } else {
+                  a[i].style.display = "none";
+              }
+          }
+      }
+    </script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
