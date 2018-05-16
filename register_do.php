@@ -10,7 +10,7 @@
         $surname = $_POST['surname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $password2 = $_POST['password2'];
+        $password2 = $_POST['password3'];
     }
         /*if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo 'Bitte eine gültige E-Mail-Adresse eingeben<br>';
