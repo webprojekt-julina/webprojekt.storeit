@@ -1,10 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">store.it</a>
+    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">NEU</button>
+    <!-- auskommentiertes Suchfeld
+    <input type="text" name="search" placeholder="Search.."> -->
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+
+            <!--Dropdown einfügen mit Bild + Name, Einstellungen, Abmelden-->
+
+            <div class="dropbtn">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle">Profil</button>
+                <div class="dropdown-content">
+                    <a href="#">Username</a>
+                    <a href="#">Einstellungen</a>
+                    <a href=sign_in.html>Abmelden</a>
+                </div>
+            </div>
+            <!--Bei Klick auf "Abmelden" automatische Weiterleitung auf "Log In Seite"-->
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href=index.html>
+                            <span data-feather="home"></span>
+                            Dateien <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=latest.html>
+                            <span data-feather="clock"></span>
+                            Aktuell
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=favourite.html>
+                            <span data-feather="star"></span>
+                            Favoriten
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=my_files.html>
+                            <span data-feather="user"></span>
+                            Von Mir
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=files_for_me.html>
+                            <span data-feather="users"></span>
+                            Für Mich
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=trash.html>
+                            <span data-feather="trash-2"></span>
+                            Papierkorb
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Von Mir</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        Sortieren nach
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../../../assets/js/vendor/popper.min.js"></script>
+<script src="../../../../dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+
+<script>
+    $(".index").click(function(){
+        toggle ("index.html")
+    });
+    $(".latest").click(function(){
+        $("#1").attr("src","latest.html")
+    });
+    $(".favourite").click(function(){
+        $("#1").attr("src","favourite.html")
+    });
+    $(".my_files").click(function(){
+        $("#1").attr("src","my_files.html")
+    });
+    $(".files_for_me").click(function(){
+        $("#1").attr("src","files_for_me.html")
+    });
+    $(".trash").click(function(){
+        $("#1").attr("src","trash.html")
+    });
+</script>
+
+<!-- script für die dropdowns-->
+<script>
+    /* When the user clicks on the button,
+     toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>
 </body>
 </html>
