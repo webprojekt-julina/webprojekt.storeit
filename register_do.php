@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include ("connection.php");
+    include ("connection2.php");
 
     // $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
     /* Passwort steht noch in URL -> Unbedingt ändern*/
