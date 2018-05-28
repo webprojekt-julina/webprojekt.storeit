@@ -76,7 +76,7 @@ include ("connection.php");
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
             $statement = $db->prepare("INSERT INTO webprojekt (firstname, surname, email, password, ) VALUES (:firstname, :surname, :email, :password )");
-            $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password));
+            $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
 
             if ($result) {
                 echo 'Du wurdest erfolgreich registriert. <a href="sign_in.html">Zum Login</a>';
@@ -96,19 +96,19 @@ if($showFormular) {
         <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
         <br>
         <label for="inputName" class="sr-only">Vorname</label>
-        <input type="text" id="inputName" class="form-control" placeholder="Vorname" required autofocus>
+        <input type="text" id="inputName" class="form-control" placeholder="Vorname" name="firstname" required autofocus>
         <br>
         <label for="inputSurname" class="sr-only">Nachname</label>
-        <input type="text" id="inputSurname" class="form-control" placeholder="Nachname" required autofocus>
+        <input type="text" id="inputSurname" class="form-control" placeholder="Nachname" name="surname"  required autofocus>
         <br>
         <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
         <br>
         <label for="inputPassword" class="sr-only">Neues Passwort</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Neues Passwort"  required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Neues Passwort" name="password" required>
         <br>
         <label for="inputPassword" class="sr-only">Neues Passwort bestätigen</label>
-        <input type="password" id="inputPassword2" class="form-control" placeholder="Neues Passwort bestätigen"  required>
+        <input type="password" id="inputPassword2" class="form-control" placeholder="Neues Passwort bestätigen" name="password2"required>
         <br>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
