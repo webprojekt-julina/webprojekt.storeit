@@ -11,7 +11,7 @@ if($row= $ergebnis->fetch(PDO::FETCH_ASSOC)) {
     session_start();
     $_SESSION["email"]=$row["email"];
     $_SESSION["password"]=$row["password"];
-    include("index.html");
+    include("dashboard/index.html");
 }
 else {
     echo "Ihre Angaben sind leider nicht korrekt, versuchen Sie es erneut!";
