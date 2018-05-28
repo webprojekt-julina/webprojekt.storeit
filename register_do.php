@@ -1,6 +1,6 @@
 <?php
-session_start();
-include ("connection.php");
+    session_start();
+    include ("connection2.php");
 ?>
     <!doctype html>
     <html lang="de">
@@ -10,6 +10,8 @@ include ("connection.php");
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
+
+
 
         <title>Registrierung</title>
 

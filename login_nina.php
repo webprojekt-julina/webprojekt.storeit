@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("connection.php");
+include ("connection2.php");
 // Abfrage
 
 $sqlabfrage="SELECT * FROM webprojekt WHERE password='".$_POST["password"]."' AND email='".$_POST["email"]."'";
