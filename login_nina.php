@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("connection2.php");
+include ("connection.php");
 // Abfrage
 
 $sqlabfrage="SELECT * FROM webprojekt WHERE password='".$_POST["password"]."' AND email='".$_POST["email"]."'";
@@ -8,7 +8,6 @@ $sqlabfrage="SELECT * FROM webprojekt WHERE password='".$_POST["password"]."' AN
 $ergebnis= $db->query($sqlabfrage);
 
 if($row= $ergebnis->fetch(PDO::FETCH_ASSOC)) {
-    session_start();
     $_SESSION["email"]=$row["email"];
     $_SESSION["password"]=$row["password"];
     include("dashboard/index.html");
