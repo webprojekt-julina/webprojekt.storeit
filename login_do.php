@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("connection2.php");
+include ("connection.php");
 if(isset($_POST['email']) and isset($_POST['password'])) {
     //$db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
     $email = $_POST['email'];

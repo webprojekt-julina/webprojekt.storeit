@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include ("connection2.php");
+    include ("connection.php");
 ?>
     <!doctype html>
     <html lang="de">
