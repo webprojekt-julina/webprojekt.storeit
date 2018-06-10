@@ -5,7 +5,7 @@
       <paths name="Mars">
         <serverdata>
           <mappings>
-            <mapping deploy="/webprojekt.storeit/" local="$PROJECT_DIR$" web="/webprojekt.storeit/" />
+            <mapping deploy="/~lb107/" local="$PROJECT_DIR$" web="/~lb107/" />
           </mappings>
         </serverdata>
       </paths>
