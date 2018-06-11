@@ -51,7 +51,7 @@ include ("connection.php");
 $showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
 
 if(isset($_GET['register'])) {
-    $error = false;
+    $error = false; //hh
     $firstname = $_POST['firstname'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
