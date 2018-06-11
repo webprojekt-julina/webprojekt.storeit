@@ -16,10 +16,8 @@ include ("connection.php");
 
         <title>Registrierung</title>
 
-        <!-- Bootstrap core CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
         <link href="signin.css" rel="stylesheet">
         <style>
             a {
