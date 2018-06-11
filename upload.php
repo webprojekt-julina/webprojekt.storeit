@@ -17,6 +17,6 @@ if ($fileType == "jpg" OR $fileType=="png" OR $fileType== "jpeg" OR $fileType ==
     echo"Dateiart nicht zugelassen.";
     die();
 }
-if (!move_uploaded_file($_FILES["uploadfile"]["tmp_name"], "/home/gurzki/public_html/upload/files/".$_FILES["uploadfile"]["name"])) { echo "Datei nicht hochgeladen";
+if (!move_uploaded_file($_FILES["uploadfile"]["tmp_name"], "/home/jt049/public_html/webprojekt.storeit/upload/files/".$_FILES["uploadfile"]["name"])) { echo "Datei nicht hochgeladen";
     die();
 }
