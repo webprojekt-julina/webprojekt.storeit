@@ -2,8 +2,13 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
+<<<<<<< HEAD
+      <webServer id="e4609e28-016d-4f41-a4f8-4cd1d81450c9" name="Mars" url="http://mars.iuk.hdm-stuttgart.de/~jt049">
+        <fileTransfer host="mars.iuk.hdm-stuttgart.de" port="22" rootFolder="/home/jt049/public_html" accessType="SFTP">
+=======
       <webServer id="fc1f11cd-0076-4833-b05c-2a41a796b59b" name="Mars" url="http://mars.iuk.hdm-stuttgart.de">
         <fileTransfer host="mars.iuk.hdm-stuttgart.de" port="22" accessType="SFTP">
+>>>>>>> origin/master
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
