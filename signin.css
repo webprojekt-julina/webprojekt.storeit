@@ -24,23 +24,23 @@ h1 {
 #h1login {
     height: 150px;/*height: 650px;*/
 }
-#h1register{
-    height: 145px;/*height: 650px;*/
+#h1register {
+    height: 145px; /*height: 650px;*/
     margin-top: 25px;
 }
 .page-header {
-    width: 100%;
-    color: white;
-    text-shadow: 0 0 5px #007bff;
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
 
-    background: url("https://images.pexels.com/photos/46160/field-clouds-sky-earth-46160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
-    -moz-background-size: cover;
-    background-size: cover;
-    position: static;
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
 
-    margin-bottom: 40px;
-    padding: 20px;
-}
+        margin-bottom: 40px;
+        padding: 20px;
+    }
 .form-signin {
     width: 100%;
     max-width: 400px;
@@ -165,7 +165,7 @@ footer {
         color: white;
         text-shadow: 0 0 5px #007bff;
 
-        background: url("https://images.pexels.com/photos/46160/field-clouds-sky-earth-46160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+        background: url("wolken.png") no-repeat center center fixed;
         -moz-background-size: cover;
         background-size: cover;
         position: static;

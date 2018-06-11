@@ -5,7 +5,6 @@ include ("connection.php");
     <!doctype html>
     <html lang="de">
     <head>
-        <!--Hallo-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -42,14 +41,17 @@ include ("connection.php");
                 text-decoration: none;
                 background-color: #0069d9;
             }
+            .alert {
+
+            }
         </style>
     </head>
 
 <?php
-$showFormular = true; //Variable ob das Registrierungsformular anezeigt werden soll
+$showFormular = true;
 
 if(isset($_GET['register'])) {
-    $error = false; //hh
+    $error = false;
     $firstname = $_POST['firstname'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
@@ -59,7 +61,7 @@ if(isset($_GET['register'])) {
         echo 'Die Passwörter müssen übereinstimmen<br>';
         $error = true;
     }
-    //Überprüfe, dass die E-Mail-Adresse noch nicht registriert wurde
+    //Überprüfung, ob E-Mail-Adresse noch nicht registriert wurde
     if (!$error) {
         $statement = $db->prepare("SELECT * FROM webprojekt WHERE email = :email");
         $result = $statement->execute(array('email' => $email));
@@ -69,15 +71,21 @@ if(isset($_GET['register'])) {
             $error = true;
         }
     }
-    //Keine Fehler, wir können den Nutzer registrieren
+
     if (!$error) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $statement = $db->prepare("INSERT INTO webprojekt (firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
+        $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
         $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
         if ($result) {
-            echo 'Du wurdest erfolgreich registriert. <a href="sign_in.html">Zum Login</a>';
-        } else {
-            echo 'Bei der Registrierung ist leider ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.<br>';
+            include ("sucessfullregistration.html");
+            $showFormular= false;
+        } else { ?>
+            <!doctype html>
+                <body>
+                    <div class="alert"><script> alert("Bei der Registrierung ist leider ein Fehler aufgetreten. Bitte überprüfe Deine Angaben und versuche es erneut."); </script></div>
+                </body>
+            </html>
+            <?php
         }
     }
 }
@@ -115,5 +123,5 @@ if($showFormular) {
     </footer><br><br>
     <p id="copyright">&copy; Webprojekt 2017-2018</p>
     <?php
-} //Ende von if($showFormular)
+}
 ?>
