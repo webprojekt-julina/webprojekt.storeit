@@ -1,4 +1,5 @@
 <?php
+//Änderung
 session_start();
 if(!isset($_SESSION['email'])) {
     die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
