@@ -65,7 +65,7 @@ include ("connection.php");
                 text-decoration: none;
                 background-color: #0069d9;
             }
-        </style>
+        </style>r
     </head>
 
     <?php
