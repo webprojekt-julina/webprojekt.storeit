@@ -18,6 +18,8 @@ include ("connection.php");
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
         <link href="signin.css" rel="stylesheet">
+        <link href="alertBox.css" rel="stylesheet">
+
         <style>
             a {
                 text-decoration: none;
@@ -41,8 +43,27 @@ include ("connection.php");
                 text-decoration: none;
                 background-color: #0069d9;
             }
-            .alert {
-
+            #dataRegister {
+                text-decoration: none;
+                display: inline-block;
+                color: white;
+                background-color: #007bff;
+            }
+            #impressumRegister{
+                text-decoration: none;
+                display: inline-block;
+                color: white;
+                background-color: #007bff;
+            }
+            #dataRegister:hover{
+                color: white;
+                text-decoration: none;
+                background-color: #0069d9;
+            }
+            #impressumRegister:hover{
+                color: white;
+                text-decoration: none;
+                background-color: #0069d9;
             }
         </style>
     </head>
@@ -58,7 +79,16 @@ if(isset($_GET['register'])) {
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     if ($password != $password2) {
-        echo 'Die Passwörter müssen übereinstimmen<br>';
+        ?>
+        <!doctype html>
+                <body>
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es  erneut..
+                    </div>
+                </body>
+            </html>
+        <?php
         $error = true;
     }
     //Überprüfung, ob E-Mail-Adresse noch nicht registriert wurde
@@ -66,8 +96,16 @@ if(isset($_GET['register'])) {
         $statement = $db->prepare("SELECT * FROM webprojekt WHERE email = :email");
         $result = $statement->execute(array('email' => $email));
         $a = $statement->fetch();
-        if ($a !== false) {
-            echo 'Diese E-Mail-Adresse ist bereits vergeben<br>';
+        if ($a !== false) { ?>
+            <!doctype html>
+                <body>
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Oh no!</strong> Diese E-Mail-Adresse ist bereits vergeben. Bitte gib eine andere E-Mail-Adresse ein.
+                    </div>
+                </body>
+            </html>
+            <?php
             $error = true;
         }
     }
@@ -82,7 +120,10 @@ if(isset($_GET['register'])) {
         } else { ?>
             <!doctype html>
                 <body>
-                    <div class="alert"><script> alert("Bei der Registrierung ist leider ein Fehler aufgetreten. Bitte überprüfe Deine Angaben und versuche es erneut."); </script></div>
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Überprüfe deine Angaben und versuche es erneut.
+                    </div>
                 </body>
             </html>
             <?php
@@ -118,8 +159,8 @@ if($showFormular) {
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
     </form>
     <footer>
-        <a class="container" id="data" href="data.html">Datenschutz</a><br>
-        <a class="container" id="impressum" href="impressum.html">Impressum</a><br>
+        <a class="container" id="dataRegister" href="data.html">Datenschutz</a><br>
+        <a class="container" id="impressumRegister" href="impressum.html">Impressum</a><br>
     </footer><br><br>
     <p id="copyright">&copy; Webprojekt 2017-2018</p>
     <?php

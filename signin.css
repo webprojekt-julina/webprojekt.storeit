@@ -18,8 +18,7 @@ h1 {
     display: -ms-flexbox;
     -ms-flex-align: center;
     align-items: center;
-    margin-top: 20px;
-    padding: 20px;
+    padding: 40px;
 }
 #h1login {
     height: 150px;/*height: 650px;*/
