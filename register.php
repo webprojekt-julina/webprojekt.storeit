@@ -6,7 +6,7 @@ include ("connection.php");
     <html lang="de">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
@@ -67,13 +67,13 @@ include ("connection.php");
             }
         </style>
     </head>
-
-
-
-<?php
-$showFormular = true; ?>
-
-<?php
+    <body class="text-center">
+    <div class="page-header">
+        <h1 id="h1register" class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
+    </div>
+    <a class="block" id="button-reg" href="sign_in.html">&laquo; Zurück zur Anmeldung</a><br>
+    <?php
+$showFormular = true;
     if(isset($_GET['register'])) {
         $error = false;
         $firstname = $_POST['firstname'];
@@ -82,11 +82,13 @@ $showFormular = true; ?>
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
 
-    if ($password != $password2) {
+        ?>
+
+    <?php if ($password != $password2) {
         ?>
                     <div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es  erneut..
+                        <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es  erneut.
                     </div>
         <?php
             $error = true;
@@ -107,16 +109,19 @@ $showFormular = true; ?>
             $error = true;
             }
          }
-    }
+    } ?>
 
+    <?php
     if (!$error) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
         $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
         if ($result) {
-            include ("successfullregistration.html");
-            $showFormular = false;
+
+            header("Location: successfull_sign_in.html"); ?>
+
+           <?php
         } else {
             ?>
                     <div class="alert">
@@ -127,16 +132,7 @@ $showFormular = true; ?>
         }
     }
     ?>
-    <?php if($showFormular)
-    {
-        ?>
-        <body class="text-center">
-        <div class="page-header">
-            <h1 id="h1register" class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
-        </div>
-        <a class="block" href="sign_in.html">&laquo; Zurück zur Anmeldung</a><br>
-
-        <form action="?register=1" class="form-signin" method="post">
+     <form action="?register=1" class="form-signin" method="post">
             <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
             <br>
             <label for="inputName" class="sr-only">Vorname</label>
@@ -163,8 +159,4 @@ $showFormular = true; ?>
         </footer><br><br>
         <p id="copyright">&copy; Webprojekt 2017-2018</p>
     </body>
-<?php
-    }
-
-    ?>
-
+</html>

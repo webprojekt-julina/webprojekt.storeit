@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Willkommen bei store.it</title>
+    <title>Registrierung erfolgreich</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +17,27 @@
     <link href="alertBox.css" rel="stylesheet">
 
     <style>
+        .congrats {
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+
         #datalogin {
             text-decoration: none;
             display: inline-block;
@@ -39,35 +60,31 @@
             text-decoration: none;
             background-color: #0069d9;
         }
-        #signup {
-            text-decoration: none;
-            display: inline-block;
-            color: #007bff;
-        }
-
-        #signup:hover{
-            color: #007bff;
-            text-decoration: underline;
+        #inputPassword {
+            margin-bottom: 0px;
         }
     </style>
 </head>
 
 <body class="text-center">
 <div class="page-header">
-    <h1 id="h1login" class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>
+    <h1 id="h1login" class="h1 mb-3 font-weight-bold-underline">Registrierung erfolgreich!</h1>
+</div>
+<div class="congrats">
+    <span class="closebtn"  onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Dein Konto wurde erfolgreich angelegt!</strong><br>  Aus Sicherheitsgründen musst Du deine Anmeldeinformationen erneut eingeben. <br> Danach kannst Du direkt loslegen, deine Dateien zu speichern, zu sortieren und zu teilen.<br> Viel Spaß!</p>
 </div>
 <form action="login_nina.php" class="form-signin" method="post">
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <!--<h1 class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>-->
 
-    <h2 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h2>
+    <h2 class="h3 mb-3 font-weight-normal">Melde dich an und lege los:</h2>
     <br>
-        <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
+    <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
     <br>
-        <label for="inputPassword" class="sr-only">Passwort</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
-    <br><a id="signup" href="register.php">Neu bei store.it? Jetzt registrieren!</a>
+    <label for="inputPassword" class="sr-only">Passwort</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me">Angemeldet bleiben
