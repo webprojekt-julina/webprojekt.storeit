@@ -1,5 +1,4 @@
 <?php
-//Änderung
 session_start();
 if(!isset($_SESSION['email'])) {
     die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
@@ -36,17 +35,24 @@ echo $userid;
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="#">Ordner erstellen</a>
-            <a class="dropdown-item" onclick="myFunction()" href="#">Datei hochladen</a>
+            <a class="dropdown-item" href="#">Datei hochladen
+                <form action="upload.php" method="post"
+                      enctype="multipart/form-data">
+                    <input type="file" name="uploadfile"
+                           id="uploadfile"><br>
+                    <input type="submit" value="Datei hochladen" name="submit">
+                </form>
+            </a>
             <a class="dropdown-item" href="#">Ordner hochladen</a>
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Bild
+            Hallo, [username lalala]!
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"> Username</a>
+            <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
             <a class="dropdown-item" href="#">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
