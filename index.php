@@ -10,7 +10,6 @@ $userid = $_SESSION['email'];
 echo $userid;
 ?>
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -200,7 +199,7 @@ echo $userid;
     feather.replace()
 </script>
 
-    <!-- script für die dropdowns-->
+<!-- script für die dropdowns-->
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
