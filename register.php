@@ -65,34 +65,29 @@ include ("connection.php");
                 text-decoration: none;
                 background-color: #0069d9;
             }
-        </style>r
+        </style>
     </head>
 
-    <?php
-$showFormular = true; ?>
-        <body class="text-center">
-            <div class="page-header">
-                    <h1 id="h1register" class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
-            </div>
-            <a class="block" href="sign_in.html">&laquo; Zurück zur Anmeldung</a><br>
-        </body>
+
+
 <?php
-if(isset($_GET['register'])) {
-    $error = false;
-    $firstname = $_POST['firstname'];
-    $surname = $_POST['surname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
+$showFormular = true; ?>
+
+<?php
+    if(isset($_GET['register'])) {
+        $error = false;
+        $firstname = $_POST['firstname'];
+        $surname = $_POST['surname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password2 = $_POST['password2'];
 
     if ($password != $password2) {
         ?>
-                 <body>
                     <div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es  erneut..
                     </div>
-                 </body>
         <?php
             $error = true;
      }
@@ -104,12 +99,10 @@ if(isset($_GET['register'])) {
 
     if ($a !== false) {
         ?>
-                <body>
                     <div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Oh no!</strong> Diese E-Mail-Adresse ist bereits vergeben. Bitte gib eine andere E-Mail-Adresse ein.
                     </div>
-                </body>
             <?php
             $error = true;
             }
@@ -126,12 +119,10 @@ if(isset($_GET['register'])) {
             $showFormular = false;
         } else {
             ?>
-                <body>
                     <div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
                     </div>
-                </body>
             <?php
         }
     }
@@ -139,7 +130,12 @@ if(isset($_GET['register'])) {
     <?php if($showFormular)
     {
         ?>
-    <body>
+        <body class="text-center">
+        <div class="page-header">
+            <h1 id="h1register" class="h1 mb-3 font-weight-bold-underline">Registrierung</h1>
+        </div>
+        <a class="block" href="sign_in.html">&laquo; Zurück zur Anmeldung</a><br>
+
         <form action="?register=1" class="form-signin" method="post">
             <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
             <br>
