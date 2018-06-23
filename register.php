@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("connection.php");
+require_once ("connection.php");
 ?>
     <!doctype html>
     <html lang="de">
@@ -84,7 +84,8 @@ $showFormular = true;
 
         ?>
 
-    <?php if ($password != $password2) {
+    <?php
+        if ($password != $password2) {
         ?>
                     <div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -118,19 +119,16 @@ $showFormular = true;
         $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
         $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
         if ($result) {
-
-            header("Location: successfull_sign_in.html"); ?>
-
-           <?php
-        } else {
-            ?>
-                    <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
-                    </div>
-            <?php
-        }
-    }
+            $_SESSION['user'] = $db->lastInsertId();
+            header("Location: successfull_sign_in.html"); }
+         else {
+             ?>
+             <div class="alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
+             </div>
+            <?php }
+         }
     ?>
      <form action="?register=1" class="form-signin" method="post">
             <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
