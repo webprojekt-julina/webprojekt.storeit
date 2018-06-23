@@ -11,7 +11,7 @@ $queryResults = $ergebnis->fetch(PDO::FETCH_ASSOC);
 // Übeprüfung Passwort und Hash-Wert
 if(password_verify($password, $queryResults["password"])) {
     $_SESSION["email"]=$queryResults["email"];
-    include("index.html");
+    include("index.php");
 }
 // Soll noch schöner werden mit Pop-up Fenster usw.
 else {
