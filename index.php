@@ -23,6 +23,7 @@ echo $userid;
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+    <link href="alertBox.css" rel="stylesheet">
 </head>
 
 <body>
