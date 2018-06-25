@@ -24,14 +24,14 @@ if ($_FILES["uploadfile"]["size"] > 800000) {
     die();
 }
 
-/**
+
 //Überprüfung der Dateiendung
 if ($fileType == "jpg" OR $fileType=="png" OR $fileType== "jpeg" OR $fileType == "gif" OR $fileType=="pdf" OR $fileType== "gif") {
     echo "Dateiart ok<br>";
 } else {
     echo"Dateiart nicht zugelassen.";
     die();
-}**/
+}
 
 $new_path = $upload_folder.$fileName.'.'.$extension;
 //Neuer Dateiname falls die Datei bereits existiert
