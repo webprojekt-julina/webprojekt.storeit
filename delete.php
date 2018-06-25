@@ -5,7 +5,7 @@ $sql = "DELETE FROM webprojekt_dateien WHERE id='$id'";
 if(mysqli_query($db, $sql)){
     echo "Die Datei wurde erfolgreich gelöscht";
 } else{
-    echo "Fehler: Der Befehl konnte nicht ausgeführt werden. $sql" . mysqli_error($link);
+    echo "Fehler: Die Datei konnte nicht gelöscht werden. $sql" . mysqli_error($link);
 }
 /**
  * Created by PhpStorm.
