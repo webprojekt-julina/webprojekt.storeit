@@ -6,8 +6,7 @@ $userid = $_SESSION ['userid'];
 //Variablen definieren
 $upload_folder = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'; // Upload-Verzeichnis in Mars
 echo "TEMP: ".$_FILES["uploadfile"]["tmp_name"];
-$fileName=$_FILES["uploadfile"]["name"];
-$file = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
+$fileName = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
 $extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
 $fileType=substr($fileName,strlen($fileName)-3,strlen($fileName) ); $fileName=substr($fileName,0,strlen($fileName)-4 );
 print_r($_FILES);
@@ -36,13 +35,13 @@ if (!in_array($extension, $allowed_extensions)) {
     die ();
 }
 
-$new_path = $upload_folder.$fileName.$file.'.'.$extension;
+$new_path = $upload_folder.$fileName.'.'.$extension;
 
 if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
     //Falls Datei existiert, hänge eine Zahl an den Dateinamen
     $Anzahl = 1;
     do {
-        $file_name = $file."_".$Anzahl.'.'.$extension;
+        $file_name = $fileName."_".$Anzahl.'.'.$extension;
         $new_path = $upload_folder.$fileName.$file_name;
         $Anzahl++;
     } while(file_exists($new_path));
