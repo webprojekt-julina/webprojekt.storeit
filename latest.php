@@ -1,4 +1,5 @@
 <?php
+//Session
 session_start();
 if(!isset($_SESSION['userid'])) {
     die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
@@ -94,7 +95,8 @@ echo $userid;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=trash.php>
+                        <a class="nav-link" href=trash.php
+                        >
                             <span data-feather="trash-2"></span>
                             Papierkorb
                         </a>

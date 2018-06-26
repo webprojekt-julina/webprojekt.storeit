@@ -1,4 +1,5 @@
 <?php
+//Session
 session_start();
 if(!isset($_SESSION['userid'])) {
     die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
