@@ -1,7 +1,7 @@
 <?php
-
 $directory = "/home/ns109/public_html/webprojekt.storeit/uploads/files/";
-$mimetype = "image/png";
+$mimetype = array('image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/x-iwork-keynote-sffkey','application/x-iwork-pages-sffpages','application/x-iwork-numbers-sffnumbers','application/vnd.ms-excel','application/msword', 'application/mspowerpoint', 'application/zip');
+
 if(empty($_GET["name"]))
 {
     echo " keine Datei angegeben";
