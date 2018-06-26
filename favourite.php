@@ -1,12 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['email'])) {
+if(!isset($_SESSION['userid'])) {
     die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
 }
 
 //Abfrage der Nutzer ID vom Login
-$userid = $_SESSION['email'];
-
+$userid = $_SESSION['userid'];
 echo $userid;
 ?>
 
@@ -65,37 +64,37 @@ echo $userid;
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href=index.html>
+                        <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
                             Dateien <span class="sr-only"></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=latest.html>
+                        <a class="nav-link" href=latest.php>
                             <span data-feather="clock"></span>
                             Aktuell
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=favourite.html>
+                        <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
                             Favoriten
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=my_files.html>
+                        <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
                             Von Mir
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=files_for_me.html>
+                        <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
                             Für Mich
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=trash.html>
+                        <a class="nav-link" href=trash.php>
                             <span data-feather="trash-2"></span>
                             Papierkorb
                         </a>
