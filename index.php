@@ -121,7 +121,7 @@ echo $userid;
 
             <h2>Dateien</h2>
 
-            <!--Dateien aus upload/files/ Ordner auslesen & anzeigen-->
+            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
             <ul>
                 <?php
                 // Ordnername
