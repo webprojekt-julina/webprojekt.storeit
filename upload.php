@@ -5,12 +5,12 @@ $userid =
 
 //Variablen definieren
 $upload_folder = '/home/jt049/public_html/webprojekt.storeit/upload/'; // Upload-Verzeichnis in Mars
-echo "TEMP: ".$FILES["uploadfile"][tmp_name];
+echo "TEMP: ".$_FILES["uploadfile"]["tmp_name"];
 $fileName=$_FILES["uploadfile"]["name"];
 $file = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
 $extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
 $fileType=substr($fileName,strlen($fileName)-3,strlen($fileName) ); $fileName=substr($fileName,0,strlen($fileName)-4 );
-print_r($FILES);
+print_r($_FILES);
 
 //Sicherer Upload
 
@@ -61,5 +61,5 @@ if (!$stmt->execute()){
     die();
 }
 echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
-
+{}
 ?>
