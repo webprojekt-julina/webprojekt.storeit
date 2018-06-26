@@ -1,58 +1,65 @@
 <?php
 session_start();
-include ("connection.php");
+include("connection.php");
+$userid =
 
+//Variablen definieren
+$upload_folder = '/home/jt049/public_html/webprojekt.storeit/upload/'; // Upload-Verzeichnis in Mars
+echo "TEMP: ".$FILES["uploadfile"][tmp_name];
+$fileName=$_FILES["uploadfile"]["name"];
+$file = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
+$extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
+$fileType=substr($fileName,strlen($fileName)-3,strlen($fileName) ); $fileName=substr($fileName,0,strlen($fileName)-4 );
+print_r($FILES);
+
+//Sicherer Upload
 
 //Überprüfung des Dateinamen
 echo "Dateiname: ".$_FILES["uploadfile"]["name"]."<br>";
 if($_FILES["uploadfile"]["name"]=="")
 {
-    echo "Fehler Dateiname.";
-    die(); }
-
-//Variablen definieren
-$upload_folder = '/home/jt049/public_html/webprojekt.storeit/upload/'; // Upload-Verzeichnis
-echo "TEMP: ".$FILES["uploadfile"][tmp_name];
-$fileName=$_FILES["uploadfile"]["name"];
-$extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
-$fileType=substr($fileName,strlen($fileName)-3,strlen($fileName) ); $fileName=substr($fileName,0,strlen($fileName)-4 );
-echo "FILENAME:".$fileName."FILETYPE:".$fileType."<br>";
+    echo "Fehlerhafter Dateiname";
+    die ();
+}
 
 //Überprüfung der Dateigröße
 if ($_FILES["uploadfile"]["size"] > 800000) {
-    echo"Datei zu groß.";
-    die();
+    echo "Die Datei ist zu groß(max. Dateigröße:8MB).";
+    die ();
 }
-
 
 //Überprüfung der Dateiendung
-if ($fileType == "jpg" OR $fileType=="png" OR $fileType== "jpeg" OR $fileType == "gif" OR $fileType=="pdf" OR $fileType== "gif") {
-    echo "Dateiart ok<br>";
-} else {
-    echo"Dateiart nicht zugelassen.";
-    die();
+$allowed_extensions = array('png','jpg','jpeg','gif','pdf','doc','docx','pages','xls','xlsx','ppt','pptx','zip');
+
+if (!in_array($extension, $allowed_extensions)) {
+    echo "Dateiformat nicht zulässig.";
+    die ();
 }
 
-$new_path = $upload_folder.$fileName.'.'.$extension;
-//Neuer Dateiname falls die Datei bereits existiert
-if(file_exists($new_path)) {
+$new_path = $upload_folder.$fileName.$file.'.'.$extension;
+
+if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
     //Falls Datei existiert, hänge eine Zahl an den Dateinamen
     $Anzahl = 1;
     do {
-        $new_path = $upload_folder.$fileName.$Anzahl.'.'.$extension;
+        $file_name = $file."_".$Anzahl.'.'.$extension;
+        $new_path = $upload_folder.$fileName.$file_name;
         $Anzahl++;
     } while(file_exists($new_path));
 }
 
 //Verschieben der Datei an neuen Pfad
-echo $new_path;
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
-
-$stmt = $db->prepare("INSERT INTO webprojekt_dateien (id, Wert, Dateiname, user_id) VALUES ('', :Wert, :Dateiname, :user_id)");
-$stmt->bindParam(":Wert", $_POST ["Wert"]);
-$stmt->bindParam(":Dateiname", $_POST [""]);
-$stmt->bindParam(":user_id", $_POST ["user_id"]);
-
-echo 'Bild erfolgreich hochgeladen: <a href="'.$new_path.'">'.$new_path.'</a>';
+$stmt = $db->prepare("INSERT INTO webprojekt_dateien (id, Wert, Dateiname, user_id) VALUES (?,?,(SELECT user_id FROM webprojekt_dateien WHERE user_id=?))");
+$stmt->bindParam($file);
+$stmt->bindParam($file_name);
+$stmt->bindParam($userid);
+if (!$stmt->execute()){
+    echo "Fehler bei der Datenbankverbindung:";
+    echo $stmt->errorInfo();
+    echo $stmt ->queryString;
+    die();
+}
+echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
 
 ?>
