@@ -1,15 +1,19 @@
 <?php
-//https://mars.iuk.hdm-stuttgart.de/~gurzki/dl/download2.php?filename=bild.jpg
-$directory = "/home/gurzki/public_html/upload/files";
-$mimetype = "image/jpeg";
-if(empty($_GET["filename"]))
+
+$directory = "/home/ns109/public_html/webprojekt.storeit/uploads/files/";
+$mimetype = "image/png";
+if(empty($_GET["name"]))
 {
     echo " keine Datei angegeben";
     die();
 }
 else
 {
-    $filename=$_GET["filename"];
+    $filename=$_GET["name"];
 }
-$filepath=$directory.$filename; header("Content-Type:".$mimetype);
-header('Content-Disposition: attachment;filename="'.$filename.'"'); header("Content-Transfer-Encoding: binary "); header("Content-Length: ".filesize($filepath)); readfile($filepath);
+$filepath=$directory.$filename;
+header("Content-Type:".$mimetype);
+header('Content-Disposition: attachment;name="'.$filename.'"');
+header("Content-Transfer-Encoding: binary ");
+header("Content-Length: ".filesize($filepath));
+readfile($filepath);
