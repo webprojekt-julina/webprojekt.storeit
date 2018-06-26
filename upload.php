@@ -1,10 +1,10 @@
 <?php
 session_start();
 include("connection.php");
-$userid =
+$userid = $_SESSION ['userid'];
 
 //Variablen definieren
-$upload_folder = '/home/jt049/public_html/webprojekt.storeit/upload/'; // Upload-Verzeichnis in Mars
+$upload_folder = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'; // Upload-Verzeichnis in Mars
 echo "TEMP: ".$_FILES["uploadfile"]["tmp_name"];
 $fileName=$_FILES["uploadfile"]["name"];
 $file = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
@@ -29,7 +29,7 @@ if ($_FILES["uploadfile"]["size"] > 800000) {
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('png','jpg','jpeg','gif','pdf','doc','docx','pages','xls','xlsx','ppt','pptx','zip');
+$allowed_extensions = array('image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/x-iwork-keynote-sffkey','application/x-iwork-pages-sffpages','application/x-iwork-numbers-sffnumbers','application/vnd.ms-excel','application/msword', 'application/mspowerpoint', 'application/zip');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
