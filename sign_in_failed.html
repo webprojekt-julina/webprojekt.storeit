@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="de">
 <head>
@@ -45,6 +44,7 @@
             display: inline-block;
             color: #007bff;
             margin-bottom: 15px;
+
         }
 
         #signup:hover{
@@ -58,18 +58,21 @@
 <div class="page-header">
     <h1 id="h1login" class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>
 </div>
-<!-- Änderung -->
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Oh no!</strong> Bei der Anmeldung ist ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
+</div>
 <form action="login.php" class="form-signin" method="post">
     <!--<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <!--<h1 class="h1 mb-3 font-weight-bold-underline">Willkommen bei store.it!</h1>-->
 
     <h2 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h2>
     <br>
-        <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
+    <label for="inputEmail" class="sr-only">E-Mail Addresse</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
     <br>
-        <label for="inputPassword" class="sr-only">Passwort</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
+    <label for="inputPassword" class="sr-only">Passwort</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" name="password" required>
     <br><a id="signup" href="register.php">Neu bei store.it? Jetzt registrieren!</a>
     <!--<div class="checkbox mb-3">
         <label>

@@ -1,8 +1,7 @@
-@media screen
-and (min-device-width: 1200px)
-and (max-device-width: 1600px)
-and (-webkit-min-device-pixel-ratio: 1) {
-
+@media  screen
+and (min-device-width: 667px)
+and (max-device-width: 1023px)
+and (-webkit-min-device-pixel-ratio: 1){
     html, body {
         height: 100%;
     }
@@ -21,28 +20,29 @@ and (-webkit-min-device-pixel-ratio: 1) {
         display: -ms-flexbox;
         -ms-flex-align: center;
         align-items: center;
-        padding: 40px;
+        margin-top: 20px;
+        padding: 20px;
     }
     #h1login {
         height: 150px;/*height: 650px;*/
     }
-    #h1register {
-        height: 145px; /*height: 650px;*/
+    #h1register{
+        height: 145px;/*height: 650px;*/
         margin-top: 25px;
     }
     .page-header {
-            width: 100%;
-            color: #ffffff;
-            text-shadow: 0 0 5px #007bff;
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
 
-            background: url("wolken.png") no-repeat center center fixed;
-            -moz-background-size: cover;
-            background-size: cover;
-            position: static;
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
 
-            margin-bottom: 40px;
-            padding: 20px;
-        }
+        margin-bottom: 30px;
+        padding: 20px;
+    }
     .form-signin {
         width: 100%;
         max-width: 400px;
@@ -73,10 +73,10 @@ and (-webkit-min-device-pixel-ratio: 1) {
         border-top-right-radius: 0;
     }
     .form-signin input[name="password2"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
     #copyright{
         margin-top: 15px;
         margin-right: 15px;
@@ -97,13 +97,164 @@ and (-webkit-min-device-pixel-ratio: 1) {
         color: white;
         background-color: #0069d9;
     }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
     .container {
         display: block;
         align-content: center;
         align-items: center;
         flex-direction: row;
 
-        width: 47%;
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+}
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    #h1login {
+        height: 150px; /*height: 650px;*/
+    }
+
+    #h1register {
+        height: 145px; /*height: 650px;*/
+        margin-top: 25px;
+    }
+
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    #copyright {
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"] {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -116,20 +267,23 @@ and (-webkit-min-device-pixel-ratio: 1) {
         padding: 10px;
     }
 
-    footer {
-        display: -ms-flexbox;
-        display: flex;
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
         flex-direction: row;
-        -ms-flex-align: center;
-        align-items: flex-start;
 
-        margin-top: 50px;
-        width: 45%;
-
+        width: 80%;
         border: none;
-        font-size: 14px;
-        border-radius: 7px;
+        background-color: #007bff;
         color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
     }
 }
 
@@ -375,7 +529,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 20%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -530,7 +684,7 @@ and (orientation: portrait) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -577,6 +731,7 @@ and (orientation: portrait) {
         color: white;
     }
 }
+
 
 
 /* Landscape */
@@ -686,7 +841,7 @@ and (orientation: landscape) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -843,7 +998,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -998,7 +1153,7 @@ and (orientation: portrait) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1153,7 +1308,7 @@ and (orientation: landscape) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1309,7 +1464,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1463,7 +1618,7 @@ and (orientation: portrait) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1618,7 +1773,7 @@ and (orientation: landscape) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1774,7 +1929,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -1929,7 +2084,7 @@ and (orientation: portrait) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2084,7 +2239,7 @@ and (orientation: landscape) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2240,7 +2395,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2395,7 +2550,7 @@ and (orientation: portrait) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2550,7 +2705,7 @@ and (orientation: landscape) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2605,7 +2760,153 @@ and (orientation: landscape) {
 and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (-webkit-min-device-pixel-ratio: 1) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Portrait */
@@ -2614,7 +2915,153 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 1) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Landscape */
@@ -2623,7 +3070,153 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 1) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* ----------- iPad 3, 4 and Pro 9.7" ----------- */
@@ -2633,7 +3226,153 @@ and (-webkit-min-device-pixel-ratio: 1) {
 and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Portrait */
@@ -2642,7 +3381,153 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Landscape */
@@ -2651,7 +3536,153 @@ and (min-device-width: 768px)
 and (max-device-width: 1024px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* ----------- iPad Pro 10.5" ----------- */
@@ -2661,7 +3692,153 @@ and (-webkit-min-device-pixel-ratio: 2) {
 and (min-device-width: 834px)
 and (max-device-width: 1112px)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Portrait */
@@ -2672,7 +3849,153 @@ and (min-device-width: 834px)
 and (max-device-width: 834px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Landscape */
@@ -2683,7 +4006,153 @@ and (min-device-width: 1112px)
 and (max-device-width: 1112px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* ----------- iPad Pro 12.9" ----------- */
@@ -2794,7 +4263,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
         align-items: center;
         flex-direction: row;
 
-        width: 60%;
+        width: 40%;
         border: none;
         background-color: #007bff;
         color: white;
@@ -2850,7 +4319,153 @@ and (min-device-width: 1024px)
 and (max-device-width: 1024px)
 and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }
 
 /* Landscape */
@@ -2861,5 +4476,900 @@ and (min-device-width: 1366px)
 and (max-device-width: 1366px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
+    html, body {
+        height: 100%;
+    }
 
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
+}
+/* ---------- Google Pixel ------------ /*
+
+ */
+@media only screen and (min-width: 411px) and (max-width: 767px) {
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            display: -ms-flexbox;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        #h1login {
+            height: 150px;/*height: 650px;*/
+        }
+        #h1register{
+            height: 145px;/*height: 650px;*/
+            margin-top: 25px;
+        }
+        .page-header {
+            width: 100%;
+            color: white;
+            text-shadow: 0 0 5px #007bff;
+
+            background: url("wolken.png") no-repeat center center fixed;
+            -moz-background-size: cover;
+            background-size: cover;
+            position: static;
+
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .form-signin {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin: auto;
+        }
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: -1px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .form-signin input[name="password2"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        #copyright{
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+
+            font-size: 14px;
+            color: #afafaf;
+        }
+
+        a [id="data, impressum"]{
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+        }
+        #data, #impressum:hover {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: #0069d9;
+        }
+        #button-reg {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 40%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+        .container {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 80%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+
+        footer {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            -ms-flex-align: center;
+            align-items: flex-start;
+
+            margin-top: 50px;
+            width: 60%;
+
+            border: none;
+            font-size: 10px;
+            border-radius: 7px;
+            color: white;
+        }
+}
+@media only screen and (min-width: 666px) and (orientation: landscape) {
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            display: -ms-flexbox;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        #h1login {
+            height: 150px;/*height: 650px;*/
+        }
+        #h1register{
+            height: 145px;/*height: 650px;*/
+            margin-top: 25px;
+        }
+        .page-header {
+            width: 100%;
+            color: white;
+            text-shadow: 0 0 5px #007bff;
+
+            background: url("wolken.png") no-repeat center center fixed;
+            -moz-background-size: cover;
+            background-size: cover;
+            position: static;
+
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .form-signin {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin: auto;
+        }
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: -1px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .form-signin input[name="password2"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        #copyright{
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+
+            font-size: 14px;
+            color: #afafaf;
+        }
+
+        a [id="data, impressum"]{
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+        }
+        #data, #impressum:hover {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: #0069d9;
+        }
+        #button-reg {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 40%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+        .container {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 80%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+
+        footer {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            -ms-flex-align: center;
+            align-items: flex-start;
+
+            margin-top: 50px;
+            width: 60%;
+
+            border: none;
+            font-size: 10px;
+            border-radius: 7px;
+            color: white;
+        }
+}
+@media only screen and (min-width: 411px) and (orientation: portrait) {
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            display: -ms-flexbox;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        #h1login {
+            height: 150px;/*height: 650px;*/
+        }
+        #h1register{
+            height: 145px;/*height: 650px;*/
+            margin-top: 25px;
+        }
+        .page-header {
+            width: 100%;
+            color: white;
+            text-shadow: 0 0 5px #007bff;
+
+            background: url("wolken.png") no-repeat center center fixed;
+            -moz-background-size: cover;
+            background-size: cover;
+            position: static;
+
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        .form-signin {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin: auto;
+        }
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: -1px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .form-signin input[name="password2"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        #copyright{
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+
+            font-size: 14px;
+            color: #afafaf;
+        }
+
+        a [id="data, impressum"]{
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+        }
+        #data, #impressum:hover {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            background-color: #0069d9;
+        }
+        #button-reg {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 40%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+        .container {
+            display: block;
+            align-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            width: 80%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+
+        footer {
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            -ms-flex-align: center;
+            align-items: flex-start;
+
+            margin-top: 50px;
+            width: 60%;
+
+            border: none;
+            font-size: 10px;
+            border-radius: 7px;
+            color: white;
+        }
+}
+@media only screen and (min-width: 411px) {
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
+}
+
+@media only screen and (min-height: 731px) {
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+    h1 {
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    #h1login {
+        height: 150px;/*height: 650px;*/
+    }
+    #h1register{
+        height: 145px;/*height: 650px;*/
+        margin-top: 25px;
+    }
+    .page-header {
+        width: 100%;
+        color: white;
+        text-shadow: 0 0 5px #007bff;
+
+        background: url("wolken.png") no-repeat center center fixed;
+        -moz-background-size: cover;
+        background-size: cover;
+        position: static;
+
+        margin-bottom: 30px;
+        padding: 20px;
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: -1px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin input[name="password2"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    #copyright{
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+
+        font-size: 14px;
+        color: #afafaf;
+    }
+
+    a [id="data, impressum"]{
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+    }
+    #data, #impressum:hover {
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        background-color: #0069d9;
+    }
+    #button-reg {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 40%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+    .container {
+        display: block;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        width: 80%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 7px;
+
+        margin-top: 15px;
+        margin-right: 15px;
+        padding: 10px;
+    }
+
+    footer {
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-align: center;
+        align-items: flex-start;
+
+        margin-top: 50px;
+        width: 60%;
+
+        border: none;
+        font-size: 10px;
+        border-radius: 7px;
+        color: white;
+    }
 }

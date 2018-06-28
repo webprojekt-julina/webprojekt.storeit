@@ -1,6 +1,23 @@
 <?php
 session_start();
 include ("connection.php");
+//Angemeldet bleiben
+function random_string() {
+    if(function_exists('random_bytes')) {
+        $bytes = random_bytes(16);
+        $str = bin2hex($bytes);
+    } else if(function_exists('openssl_random_pseudo_bytes')) {
+        $bytes = openssl_random_pseudo_bytes(16);
+        $str = bin2hex($bytes);
+    } else if(function_exists('mcrypt_create_iv')) {
+        $bytes = random_bytes(16, MCRYPT_DEV_URANDOM);
+        $str = bin2hex($bytes);
+    } else {
+        //Bitte euer_geheim_string durch einen zufälligen String mit >12 Zeichen austauschen
+        $str = md5(uniqid('RUSbDPQPhFpL', true));
+    }
+    return $str;
+}
 // Variablen definieren
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -13,16 +30,13 @@ if(password_verify($password, $queryResults["password"])) {
     $_SESSION["userid"]=$queryResults["userid"];
     include("index.php");
 }
-// Soll noch schöner werden mit Pop-up Fenster usw.
 else { ?>
-        <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Oh no!</strong> Bei der Anmeldung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
-        </div>
     <?php
-    header (" Location: sign_in.html");
+    header
+('Location: sign_in_failed.html');
 }
 ?>
+
 
 
 

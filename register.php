@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once ("connection.php");
 ?>
     <!doctype html>
@@ -8,15 +9,12 @@ require_once ("connection.php");
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="author" content="Linus Braunschweig">
         <link rel="icon" href="../../../../favicon.ico">
-
-
 
         <title>Registrierung</title>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-
         <link href="signin.css" rel="stylesheet">
         <link href="alertBox.css" rel="stylesheet">
 
@@ -84,51 +82,53 @@ $showFormular = true;
 
         ?>
 
-    <?php
-        if ($password != $password2) {
-        ?>
-                    <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es  erneut.
-                    </div>
         <?php
-            $error = true;
-     }
-    //Überprüfung, ob E-Mail-Adresse noch nicht registriert wurde
-    if (!$error) {
-        $statement = $db->prepare("SELECT * FROM webprojekt WHERE email = :email");
-        $result = $statement->execute(array('email' => $email));
-        $a = $statement->fetch();
-
-    if ($a !== false) {
-        ?>
-                    <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        <strong>Oh no!</strong> Diese E-Mail-Adresse ist bereits vergeben. Bitte gib eine andere E-Mail-Adresse ein.
-                    </div>
+        if ($password != $password2) {
+            ?>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Oh no!</strong> Deine Passwörter stimmen nicht überein, bitte versuche es erneut.
+            </div>
             <?php
             $error = true;
+        }
+        //Überprüfung, ob E-Mail-Adresse noch nicht registriert wurde
+        if (!$error) {
+            $statement = $db->prepare("SELECT * FROM webprojekt WHERE email = :email");
+            $result = $statement->execute(array('email' => $email));
+            $a = $statement->fetch();
+
+            if ($a !== false) {
+                ?>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>Oh no!</strong> Diese E-Mail-Adresse ist bereits vergeben. Bitte gib eine andere
+                    E-Mail-Adresse ein.
+                </div>
+                <?php
+                $error = true;
             }
-         }
-    } ?>
+        }
+        ?>
 
-    <?php
-    if (!$error) {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        <?php
+        if (!$error) {
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
-        $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
-        if ($result) {
-            $_SESSION['user'] = $db->lastInsertId();
-            header("Location: successfull_sign_in.html"); }
-         else {
-             ?>
-             <div class="alert">
-                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                 <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe deine Angaben und versuche es erneut.
-             </div>
+            $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
+            $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
+            if ($result) {
+                header("Location: successfull_sign_in.html");
+            } else {
+                ?>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>Oh no!</strong> Bei der Registrierung ist leider ein Fehler aufgetreten. <br>Bitte überprüfe
+                    deine Angaben und versuche es erneut.
+                </div>
             <?php }
-         }
+        }
+    }
     ?>
      <form action="?register=1" class="form-signin" method="post">
             <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
