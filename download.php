@@ -1,6 +1,17 @@
 <?php
 $directory = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
-$mimetype = array('image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/x-iwork-keynote-sffkey','application/x-iwork-pages-sffpages','application/x-iwork-numbers-sffnumbers','application/vnd.ms-excel','application/msword', 'application/mspowerpoint', 'application/zip');
+$mimetype = array(
+    'png' => array('image/png'),
+    'jpeg' => array('image/jpeg', 'image/pjpeg'),
+    'gif' => array('image/gif'),
+    'pdf' => array('application/pdf'),
+    'keynote' => array('application/x-iwork-keynote-sffkey'),
+    'pages' => array('application/x-iwork-pages-sffpages'),
+    'numbers' => array('application/x-iwork-numbers-sffnumbers'),
+    'application/vnd.ms-excel',
+    'application/msword',
+    'application/mspowerpoint',
+    'application/zip');
 
 if(empty($_GET["name"]))
 {
