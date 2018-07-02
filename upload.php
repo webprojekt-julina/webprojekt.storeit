@@ -1,6 +1,14 @@
 <?php
 session_start();
-include("connection.php");
+$dsn="mysql:: host=mars.iuk.hdm-stuttgart.de; dbname=u-lb107";
+try
+{
+    $db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
+}
+catch (PDOException$p)
+{
+    echo ("Fehler bei Aufbau der Datenbankverbindung.");
+};
 $userid = $_SESSION ['userid'];
 
 //Variablen definieren
@@ -28,7 +36,7 @@ if ($_FILES["uploadfile"]["size"] > 800000) {
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/x-iwork-keynote-sffkey','application/x-iwork-pages-sffpages','application/x-iwork-numbers-sffnumbers','application/vnd.ms-excel','application/msword', 'application/mspowerpoint', 'application/zip');
+$allowed_extensions = array('png', 'jpeg', 'gif', 'pdf', 'keynote','pages','numbers','xls','doc', 'ppt', 'zip');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
@@ -49,16 +57,13 @@ if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
 
 //Verschieben der Datei an neuen Pfad
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
-$stmt = $db->prepare("INSERT INTO webprojekt_dateien (id, Wert, Dateiname, user_id) VALUES (?,?,(SELECT user_id FROM webprojekt_dateien WHERE user_id=?))");
-$stmt->bindParam($file);
-$stmt->bindParam($file_name);
-$stmt->bindParam($userid);
-if (!$stmt->execute()){
-    echo "Fehler bei der Datenbankverbindung:";
-    echo $stmt->errorInfo();
-    echo $stmt ->queryString;
+$name=$_FILES['uploadfile']['name'];
+$pfad=$_FILES['uploadfile']['pfad'];
+$user_id=$_FILES['uploadfile']['user_id'];
+$sql="INSERT INTO dateien (name, pfad, user_id) VALUES('$name','$pfad','$user_id')";
+$result=$db ->query($sql);
+if($result==TRUE)
     die();
-}
 echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
-{}
+
 ?>
