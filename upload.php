@@ -1,14 +1,6 @@
 <?php
 session_start();
-$dsn="mysql:: host=mars.iuk.hdm-stuttgart.de; dbname=u-lb107";
-try
-{
-    $db = new PDO($dsn, 'lb107', '#Li1997Bra', array('charset' => 'utf8'));
-}
-catch (PDOException$p)
-{
-    echo ("Fehler bei Aufbau der Datenbankverbindung.");
-};
+include "connection.php";
 $userid = $_SESSION ['userid'];
 
 //Variablen definieren
@@ -58,7 +50,7 @@ if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
 //Verschieben der Datei an neuen Pfad
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
 $name=$_FILES['uploadfile']['name'];
-$pfad=$_FILES['uploadfile']['pfad'];
+$pfad=$_FILES['uploadfile'][$new_path];
 $user_id=$_FILES['uploadfile']['user_id'];
 $sql="INSERT INTO dateien (name, pfad, user_id) VALUES('$name','$pfad','$user_id')";
 $result=$db ->query($sql);
