@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION['userid'])) {
+    die( include("sign_in_nosession.html"));
+}
+
+//Abfrage der Nutzer ID vom Login
+$userid = $_SESSION['userid'];
+
 $directory = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
 $mimetype = array(
     'png' => array('image/png'),
