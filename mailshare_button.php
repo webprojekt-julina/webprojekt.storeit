@@ -84,7 +84,7 @@
 <?php
 if(isset($_GET['mailshare'])) {
     $email = $_POST['email'];
-    echo "HI";
+    echo "HIdu";
     $empfaenger = "{$email}";
 }
 echo $empfaenger; /*
