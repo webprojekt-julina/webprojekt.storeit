@@ -65,11 +65,11 @@
 <div class="alert" id="formular" >
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     <div class="col-md-8">
-            <form action="?mailshare=1" class="form-inline">
+            <form action="?mailshare=1" method="post" class="form-inline">
                 <div>
                     <p><strong>Mit anderen teilen:</strong></p>
                     <input type="email" class="form-control" placeholder="E-Mail Addresse" name="email" required autofocus>
-                    <button class="btn btn-md btn-primary" type="submit">Teilen</button>
+                    <button class="btn btn-md btn-primary" type="submit" name="share">Teilen</button>
                 </div>
             </form>
     </div>
@@ -84,12 +84,11 @@
 <?php
 if(isset($_GET['mailshare'])) {
     $email = $_POST['email'];
-    echo "HIdu";
     $empfaenger = "{$email}";
-}
-echo $empfaenger;
+
+    /*echo $empfaenger;*/
     $betreff = "Filesharing mit store.it";
-    $mailtext = "Liinus hat die Datei {$dateiname} mit dir geteilt.";
+    $mailtext = "Linus hat die Datei {$dateiname} mit dir geteilt.";
     $mailtext .= "Klicke auf den Link, um sie herunterzuladen. DIRECT_DOWNLOAD LINK-URL";
     $absender = "{lb107@hdm-stuttgart.de}";
 
@@ -98,8 +97,8 @@ echo $empfaenger;
     $headers[] = "Content-type: text/plain; charset=utf-8";
     $headers[] = "From: {lb107@hdm-stuttgart.de}";
 // falls Bcc benötigt wird
-    $headers[] = "Bcc: <mitleser@example.com>";
-    $headers[] = "Reply-To: {$absenderemail}";
+    /*$headers[] = "Bcc: <mitleser@example.com>";*/
+    $headers[] = "Reply-To: {lb107@hdm-stuttgart.de}";
     $headers[] = "Subject: {$betreff}";
     $headers[] = "X-Mailer: PHP/" . phpversion();
 

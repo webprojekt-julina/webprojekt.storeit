@@ -1,7 +1,7 @@
 <?php
 session_start();
 include ("connection.php");
-//Angemeldet bleiben
+
 function random_string() {
     if(function_exists('random_bytes')) {
         $bytes = random_bytes(16);
@@ -28,7 +28,7 @@ $queryResults = $ergebnis->fetch(PDO::FETCH_ASSOC);
 // Übeprüfung Passwort und Hash-Wert
 if(password_verify($password, $queryResults["password"])) {
     $_SESSION["userid"]=$queryResults["userid"];
-    include("index.php");
+    header ('Location: index.php');
 }
 else { ?>
     <?php

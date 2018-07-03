@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['userid'])) {
-    die( include("sign_in_nosession.html"));
+    die( require_once("sign_in_nosession.html"));
 }
 
 //Abfrage der Nutzer ID vom Login
