@@ -116,3 +116,7 @@ body {
 #suc-box{
     width: 25%;
 }
+
+.li {
+    display: inline;
+}

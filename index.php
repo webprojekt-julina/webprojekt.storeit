@@ -6,7 +6,6 @@ if(!isset($_SESSION['userid'])) {
 
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
-echo $userid;
 ?>
 
 <!doctype html>
@@ -22,7 +21,6 @@ echo $userid;
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-    <link href="alertBox.css" rel="stylesheet">
 </head>
 
 <body>
@@ -152,7 +150,7 @@ echo $userid;
                     // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
                     if ($datei != "." && $datei != ".."  && $datei != "_notes") {
                         ?>
-                        <li><a href="download.php"><?php echo $dateiinfo['filename']; ?></a> (<?php echo $dateiinfo['extension']; ?> | <?php echo $size ;?>kb) <?php include("mailshare_button.php")?></li>
+                        <li><a href="download.php"><?php echo $dateiinfo['filename']; ?></a> (<?php echo $dateiinfo['extension']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></li>
                         <?php
                     };
                 };

@@ -13,7 +13,6 @@ function random_string() {
         $bytes = random_bytes(16, MCRYPT_DEV_URANDOM);
         $str = bin2hex($bytes);
     } else {
-        //Bitte euer_geheim_string durch einen zufälligen String mit >12 Zeichen austauschen
         $str = md5(uniqid('RUSbDPQPhFpL', true));
     }
     return $str;
