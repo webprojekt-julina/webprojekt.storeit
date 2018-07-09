@@ -127,7 +127,7 @@
     <div class="row">
         <!------ Include the above in your HEAD tag ---------->
 
-        <a href="http://ec2-54-209-220-253.compute-1.amazonaws.com/sites/default/files/skiptu-template-0.3.zip" class="btn btn-sm btn-primary"><form action="download.php"><span class="glyphicon glyphicon-cloud-download"></span></form></a>
+        <a href="download.php" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cloud-download"></span></a>
 
 
         <!----------------- TEILEN ----------------->
