@@ -7,10 +7,7 @@ if(!isset($_SESSION['userid'])) {
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
 
-if(isset($_REQUEST["file"])){
-    // Get parameters
-    $file = urldecode($_REQUEST["file"]); // Decode URL-encoded string
-    $filepath = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'.$file;
+    $filepath = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
     $mimetype = array(
         'png' => array('image/png'),
         'jpeg' => array('image/jpeg', 'image/pjpeg'),
@@ -24,17 +21,20 @@ if(isset($_REQUEST["file"])){
         'application/mspowerpoint',
         'application/zip');
 
-    // Process download
-    if(file_exists($filepath)) {
-        header("Content-Type:".$mimetype);
-        header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
-        header("Content-Transfer-Encoding: binary ");
-        header('Content-Length: ' . filesize($filepath));
-        flush(); // Flush system output buffer
-        readfile($filepath);
-    }
-    else {
-        echo "Fehlgeschlagen";
-    }
+if(empty($_GET["filename"]))
+{
+    echo " keine Datei angegeben";
+    die();
 }
+else
+{
+    $filename=$_GET["filename"];
+}
+$filepath=$filepath.$filename;
+header("Content-Type:".$mimetype);
+header('Content-Disposition: attachment;filename="'.$filename.'"');
+header("Content-Transfer-Encoding: binary ");
+header("Content-Length: ".filesize($filepath));
+readfile($filepath);
+
 ?>

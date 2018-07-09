@@ -150,7 +150,7 @@ $userid = $_SESSION['userid'];
                     // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
                     if ($datei != "." && $datei != ".."  && $datei != "_notes") {
                         ?>
-                        <li><a href="download.php"><?php echo $dateiinfo['filename']; ?></a> (<?php echo $dateiinfo['extension']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></li>
+                        <li><a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><?php echo $dateiinfo['basename']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></a></li>
                         <?php
                     };
                 };
