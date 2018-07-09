@@ -119,7 +119,6 @@ echo $userid;
                 </div>
             </div>
 
-            <h2>Dateien</h2>
             <div class="table-responsive">
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -131,7 +130,7 @@ echo $userid;
                         echo "<th> Urheber </th>";
                         echo "</thead>";
                         require ("connection.php");
-                        $sql = "SELECT id, name FROM dateien WHERE freigabe=1" and "";
+                        $sql = "SELECT id, name FROM dateien WHERE user_id=$userid AND freigabe=1";
                         foreach ($db->query($sql) as $row) {
 
 
