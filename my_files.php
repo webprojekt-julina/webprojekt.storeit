@@ -7,7 +7,6 @@ if(!isset($_SESSION['userid'])) {
 
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
-echo $userid;
 ?>
 
 <!doctype html>
@@ -121,67 +120,29 @@ echo $userid;
 
             <h2>Dateien</h2>
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Eigentümer</th>
-                        <th>Zuletzt geändert</th>
-                        <th>Dateigröße</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <?php
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Datei-ID </th>";
+                        echo "<th> Name </th>";
+                        echo "<th> Urheber </th>";
+                        echo "</thead>";
+                        require ("connection.php");
+                        $sql = "SELECT name FROM dateien WHERE user_id=$userid";
+                        foreach ($db->query($sql) as $row) {
+
+
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "</tr>";
+                            echo "</tbody>";
+                        }; ?>
+                    </table>
+                </div>
         </main>
     </div>
 </div>
