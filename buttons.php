@@ -126,8 +126,17 @@
 <div class="container">
     <div class="row">
         <!------ Include the above in your HEAD tag ---------->
+<?php
+// Ordnername
+$ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
+$alledateien = scandir($ordner);
+foreach ($alledateien as $datei) {
 
-        <a href="download.php" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-cloud-download"></span></a>
+// Zusammentragen der Dateiinfo
+$dateiinfo = pathinfo($ordner."/".$datei); }
+?>
+
+        <a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>" class="btn btn-sm btn-primary"><form action="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><span class="glyphicon glyphicon-cloud-download"></span></form></a>
 
 
         <!----------------- TEILEN ----------------->

@@ -7,7 +7,7 @@ if(!isset($_SESSION['userid'])) {
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
 
-    $filepath = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
+    $directory = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
     $mimetype = array(
         'png' => array('image/png'),
         'jpeg' => array('image/jpeg', 'image/pjpeg'),
@@ -30,7 +30,7 @@ else
 {
     $filename=$_GET["filename"];
 }
-$filepath=$filepath.$filename;
+$filepath=$directory.$filename;
 header("Content-Type:".$mimetype);
 header('Content-Disposition: attachment;filename="'.$filename.'"');
 header("Content-Transfer-Encoding: binary ");
