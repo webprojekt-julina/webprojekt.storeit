@@ -35,6 +35,27 @@ if (!in_array($extension, $allowed_extensions)) {
     die ();
 }
 
+function random_string() {
+    if(function_exists('random_bytes')) {
+        $bytes = random_bytes(16);
+        $str = bin2hex($bytes);
+    } else if(function_exists('openssl_random_pseudo_bytes')) {
+        $bytes = openssl_random_pseudo_bytes(16);
+        $str = bin2hex($bytes);
+    } else if(function_exists('mcrypt_create_iv')) {
+        $bytes = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+        $str = bin2hex($bytes);
+    } else {
+        //Bitte euer_geheim_string durch einen zufälligen String mit >12 Zeichen austauschen
+        $str = md5(uniqid('6hfjlkbf358saumf401', true));
+    }
+    return $str;
+}
+
+
+
+$krpytisch = random_string(); //random new name
+
 $new_path = $upload_folder.$fileName.'.'.$extension;
 
 if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
@@ -48,14 +69,19 @@ if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
 }
 
 //Verschieben der Datei an neuen Pfad
+$datei= 'datei';
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
 $name=$_FILES['uploadfile']['name'];
-$pfad=$_FILES['uploadfile'][$new_path];
-$user_id=$_FILES['uploadfile']['user_id'];
-$sql="INSERT INTO dateien (name, pfad, user_id) VALUES('$name','$pfad','$user_id')";
-$result=$db ->query($sql);
-if($result==TRUE)
-    die();
+$kryptisch=$_FILES['uploadfile']['kryptisch'];
+$statement= $db ->prepare("INSERT INTO dateien (name, kryptisch, user_id) VALUES('$name','$kryptisch','$userid')");
+$statement ->bindParam(1,$datei);
+$statement ->bindParam(2,$name);
+$statement ->bindParam(3,$kryptisch);
+if (!$statement->execute()){
+    echo "Datenbank-Fehler:";
+    echo $statement->errorInfo()[2];
+    echo $statement->queryString;
+    die();}
 echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
 
 ?>

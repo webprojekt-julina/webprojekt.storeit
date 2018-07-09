@@ -2,12 +2,11 @@
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
-    die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
+    die( require_once("sign_in_nosession.html"));
 }
 
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
-echo $userid;
 ?>
 
 <!doctype html>
@@ -120,68 +119,44 @@ echo $userid;
             </div>
 
             <h2>Dateien</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Eigentümer</th>
-                        <th>Zuletzt geändert</th>
-                        <th>Dateigröße</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+
+            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
+            <ul>
+                <?php
+                // Ordnername
+                $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
+
+                // Ordner auslesen und Array in Variable speichern
+                $alledateien = scandir($ordner); // Sortierung A-Z
+                // Sortierung Z-A mit scandir($ordner, 1)
+
+                // Schleife um Array "$alledateien" aus scandir Funktion auszugeben
+                // Einzeldateien werden dabei in der Variabel $datei abgelegt
+                foreach ($alledateien as $datei) {
+
+                    // Zusammentragen der Dateiinfo
+                    $dateiinfo = pathinfo($ordner."/".$datei);
+                    //Folgende Variablen stehen nach pathinfo zur Verfügung
+                    // $dateiinfo['filename'] =Dateiname ohne Dateiendung  *erst mit PHP 5.2
+                    // $dateiinfo['dirname'] = Verzeichnisname
+                    // $dateiinfo['extension'] = Dateityp -/endung
+                    // $dateiinfo['basename'] = voller Dateiname mit Dateiendung
+
+                    // Größe ermitteln zur Ausgabe
+                    $size = ceil(filesize($ordner."/".$datei)/1024);
+                    //1024 = kb | 1048576 = MB | 1073741824 = GB
+
+                    // scandir liest alle Dateien im Ordner aus, zusätzlich noch "." , ".." als Ordner
+                    // Nur echte Dateien anzeigen lassen und keine "Punkt" Ordner
+                    // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
+                    if ($datei != "." && $datei != ".."  && $datei != "_notes") {
+                        ?>
+                        <li><a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><?php echo $dateiinfo['basename']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></a></li>
+                        <?php
+                    };
+                };
+                ?>
+            </ul>
         </main>
     </div>
 </div>

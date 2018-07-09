@@ -7,6 +7,7 @@ if(!isset($_SESSION['userid'])) {
 
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
+echo $userid;
 ?>
 
 <!doctype html>
@@ -124,12 +125,12 @@ $userid = $_SESSION['userid'];
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Freigegeben von</th>
+                        <th>Eigentümer</th>
                         <th>Zuletzt geändert</th>
                         <th>Dateigröße</th>
                     </tr>
                     </thead>
-                    <tbody>"
+                    <tbody>
                     <tr>
                         <td>1,001</td>
                         <td>Lorem</td>
