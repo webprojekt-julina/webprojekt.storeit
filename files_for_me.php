@@ -124,19 +124,21 @@ echo $userid;
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <?php
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Datei-ID </th>";
+                        echo "<th> Name </th>";
+                        echo "<th> Urheber </th>";
+                        echo "</thead>";
                         require ("connection.php");
-                        $sql = "SELECT id, name FROM dateien WHERE freigabe=1";
+                        $sql = "SELECT id, name FROM dateien WHERE freigabe=1" and "";
                         foreach ($db->query($sql) as $row) {
 
-                            echo "<thead>";
-                            echo "<tr>";
-                            echo "<th> Datei-ID </th>";
-                            echo "<th> Name </th>";
-                            echo "<th> Urheber </th>";
-                            echo "</thead>";
+
                             echo "<tbody>";
                             echo "<tr>";
                             echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['name'] . "</td>";
                             echo "<td>" . $row['name'] . "</td>";
                             echo "</tr>";
                             echo "</tbody>";
