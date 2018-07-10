@@ -7,7 +7,6 @@ if(!isset($_SESSION['userid'])) {
 
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
-echo $userid;
 ?>
 
 <!doctype html>
@@ -33,7 +32,6 @@ echo $userid;
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="#">Ordner erstellen</a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -49,7 +47,7 @@ echo $userid;
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, [username lalala]!
+            Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
@@ -67,15 +65,15 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
-                            Dateien <span class="sr-only"></span>
+                            Alle Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href=latest.php>
                             <span data-feather="clock"></span>
                             Aktuell
                         </a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -85,13 +83,13 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
-                            Von Mir
+                            Meine Uploads
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich
+                            Für Mich freigegeben
                         </a>
                     </li>
                     <li class="nav-item">
@@ -106,7 +104,7 @@ echo $userid;
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Gelöschte Dateien</h1>
+                <h1 class="h2">Papierkorb</h1>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sortieren nach
@@ -119,69 +117,27 @@ echo $userid;
                 </div>
             </div>
 
-            <h2>Dateien</h2>
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Eigentümer</th>
-                        <th>Zuletzt geändert</th>
-                        <th>Dateigröße</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <?php
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Name </th>";
+                        echo "<th> Dateigröße</th>";
+                        echo "</thead>";
+                        require ("connection.php");
+                        $sql = "SELECT name FROM dateien WHERE user_id=$userid";
+                        foreach ($db->query($sql) as $row)
+                        {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "</tr>";
+                            echo "</tbody>";
+                        }; ?>
+                    </table>
+                </div>
         </main>
     </div>
 </div>

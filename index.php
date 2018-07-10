@@ -31,7 +31,6 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="<?php include("folder_formular.html")?>"></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -47,7 +46,7 @@ $userid = $_SESSION['userid'];
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, [username lalala]!
+            Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
@@ -68,12 +67,12 @@ $userid = $_SESSION['userid'];
                             Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href=latest.php>
                             <span data-feather="clock"></span>
                             Aktuell
                         </a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -121,6 +120,35 @@ $userid = $_SESSION['userid'];
 
             <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
             <ul>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <?php
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Dateiname </th>";
+                        echo "<th> Nutzername</th>";
+                        echo "<th> Freigabe</th>";
+                        echo "</thead>";
+                        require ("connection.php");
+                       $sql1 = "SELECT name, freigabe FROM dateien WHERE user_id=$userid";
+                         $query1 = $db ->prepare($sql1);
+                         $query1 ->execute();
+                         while ($tr = $query1->fetchObject()){
+                             echo "<tbody>";
+                             echo "<td>" . "$tr->name". "</td>";
+
+                             $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
+                             $query2 = $db ->prepare($sql2);
+                             $query2 ->execute();
+                             while ($tr2 = $query2->fetchObject()){
+                                 echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
+                                 echo "<td>" . "$tr->freigabe". "</td>";
+                                 echo "</tr>";
+                             }
+                        } ?>
+                    </table>
+                </div>
                 <?php
                 // Ordnername
                 $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
