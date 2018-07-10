@@ -31,7 +31,7 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="<?php include("folder_formular.html")?>"></a>
+            <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">

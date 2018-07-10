@@ -32,8 +32,6 @@
         }
         .modal-header {
             padding-left: 25px;
-        }*/
-        .bootstrap {
         }
         .modal-confirm {
             color: #636363;
