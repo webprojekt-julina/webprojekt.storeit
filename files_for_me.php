@@ -49,7 +49,7 @@ echo $userid;
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, [username lalala]!
+            Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
@@ -67,15 +67,15 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
-                            Dateien <span class="sr-only"></span>
+                            Alle Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href=latest.php>
                             <span data-feather="clock"></span>
                             Aktuell
                         </a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -85,13 +85,13 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
-                            Von Mir
+                            Meine Uploads
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich
+                            Für Mich freigegeben
                         </a>
                     </li>
                     <li class="nav-item">

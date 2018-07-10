@@ -31,7 +31,7 @@ if (isset($_GET['file_id'])) {
         if (strlen($_POST['email-noUser']) > 4) {   //Teilen mit Nicht-Usern WIESO 4?????
             $email = $_POST['email-noUser'];
             $dateiname = $ergebnis['name'];
-            mail($email, 'Jemand hat eine Datei mit dir geteilt', 'Hallo! Lade Dir jetzt die für dich freigegebene Datei herunter. <br><br> <a href="https://mars.iuk.hdm-stuttgart.de/' . $dateiname . '">Einfach hier klicken!</a><br><br> Dein store.it-Team', [
+            mail($email, 'Filesharing mit store.it', 'Hallo! Lade Dir jetzt diese für Dich freigegebene Datei herunter. <br><br> <a href="https://mars.iuk.hdm-stuttgart.de/' . $dateiname . '">Einfach hier klicken!</a><br><br> Dein store.it-Team', [
                 'MIME-Version: 1.0','Content-type: text/html; charset=iso-8859-1']);
 
 
