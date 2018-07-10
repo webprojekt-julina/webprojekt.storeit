@@ -32,7 +32,6 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="#">Ordner erstellen</a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -118,25 +117,20 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <h2>Dateien</h2>
             <div class="table-responsive">
-                <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <?php
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th> Datei-ID </th>";
                         echo "<th> Name </th>";
-                        echo "<th> Urheber </th>";
+                        echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         $sql = "SELECT name FROM dateien WHERE user_id=$userid";
-                        foreach ($db->query($sql) as $row) {
-
-
+                        foreach ($db->query($sql) as $row)
+                        {
                             echo "<tbody>";
                             echo "<tr>";
-                            echo "<td>" . $row['name'] . "</td>";
                             echo "<td>" . $row['name'] . "</td>";
                             echo "</tr>";
                             echo "</tbody>";

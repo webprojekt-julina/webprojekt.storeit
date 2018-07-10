@@ -22,13 +22,13 @@ if($_FILES["uploadfile"]["name"]=="")
 }
 
 //Überprüfung der Dateigröße
-if ($_FILES["uploadfile"]["size"] > 800000) {
-    echo "Die Datei ist zu groß(max. Dateigröße:8MB).";
+if ($_FILES["uploadfile"]["size"] > 5000000) {
+    echo "Die Datei ist zu groß(max. Dateigröße:50MB).";
     die ();
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('png', 'jpeg', 'gif', 'pdf', 'keynote','pages','numbers','xls','doc', 'ppt', 'zip');
+$allowed_extensions = array('png', 'jpeg', 'gif', 'pdf', 'key','pages','numbers','xls','doc', 'ppt', 'zip');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";

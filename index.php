@@ -31,7 +31,6 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="<?php include("folder_formular.html")?>"></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -65,7 +64,7 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
-                            Alle Dateien <span class="sr-only"></span>
+                            Dateien <span class="sr-only"></span>
                         </a>
                     </li>
                     <!--<li class="nav-item">
@@ -83,13 +82,13 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
-                            Meine Uploads
+                            Von Mir
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich freigegeben
+                            Für Mich
                         </a>
                     </li>
                     <li class="nav-item">
@@ -121,6 +120,35 @@ $userid = $_SESSION['userid'];
 
             <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
             <ul>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <?php
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Dateiname </th>";
+                        echo "<th> Nutzername</th>";
+                        echo "<th> Freigabe</th>";
+                        echo "</thead>";
+                        require ("connection.php");
+                       $sql1 = "SELECT name, freigabe FROM dateien WHERE user_id=$userid";
+                         $query1 = $db ->prepare($sql1);
+                         $query1 ->execute();
+                         while ($tr = $query1->fetchObject()){
+                             echo "<tbody>";
+                             echo "<td>" . "$tr->name". "</td>";
+
+                             $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
+                             $query2 = $db ->prepare($sql2);
+                             $query2 ->execute();
+                             while ($tr2 = $query2->fetchObject()){
+                                 echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
+                                 echo "<td>" . "$tr->freigabe". "</td>";
+                                 echo "</tr>";
+                             }
+                        } ?>
+                    </table>
+                </div>
                 <?php
                 // Ordnername
                 $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)

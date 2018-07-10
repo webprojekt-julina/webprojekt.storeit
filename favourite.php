@@ -32,7 +32,6 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="#">Ordner erstellen</a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -58,48 +57,50 @@ $userid = $_SESSION['userid'];
     </div>
 </nav>
 
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href=index.php>
-                    <span data-feather="home"></span>
-                    Alle Dateien <span class="sr-only"></span>
-                </a>
-            </li>
-            <!--<li class="nav-item">
-                <a class="nav-link" href=latest.php>
-                    <span data-feather="clock"></span>
-                    Aktuell
-                </a>
-            </li>-->
-            <li class="nav-item">
-                <a class="nav-link" href=favourite.php>
-                    <span data-feather="star"></span>
-                    Favoriten
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href=my_files.php>
-                    <span data-feather="user"></span>
-                    Meine Uploads
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href=files_for_me.php>
-                    <span data-feather="users"></span>
-                    Für Mich freigegeben
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href=trash.php>
-                    <span data-feather="trash-2"></span>
-                    Papierkorb
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href=index.php>
+                            <span data-feather="home"></span>
+                            Alle Dateien <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href=latest.php>
+                            <span data-feather="clock"></span>
+                            Aktuell
+                        </a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href=favourite.php>
+                            <span data-feather="star"></span>
+                            Favoriten
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=my_files.php>
+                            <span data-feather="user"></span>
+                            Meine Uploads
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=files_for_me.php>
+                            <span data-feather="users"></span>
+                            Für Mich freigegeben
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=trash.php>
+                            <span data-feather="trash-2"></span>
+                            Papierkorb
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -116,45 +117,27 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <h2>Dateien</h2>
-
-            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
-            <ul>
-                <?php
-                // Ordnername
-                $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
-
-                // Ordner auslesen und Array in Variable speichern
-                $alledateien = scandir($ordner); // Sortierung A-Z
-                // Sortierung Z-A mit scandir($ordner, 1)
-
-                // Schleife um Array "$alledateien" aus scandir Funktion auszugeben
-                // Einzeldateien werden dabei in der Variabel $datei abgelegt
-                foreach ($alledateien as $datei) {
-
-                    // Zusammentragen der Dateiinfo
-                    $dateiinfo = pathinfo($ordner."/".$datei);
-                    //Folgende Variablen stehen nach pathinfo zur Verfügung
-                    // $dateiinfo['filename'] =Dateiname ohne Dateiendung  *erst mit PHP 5.2
-                    // $dateiinfo['dirname'] = Verzeichnisname
-                    // $dateiinfo['extension'] = Dateityp -/endung
-                    // $dateiinfo['basename'] = voller Dateiname mit Dateiendung
-
-                    // Größe ermitteln zur Ausgabe
-                    $size = ceil(filesize($ordner."/".$datei)/1024);
-                    //1024 = kb | 1048576 = MB | 1073741824 = GB
-
-                    // scandir liest alle Dateien im Ordner aus, zusätzlich noch "." , ".." als Ordner
-                    // Nur echte Dateien anzeigen lassen und keine "Punkt" Ordner
-                    // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
-                    if ($datei != "." && $datei != ".."  && $datei != "_notes") {
-                        ?>
-                        <li><a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><?php echo $dateiinfo['basename']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></a></li>
+            <div class="table-responsive">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
                         <?php
-                    };
-                };
-                ?>
-            </ul>
+                        echo "<thead>";
+                        echo "<tr>";
+                        echo "<th> Name </th>";
+                        echo "<th> Dateigröße</th>";
+                        echo "</thead>";
+                        require ("connection.php");
+                        $sql = "SELECT name FROM dateien WHERE user_id=$userid";
+                        foreach ($db->query($sql) as $row)
+                        {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . $row['name'] . "</td>";
+                            echo "</tr>";
+                            echo "</tbody>";
+                        }; ?>
+                    </table>
+                </div>
         </main>
     </div>
 </div>

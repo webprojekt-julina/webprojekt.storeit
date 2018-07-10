@@ -33,7 +33,6 @@ echo $userid;
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Datei erstellen</a>
             <a class="dropdown-item" href="#">Ordner erstellen</a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
@@ -67,7 +66,7 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
-                            Alle Dateien <span class="sr-only"></span>
+                            Dateien <span class="sr-only"></span>
                         </a>
                     </li>
                     <!--<li class="nav-item">
@@ -75,7 +74,7 @@ echo $userid;
                             <span data-feather="clock"></span>
                             Aktuell
                         </a>
-                    </li>-->
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -85,13 +84,13 @@ echo $userid;
                     <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
-                            Meine Uploads
+                            Von Mir
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich freigegeben
+                            Für Mich
                         </a>
                     </li>
                     <li class="nav-item">
@@ -121,28 +120,28 @@ echo $userid;
 
             <div class="table-responsive">
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <?php
-                        echo "<thead>";
+                <table class="table table-striped table-sm">
+                    <?php
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th> Dateiname </th>";
+                    echo "<th> Urheber </th>";
+                    echo "<th> Dateigröße </th>";
+                    echo "</thead>";
+                    require ("connection.php");
+                    $sql = "SELECT name FROM dateien WHERE user_id=$userid AND freigabe=1";
+                    foreach ($db->query($sql) as $row) {
+
+
+                        echo "<tbody>";
                         echo "<tr>";
-                        echo "<th> Datei-ID </th>";
-                        echo "<th> Name </th>";
-                        echo "<th> Urheber </th>";
-                        echo "</thead>";
-                        require ("connection.php");
-                        $sql = "SELECT id, name FROM dateien WHERE user_id=$userid AND freigabe=1";
-                        foreach ($db->query($sql) as $row) {
-
-
-                            echo "<tbody>";
-                            echo "<tr>";
-                            echo "<td>" . $row['id'] . "</td>";
-                            echo "<td>" . $row['name'] . "</td>";
-                            echo "<td>" . $row['name'] . "</td>";
-                            echo "</tr>";
-                            echo "</tbody>";
-                        }; ?>
-                    </table>
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['name'] . "</td>";
+                        echo "<td>" . $row['name'] . "</td>";
+                        echo "</tr>";
+                        echo "</tbody>";
+                    }; ?>
+                </table>
             </div>
         </main>
     </div>
