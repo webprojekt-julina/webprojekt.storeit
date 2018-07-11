@@ -1,4 +1,7 @@
+
+
 <?php
+//extra für Jule
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
