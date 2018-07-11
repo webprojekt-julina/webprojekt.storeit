@@ -16,7 +16,7 @@ $userid = $_SESSION['userid'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Startseite</title>
+    <title>Dashboard Template for Bootstrap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
@@ -125,18 +125,18 @@ $userid = $_SESSION['userid'];
                     <table class="table table-striped table-sm">
                         <?php
                         echo "<thead>";
-                            echo "<tr>";
-                                echo "<th> Dateiname </th>";
-                                echo "<th></th>";
-                                echo "<th> Nutzername</th>";
-                                echo "<th> Freigabe</th>";
-                            echo "</tr>";
+                        echo "<tr>";
+                        echo "<th> Dateiname </th>";
+                        echo "<th></th>";
+                        echo "<th> Nutzername</th>";
+                        echo "<th> Freigabe</th>";
+                        echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                        $sql1 = "SELECT name, freigabe FROM dateien WHERE user_id=$userid";
+                       $sql1 = "SELECT name, freigabe, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
-                         while ($tr = $query1->fetchObject()) {
+                         while ($tr = $query1->fetchObject()){
                              echo "<tbody>";
                                  echo "<tr>";
                                      echo "<td>" . "$tr->name". "</td>";
@@ -210,17 +210,20 @@ $userid = $_SESSION['userid'];
 
 
                              $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
-                                     $query2 = $db ->prepare($sql2);
-                                     $query2 ->execute();
-                                     while ($tr2 = $query2->fetchObject()){
-                                         echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
-                                         echo "<td>" . "$tr->freigabe". "</td>";
-                                     }
-                                }
-                         ?>
-                        </table>
+                             $query2 = $db ->prepare($sql2);
+                             $query2 ->execute();
+                             while ($tr2 = $query2->fetchObject()){
+                                 echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
+                                 echo "<td>" . "$tr->freigabe". "</td>";
+                                 echo "<td>" . "$tr->size". "</td>";
+
+                                 echo "</tr>";
+                             }
+                        } ?>
+                    </table>
                 </div>
                 <?php
+                /*
                 // Ordnername
                 $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
 
@@ -253,7 +256,7 @@ $userid = $_SESSION['userid'];
                         <?php
                     };
                 };
-                ?>
+                */?>
             </ul>
         </main>
     </div>
