@@ -1,5 +1,3 @@
-
-
 <?php
 //extra für Jule
 //Session
@@ -23,6 +21,9 @@ $userid = $_SESSION['userid'];
     <title>Dashboard Template for Bootstrap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 </head>
@@ -36,14 +37,12 @@ $userid = $_SESSION['userid'];
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
-            <a class="dropdown-item" href="#">Datei hochladen
-                <form action="upload.php" method="post"
+            <a  class="dropdown-item"><form action="upload.php" method="post"
                       enctype="multipart/form-data">
-                    <input type="file" name="uploadfile"
-                           id="uploadfile"><br>
-                    <input type="submit" value="Datei hochladen" name="submit">
+                    <span><input type="file" name="uploadfile" id="uploadfile"></span><br>
+                    <span><input type="submit" value="Datei hochladen" name="submit"></span>
                 </form>
-            </a>
+              </a>
             <a class="dropdown-item" href="#">Ordner hochladen</a>
         </div>
     </div>
@@ -129,6 +128,7 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
+                        include ("header.php");
                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
@@ -136,8 +136,10 @@ $userid = $_SESSION['userid'];
                              echo "<tbody>";
                              echo "<tr>";
                              echo "<td>" . "$tr->name". "</td>";
+                             echo "<td>" . "$tr->id". "</td>";
 
                              ?>
+                             <!--Dateidownload-->
                              <td>
                                  <form action="download.php?filename=<?="$tr->name"?>" method="post">
                                      <button class="btn btn-primary btn-sm" type="submit" >
@@ -145,44 +147,46 @@ $userid = $_SESSION['userid'];
                                      </button>
                                  </form>
                              </td>
+                             <!--Datei teilen-->
                                 <td>
                                 <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
-                                                            <i class='fa fa-share-alt'></i>
-                                                     </button>
-                                                        <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                                                                <div class='modal-dialog'>
-                                                                    <div class='modal-content'>
-                                                                        <div class='modal-header'>
-                                                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                                                            <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
-                                                                        </div>
-                                                                        <div class='modal-body'>
-                                                                            <!--<p><a title=\"Facebook\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-facebook fa-stack-1x\"></i></span></a> <a title=\"Twitter\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-twitter fa-stack-1x\"></i></span></a> <a title=\"Google+\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-google-plus fa-stack-1x\"></i></span></a> <a title=\"Linkedin\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-linkedin fa-stack-1x\"></i></span></a> <a title=\"Reddit\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-reddit fa-stack-1x\"></i></span></a> <a title=\"WordPress\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-wordpress fa-stack-1x\"></i></span></a> <a title=\"Digg\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-digg fa-stack-1x\"></i></span></a>  <a title=\"Stumbleupon\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-stumbleupon fa-stack-1x\"></i></span></a><a title=\"E-mail\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-envelope fa-stack-1x\"></i></span></a>  <a title=\"Print\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-print fa-stack-1x\"></i></span></a></p>-->
-                                                                            <br>
-                                                                            <p>Mit anderen registrierten Nutzern teilen:</p>";
+                                <i class='fa fa-share-alt'></i>
+                                </button>
+                                <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                                            <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
+                                            </div>
+                                                <div class='modal-body'>
+                                            <br>
+                                            <p>Mit anderen registrierten Nutzern teilen:</p>";
 
-                                                                            <form action='share.php?file_id=<?="$tr->id"?>' method='post'>
-                                                                                <div class='input-group'>
-                                                                                    <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
-                                                                                </div>
-                                                                                <br />
-                                                                                <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
 
-                                                                                <!--------------------------   Nicht registrierte Benutzer ----------------->
-                                                                                <br>
-                                                                                <br>
-                                                                                <br>
-                                                                                <p>Mit nicht-registrierten Personen teilen:</p>
-                                                                                <div class='input-group'>
-                                                                                    <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
-                                                                                </div>
-                                                                                <br />
-                                                                                <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                        </div>
+                                            <form action="share.php?filename=<?="$tr->name"?>" method="post">
+                                                <div class='input-group'>
+                                                    <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
+                                                </div>
+                                            <br />
+                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
+
+                                            <!--------------------------   Nicht registrierte Benutzer ----------------->
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <p>Mit nicht-registrierten Personen teilen:</p>
+                                            <div class='input-group'>
+                                                <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
+                                            </div>
+                                            <br />
+                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                                 <!-- Datei löschen-->
                                                      <button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
                                                             <i class='fas fa-trash-alt'></i>
                                                      </button>
@@ -270,6 +274,12 @@ $userid = $_SESSION['userid'];
 
 <!-- Icons -->
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+<!-- Bootstrap Modals -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     feather.replace()
 </script>

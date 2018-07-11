@@ -17,151 +17,95 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 
     <!------ Include the above in your HEAD tag ---------->
     <style>
-        body {
-            font-family: "Helvetica Light",Helvetica,Arial,sans-serif; }
-        .modal-body {
-            padding-left: 25px;
-            padding-bottom: 30px;
+        body {/* Popup box BEGIN */
+        .hover_bkgr_fricc{
+            background:rgba(0,0,0,.4);
+            cursor:pointer;
+            display:none;
+            height:100%;
+            position:fixed;
+            text-align:center;
+            top:0;
+            width:100%;
+            z-index:10000;
         }
-        .modal-header {
-            padding-left: 25px;
+        .hover_bkgr_fricc .helper{
+            display:inline-block;
+            height:100%;
+            vertical-align:middle;
         }
-        .modal-confirm {
-            color: #636363;
-            width: 400px;
-        }
-
-        .modal-confirm .modal-content {
-            padding: 20px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .modal-confirm .modal-header {
-            border-bottom: none;
+        .hover_bkgr_fricc > div {
+            background-color: #fff;
+            box-shadow: 10px 10px 60px #555;
+            display: inline-block;
+            height: auto;
+            max-width: 551px;
+            min-height: 100px;
+            vertical-align: middle;
+            width: 60%;
             position: relative;
+            border-radius: 8px;
+            padding: 15px 5%;
         }
-
-        .modal-confirm h4 {
-            text-align: center;
-            font-size: 26px;
-            margin: 30px 0 -10px;
-        }
-
-        .modal-confirm .close {
+        .popupCloseButton {
+            background-color: #fff;
+            border: 3px solid #999;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-block;
+            font-family: arial;
+            font-weight: bold;
             position: absolute;
-            top: -5px;
-            right: -2px;
-        }
-
-        .modal-confirm .modal-body {
-            color: #999;
-        }
-
-        .modal-confirm .modal-footer {
-            border: none;
+            top: -20px;
+            right: -20px;
+            font-size: 25px;
+            line-height: 30px;
+            width: 30px;
+            height: 30px;
             text-align: center;
-            border-radius: 5px;
-            font-size: 13px;
-            padding: 10px 15px 25px;
         }
-
-        .modal-confirm .modal-footer a {
-            color: #999;
+        .popupCloseButton:hover {
+            background-color: #ccc;
         }
-
-        .modal-confirm .icon-box {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-            border-radius: 50%;
-            z-index: 9;
-            text-align: center;
-            border: 3px solid #f44336;
-        }
-
-        .modal-confirm .icon-box i {
-            color: #f44336;
-            font-size: 46px;
+        .trigger_popup_fricc {
+            cursor: pointer;
+            font-size: 20px;
+            margin: 20px;
             display: inline-block;
-            margin-top: 13px;
+            font-weight: bold;
         }
-
-        .modal-confirm .btn {
-            color: #fff;
-            border-radius: 4px;
-            background: #007bff;
-            text-decoration: none;
-            transition: all 0.4s;
-            line-height: normal;
-            min-width: 120px;
-            border: none;
-            min-height: 40px;
-            border-radius: 3px;
-            margin: 0 5px;
-            outline: none !important;
-        }
-
-        .modal-confirm .btn-info {
-            background: #c1c1c1;
-        }
-
-        .modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
-            background: #a8a8a8;
-        }
-
-        .modal-confirm .btn-danger {
-            background: #f44336;
-        }
-
-        .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-            background: #f44336;
-        }
-
-        .trigger-btn {
-            display: inline-block;
-            margin: 100px auto;
-        }
-
-        #myFolderModal {
-            margin-left: 1em;
-            margin-right: 1em;
-        }
+        /* Popup box BEGIN */
     </style>
 </head>
 <body>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <button class="btn btn-primary btn-sm"  title="Ordner erstellen" data-toggle="modal" data-target="#myFolderModal">
-            <i class="">Ordner erstellen</i>
-        </button>
-        <div class="modal fade" id="myFolderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2><i class="fa fa-envelope"></i> Ordner anlegen:</h2>
-            </div>
-            <div class="modal-body">
-                <br>
-<form action="folder.php" method="post">
-    <div class="input-group">
-        <input type="text" name="ordnername" class="form-control" placeholder="Unbenannter Ordner">
+    <a class="trigger_popup_fricc">Ordner erstellen</a>
+
+    <div class="hover_bkgr_fricc">
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">X</div>
+            <p>Add any HTML content<br />inside the popup box!</p>
+        </div>
     </div>
-    <br/>
-    <button type="submit" value="sub" name="sub" class="btn btn-primary"><i class=""></i>Erstellen</button>
-</form>
-</div>
-</div>
-</div>
-</div>
+   <script>
+       $(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+    $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+    $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+    $('.hover_bkgr_fricc').hide();
+    });
+    });
+   </script>
 </body>
 </html>

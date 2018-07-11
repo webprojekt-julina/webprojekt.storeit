@@ -72,13 +72,11 @@ if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
 $datei= 'datei';
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
 $name=$_FILES['uploadfile']['name'];
-$kryptisch=$_FILES['uploadfile']['kryptisch'];
 $size=$_FILES['uploadfile']['size'];
-$statement= $db ->prepare("INSERT INTO dateien (name, kryptisch,size, user_id) VALUES('$name','$kryptisch','$size','$userid')");
+$statement= $db ->prepare("INSERT INTO dateien (name, size, user_id) VALUES('$name','$size','$userid')");
 $statement ->bindParam(1,$datei);
 $statement ->bindParam(2,$name);
-$statement ->bindParam(3,$kryptisch);
-$statement ->bindParam(4,$size);
+$statement ->bindParam(3,$size);
 if (!$statement->execute()){
     echo "Datenbank-Fehler:";
     echo $statement->errorInfo()[2];
