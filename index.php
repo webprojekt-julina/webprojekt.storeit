@@ -126,7 +126,7 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                       $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
+                       $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
                          while ($tr = $query1->fetchObject()){
@@ -142,39 +142,39 @@ $userid = $_SESSION['userid'];
                                      </button>
                                  </form>
                              </td>
-                             <?php
-                             echo "<td>" . "         <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
+                                <td>
+                                <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
                                                             <i class='fa fa-share-alt'></i>
-                                                     </button>" . "
+                                                     </button>
                                                         <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
                                                                 <div class='modal-dialog'>
                                                                     <div class='modal-content'>
                                                                         <div class='modal-header'>
-                                                                            <button type='button' class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
-                                                                            <h2><i class=\"fa fa-envelope\"></i> Datei teilen:</h2>
+                                                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+                                                                            <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
                                                                         </div>
-                                                                        <div class=\"modal-body\">
+                                                                        <div class='modal-body'>
                                                                             <!--<p><a title=\"Facebook\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-facebook fa-stack-1x\"></i></span></a> <a title=\"Twitter\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-twitter fa-stack-1x\"></i></span></a> <a title=\"Google+\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-google-plus fa-stack-1x\"></i></span></a> <a title=\"Linkedin\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-linkedin fa-stack-1x\"></i></span></a> <a title=\"Reddit\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-reddit fa-stack-1x\"></i></span></a> <a title=\"WordPress\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-wordpress fa-stack-1x\"></i></span></a> <a title=\"Digg\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-digg fa-stack-1x\"></i></span></a>  <a title=\"Stumbleupon\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-stumbleupon fa-stack-1x\"></i></span></a><a title=\"E-mail\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-envelope fa-stack-1x\"></i></span></a>  <a title=\"Print\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-print fa-stack-1x\"></i></span></a></p>-->
                                                                             <br>
-                                                                            <p>Mit anderen registrierten Nutzern teilen:</p>
-                                                
-                                                                            <form action=\"share.php\" method=\"post\">
-                                                                                <div class=\"input-group\">
-                                                                                    <input type=\"email\" name=\"emailUser\" class=\"form-control\" placeholder=\"E-Mail Addresse\">
+                                                                            <p>Mit anderen registrierten Nutzern teilen:</p>";
+
+                                                                            <form action='share.php?file_id=<?="$tr->id"?>' method='post'>
+                                                                                <div class='input-group'>
+                                                                                    <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
                                                                                 </div>
                                                                                 <br />
-                                                                                <button type=\"submit\" value=\"sub\" name=\"sub\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i> Teilen</button>
-                                                
+                                                                                <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
+
                                                                                 <!--------------------------   Nicht registrierte Benutzer ----------------->
                                                                                 <br>
                                                                                 <br>
                                                                                 <br>
                                                                                 <p>Mit nicht-registrierten Personen teilen:</p>
-                                                                                <div class=\"input-group\">
-                                                                                    <input type=\"email\" name=\"email-noUser\" class=\"form-control\" placeholder=\"E-Mail-Adresse\">
+                                                                                <div class='input-group'>
+                                                                                    <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
                                                                                 </div>
                                                                                 <br />
-                                                                                <button type=\"submit\" value=\"sub\" name=\"sub\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i> Teilen</button>
+                                                                                <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -182,30 +182,30 @@ $userid = $_SESSION['userid'];
                                                         </div>
                                                      <button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
                                                             <i class='fas fa-trash-alt'></i>
-                                                     </button>" . "
-                                                     <div id=\"myDeleteModal\" class=\"modal fade\">
-                                                        <div class=\"modal-dialog modal-confirm\">
-                                                            <div class=\"modal-content\">
-                                                                <div class=\"modal-header\">
-                                                                    <div class=\"icon-box\">
-                                                                        <i class=\"fas fa-trash-alt\"></i>
+                                                     </button>
+                                                     <div id='myDeleteModal' class='modal fade'>
+                                                        <div class='modal-dialog modal-confirm'>
+                                                            <div class='modal-content'>
+                                                                <div class='modal-header'>
+                                                                    <div class='icon-box'>
+                                                                        <i class='fas fa-trash-alt'></i>
                                                                     </div>
-                                                                    <h4 class=\"modal-title\">Bist Du sicher?</h4>
-                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
+                                                                    <h4 class='modal-title'>Bist Du sicher?</h4>
+                                                                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
                                                                 </div>
-                                                                <div class=\"modal-body\">
+                                                                <div class='modal-body'>
                                                                     <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
                                                                 </div>
-                                                                <div class=\"modal-footer\">
-                                                                    <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">Abbrechen</button>
-                                                                    <button type=\"button\" class=\"btn btn-danger\">Löschen</button>
+                                                                <div class='modal-footer'>
+                                                                    <button type='button' class='btn btn-info' data-dismiss='modal'>Abbrechen</button>
+                                                                    <button type='button' class='btn btn-danger'>Löschen</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                           </td>";
+                                           </td>
 
-
+<?php
                              $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
                              $query2 = $db ->prepare($sql2);
                              $query2 ->execute();
