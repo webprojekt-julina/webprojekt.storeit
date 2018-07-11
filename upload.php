@@ -22,13 +22,13 @@ if($_FILES["uploadfile"]["name"]=="")
 }
 
 //Überprüfung der Dateigröße
-if ($_FILES["uploadfile"]["size"] > 5000000) {
+if ($_FILES["uploadfile"]["size"] > 50000000 ) {
     echo "Die Datei ist zu groß(max. Dateigröße:50MB).";
     die ();
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('png', 'jpeg', 'gif', 'pdf', 'key','pages','numbers','xls','doc', 'ppt', 'zip');
+$allowed_extensions = array('png', 'jpeg','jpg', 'gif', 'pdf', 'key','pages','numbers','xls','doc', 'ppt', 'zip');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
@@ -73,10 +73,12 @@ $datei= 'datei';
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
 $name=$_FILES['uploadfile']['name'];
 $kryptisch=$_FILES['uploadfile']['kryptisch'];
-$statement= $db ->prepare("INSERT INTO dateien (name, kryptisch, user_id) VALUES('$name','$kryptisch','$userid')");
+$size=$_FILES['uploadfile']['size'];
+$statement= $db ->prepare("INSERT INTO dateien (name, kryptisch,size, user_id) VALUES('$name','$kryptisch','$size','$userid')");
 $statement ->bindParam(1,$datei);
 $statement ->bindParam(2,$name);
 $statement ->bindParam(3,$kryptisch);
+$statement ->bindParam(4,$size);
 if (!$statement->execute()){
     echo "Datenbank-Fehler:";
     echo $statement->errorInfo()[2];

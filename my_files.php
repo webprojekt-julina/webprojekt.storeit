@@ -2,7 +2,7 @@
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
-    die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
+    die( require_once("sign_in_nosession.html"));
 }
 
 //Abfrage der Nutzer ID vom Login
@@ -32,7 +32,7 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Ordner erstellen</a>
+            <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
@@ -68,12 +68,6 @@ $userid = $_SESSION['userid'];
                             Alle Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href=latest.php>
-                            <span data-feather="clock"></span>
-                            Aktuell
-                        </a>
-                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -89,7 +83,7 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich freigegeben
+                            Für mich freigegeben
                         </a>
                     </li>
                     <li class="nav-item">
@@ -104,7 +98,7 @@ $userid = $_SESSION['userid'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Meine Dateien</h1>
+                <h1 class="h2">Meine Uploads</h1>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sortieren nach
@@ -117,24 +111,97 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
+            <ul>
+
+                <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <?php
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th> Name </th>";
+                        echo "<th> Dateiname </th>";
+                        echo "<th></th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                        $sql = "SELECT name FROM dateien WHERE user_id=$userid";
-                        foreach ($db->query($sql) as $row)
-                        {
-                            echo "<tbody>";
-                            echo "<tr>";
-                            echo "<td>" . $row['name'] . "</td>";
-                            echo "</tr>";
-                            echo "</tbody>";
-                        }; ?>
+                       $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
+                         $query1 = $db ->prepare($sql1);
+                         $query1 ->execute();
+                         while ($tr = $query1->fetchObject()){
+                             echo "<tbody>";
+                             echo "<tr>";
+                             echo "<td>" . "$tr->name". "</td>";
+                             echo "<td>" . "<button class='btn btn-primary btn-sm'  title='Datei speichern'>
+                                                            <form action='download.php'>
+                                                                <i class='fas fa-cloud-download-alt'></i>
+                                                            </form>
+                                                     </button>" . "
+                                                     
+                                                     <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
+                                                            <i class='fa fa-share-alt'></i>
+                                                     </button>" . "
+                                                        <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+                                                                <div class='modal-dialog'>
+                                                                    <div class='modal-content'>
+                                                                        <div class='modal-header'>
+                                                                            <button type='button' class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
+                                                                            <h2><i class=\"fa fa-envelope\"></i> Datei teilen:</h2>
+                                                                        </div>
+                                                                        <div class=\"modal-body\">
+                                                                            <!--<p><a title=\"Facebook\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-facebook fa-stack-1x\"></i></span></a> <a title=\"Twitter\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-twitter fa-stack-1x\"></i></span></a> <a title=\"Google+\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-google-plus fa-stack-1x\"></i></span></a> <a title=\"Linkedin\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-linkedin fa-stack-1x\"></i></span></a> <a title=\"Reddit\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-reddit fa-stack-1x\"></i></span></a> <a title=\"WordPress\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-wordpress fa-stack-1x\"></i></span></a> <a title=\"Digg\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-digg fa-stack-1x\"></i></span></a>  <a title=\"Stumbleupon\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-stumbleupon fa-stack-1x\"></i></span></a><a title=\"E-mail\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-envelope fa-stack-1x\"></i></span></a>  <a title=\"Print\" href=\"\"><span class=\"fa-stack fa-lg\"><i class=\"fa fa-square-o fa-stack-2x\"></i><i class=\"fa fa-print fa-stack-1x\"></i></span></a></p>-->
+                                                                            <br>
+                                                                            <p>Mit anderen registrierten Nutzern teilen:</p>
+                                                
+                                                                            <form action=\"share.php\" method=\"post\">
+                                                                                <div class=\"input-group\">
+                                                                                    <input type=\"email\" name=\"emailUser\" class=\"form-control\" placeholder=\"E-Mail Addresse\">
+                                                                                </div>
+                                                                                <br />
+                                                                                <button type=\"submit\" value=\"sub\" name=\"sub\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i> Teilen</button>
+                                                
+                                                                                <!--------------------------   Nicht registrierte Benutzer ----------------->
+                                                                                <br>
+                                                                                <br>
+                                                                                <br>
+                                                                                <p>Mit nicht-registrierten Personen teilen:</p>
+                                                                                <div class=\"input-group\">
+                                                                                    <input type=\"email\" name=\"email-noUser\" class=\"form-control\" placeholder=\"E-Mail-Adresse\">
+                                                                                </div>
+                                                                                <br />
+                                                                                <button type=\"submit\" value=\"sub\" name=\"sub\" class=\"btn btn-primary\"><i class=\"fa fa-share\"></i> Teilen</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                     <button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
+                                                            <i class='fas fa-trash-alt'></i>
+                                                     </button>" . "
+                                                     <div id=\"myDeleteModal\" class=\"modal fade\">
+                                                        <div class=\"modal-dialog modal-confirm\">
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-header\">
+                                                                    <div class=\"icon-box\">
+                                                                        <i class=\"fas fa-trash-alt\"></i>
+                                                                    </div>
+                                                                    <h4 class=\"modal-title\">Bist Du sicher?</h4>
+                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
+                                                                </div>
+                                                                <div class=\"modal-body\">
+                                                                    <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">Abbrechen</button>
+                                                                    <button type=\"button\" class=\"btn btn-danger\">Löschen</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                           </td>";
+                             echo "<td>" . "$tr->size". "Byte". "</td>";
+
+                                 echo "</tr>";
+                        } ?>
                     </table>
                 </div>
         </main>

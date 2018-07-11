@@ -1,4 +1,5 @@
 <?php
+//Session
 session_start();
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
@@ -64,15 +65,9 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
-                            Dateien <span class="sr-only"></span>
+                            Alle Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href=latest.php>
-                            <span data-feather="clock"></span>
-                            Aktuell
-                        </a>
-                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -82,13 +77,13 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
-                            Von Mir
+                            Meine Uploads
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich
+                            Für mich freigegeben
                         </a>
                     </li>
                     <li class="nav-item">
@@ -116,8 +111,6 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <h2>Dateien</h2>
-
             <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
             <ul>
 
@@ -128,25 +121,29 @@ $userid = $_SESSION['userid'];
                         echo "<tr>";
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
-                        echo "<th> Nutzername</th>";
-                        echo "<th> Freigabe</th>";
+                        echo "<th></th>";
+                        echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                       $sql1 = "SELECT name, freigabe, size FROM dateien WHERE user_id=$userid";
+                       $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
                          while ($tr = $query1->fetchObject()){
                              echo "<tbody>";
-                                 echo "<tr>";
-                                     echo "<td>" . "$tr->name". "</td>";
-                                     echo "<td>" . "<button class='btn btn-primary btn-sm'  title='Datei speichern'>
-                                                            <form action='download.php'>
-                                                                <i class='fas fa-cloud-download-alt'></i>
-                                                            </form>
-                                                     </button>" . "
-                                                     
-                                                     <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
+                             echo "<tr>";
+                             echo "<td>" . "$tr->name". "</td>";
+
+                             ?>
+                             <td>
+                                 <form action="download.php?filename=<?="$tr->name"?>" method="post">
+                                     <button class="btn btn-primary btn-sm" type="submit" >
+                                         <i class="fas fa-cloud-download-alt"></i>
+                                     </button>
+                                 </form>
+                             </td>
+                             <?php
+                             echo "<td>" . "         <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
                                                             <i class='fa fa-share-alt'></i>
                                                      </button>" . "
                                                         <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -214,8 +211,7 @@ $userid = $_SESSION['userid'];
                              $query2 ->execute();
                              while ($tr2 = $query2->fetchObject()){
                                  echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
-                                 echo "<td>" . "$tr->freigabe". "</td>";
-                                 echo "<td>" . "$tr->size". "</td>";
+                                 echo "<td>" . "$tr->size". "Bytes". "</td>";
 
                                  echo "</tr>";
                              }

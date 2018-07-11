@@ -2,7 +2,7 @@
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
-    die('Bitte zuerst <a href="sign_in.html">einloggen</a>');
+    die( require_once("sign_in_nosession.html"));
 }
 
 //Abfrage der Nutzer ID vom Login
@@ -32,7 +32,7 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href="#">Ordner erstellen</a>
+            <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
@@ -68,12 +68,6 @@ $userid = $_SESSION['userid'];
                             Alle Dateien <span class="sr-only"></span>
                         </a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href=latest.php>
-                            <span data-feather="clock"></span>
-                            Aktuell
-                        </a>
-                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link" href=favourite.php>
                             <span data-feather="star"></span>
@@ -89,7 +83,7 @@ $userid = $_SESSION['userid'];
                     <li class="nav-item">
                         <a class="nav-link" href=files_for_me.php>
                             <span data-feather="users"></span>
-                            Für Mich freigegeben
+                            Für mich freigegeben
                         </a>
                     </li>
                     <li class="nav-item">
@@ -104,7 +98,7 @@ $userid = $_SESSION['userid'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Papierkorb</h1>
+                <h1 class="h2">Startseite</h1>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sortieren nach
@@ -117,27 +111,101 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
+            <ul>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <?php
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th> Name </th>";
+                        echo "<th> Dateiname </th>";
+                        echo "<th></th>";
+                        echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                        $sql = "SELECT name FROM dateien WHERE user_id=$userid";
-                        foreach ($db->query($sql) as $row)
-                        {
+                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
+                        $query1 = $db ->prepare($sql1);
+                        $query1 ->execute();
+                        while ($tr = $query1->fetchObject()){
                             echo "<tbody>";
                             echo "<tr>";
-                            echo "<td>" . $row['name'] . "</td>";
-                            echo "</tr>";
-                            echo "</tbody>";
-                        }; ?>
+                            echo "<td>" . "$tr->name". "</td>";
+                            echo "<td>" . "<button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
+                                                            <i class='fas fa-trash-alt'></i>
+                                                     </button>" . "
+                                                     <div id=\"myDeleteModal\" class=\"modal fade\">
+                                                        <div class=\"modal-dialog modal-confirm\">
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-header\">
+                                                                    <div class=\"icon-box\">
+                                                                        <i class=\"fas fa-trash-alt\"></i>
+                                                                    </div>
+                                                                    <h4 class=\"modal-title\">Bist Du sicher?</h4>
+                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
+                                                                </div>
+                                                                <div class=\"modal-body\">
+                                                                    <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button type=\"button\" class=\"btn btn-info\" data-dismiss=\"modal\">Abbrechen</button>
+                                                                    <button type=\"button\" class=\"btn btn-danger\">Löschen</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                           </td>";
+
+
+                            $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
+                            $query2 = $db ->prepare($sql2);
+                            $query2 ->execute();
+                            while ($tr2 = $query2->fetchObject()){
+                                echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
+                                echo "<td>" . "$tr->size". "Byte". "</td>";
+
+                                echo "</tr>";
+                            }
+                        } ?>
                     </table>
                 </div>
+                <?php
+                /*
+                // Ordnername
+                $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
+
+                // Ordner auslesen und Array in Variable speichern
+                $alledateien = scandir($ordner); // Sortierung A-Z
+                // Sortierung Z-A mit scandir($ordner, 1)
+
+                // Schleife um Array "$alledateien" aus scandir Funktion auszugeben
+                // Einzeldateien werden dabei in der Variabel $datei abgelegt
+                foreach ($alledateien as $datei) {
+
+                    // Zusammentragen der Dateiinfo
+                    $dateiinfo = pathinfo($ordner."/".$datei);
+                    //Folgende Variablen stehen nach pathinfo zur Verfügung
+                    // $dateiinfo['filename'] =Dateiname ohne Dateiendung  *erst mit PHP 5.2
+                    // $dateiinfo['dirname'] = Verzeichnisname
+                    // $dateiinfo['extension'] = Dateityp -/endung
+                    // $dateiinfo['basename'] = voller Dateiname mit Dateiendung
+
+                    // Größe ermitteln zur Ausgabe
+                    $size = ceil(filesize($ordner."/".$datei)/1024);
+                    //1024 = kb | 1048576 = MB | 1073741824 = GB
+
+                    // scandir liest alle Dateien im Ordner aus, zusätzlich noch "." , ".." als Ordner
+                    // Nur echte Dateien anzeigen lassen und keine "Punkt" Ordner
+                    // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
+                    if ($datei != "." && $datei != ".."  && $datei != "_notes") {
+                        ?>
+                        <li><a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><?php echo $dateiinfo['basename']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></a></li>
+                        <?php
+                    };
+                };
+                */?>
+            </ul>
         </main>
     </div>
 </div>
@@ -187,3 +255,4 @@ $userid = $_SESSION['userid'];
 </script>
 </body>
 </html>
+
