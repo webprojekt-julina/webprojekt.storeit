@@ -5,7 +5,7 @@ if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
 }
 
-//Abfrage der Nutzer ID vom Login
+//Abfrage der Nutzer ID vom Login ja
 $userid = $_SESSION['userid'];
 ?>
 
