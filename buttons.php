@@ -144,6 +144,18 @@
     <div class="container">
         <div class="row">
             <?php
+           /* session_start();
+            include "connection.php";
+            $userid = $_SESSION ['userid'];
+
+            $statement= $db->prepare("SELECT name FROM dateien");
+            $statement->execute();
+            //print_r ($statement->fetchAll());
+            foreach ($statement->fetchAll() as $value) {
+
+            }
+
+
             // Ordnername
             $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
             $alledateien = scandir($ordner);
@@ -151,7 +163,10 @@
 
             // Zusammentragen der Dateiinfo
             $dateiinfo = pathinfo($ordner."/".$datei); }
-            ?>
+            if ($datei != "." && $datei != ".."  && $datei != "_notes") {
+           */
+           ?>
+
             <a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>" class="btn btn-sm btn-primary"><form action="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><span class="glyphicon glyphicon-cloud-download"></span></form></a>
 
 
