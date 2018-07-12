@@ -12,6 +12,7 @@ if (!$statement->execute()){
     die();}
     else {
         echo 'Datei erfolgreich hochgeladen';
+        header ("Location: index.php");
     }
 
 $directory = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';

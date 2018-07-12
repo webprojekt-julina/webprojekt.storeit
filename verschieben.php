@@ -25,6 +25,7 @@ if(isset($_GET['filename'])) {
         die();
     } else {
         echo 'Datei erfolgreich verschoben';
+        header ("Location: index.php");
     }
 }
 ?>

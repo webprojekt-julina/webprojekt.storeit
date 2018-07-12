@@ -130,7 +130,7 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0";
+                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         while ($tr = $query1->fetchObject()){
