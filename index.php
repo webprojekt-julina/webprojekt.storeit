@@ -126,12 +126,13 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         $statement=$db->prepare('SELECT name FROM ordner WHERE user_id=?'); // user id eingefügt mit der ich eingeloggt bin
@@ -242,35 +243,12 @@ $userid = $_SESSION['userid'];
                                         </div>
                                     </div>
                                     <!-- Datei löschen-->
-                                    <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
-                                            data-target='#myDeleteModal'>
-                                        <i class='fas fa-trash-alt'></i>
-                                    </button>
-                                    <div id='myDeleteModal' class='modal fade'>
-                                        <div class='modal-dialog modal-confirm'>
-                                            <div class='modal-content'>
-                                                <div class='modal-header'>
-                                                    <div class='icon-box'>
-                                                        <i class='fas fa-trash-alt'></i>
-                                                    </div>
-                                                    <h4 class='modal-title'>Bist Du sicher?</h4>
-                                                    <button type='button' class='close' data-dismiss='modal'
-                                                            aria-hidden='true'>&times;
-                                                    </button>
-                                                </div>
-                                                <div class='modal-body'>
-                                                    <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
-                                                </div>
-                                                <div class='modal-footer'>
-                                                    <button type='button' class='btn btn-info' data-dismiss='modal'>
-                                                        Abbrechen
-                                                    </button>
-                                                    <button type='button' class='btn btn-danger'>Löschen</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
+                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit" >
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    </td>
 
                                 <?php
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
