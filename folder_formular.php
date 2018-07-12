@@ -16,96 +16,109 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
 
 
     <!------ Include the above in your HEAD tag ---------->
     <style>
-        body {/* Popup box BEGIN */
-        .hover_bkgr_fricc{
-            background:rgba(0,0,0,.4);
-            cursor:pointer;
-            display:none;
-            height:100%;
-            position:fixed;
-            text-align:center;
-            top:0;
-            width:100%;
-            z-index:10000;
+    body {
+        font-family: Roboto,"Helvetica Neue",Arial,sans-serif;
+    }
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    }
+.formular {
+    margin: 3%;
+}
+    .h1 {
+        margin-left: 3%;
+        margin-top: 5%;
+    }
+
+    /* The Close Button */
+    .close {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+    .btn {
+            background-color: #007bff;
+            color: white;
         }
-        .hover_bkgr_fricc .helper{
-            display:inline-block;
-            height:100%;
-            vertical-align:middle;
-        }
-        .hover_bkgr_fricc > div {
-            background-color: #fff;
-            box-shadow: 10px 10px 60px #555;
-            display: inline-block;
-            height: auto;
-            max-width: 551px;
-            min-height: 100px;
-            vertical-align: middle;
-            width: 60%;
-            position: relative;
-            border-radius: 8px;
-            padding: 15px 5%;
-        }
-        .popupCloseButton {
-            background-color: #fff;
-            border: 3px solid #999;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-block;
-            font-family: arial;
-            font-weight: bold;
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 25px;
-            line-height: 30px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-        }
-        .popupCloseButton:hover {
-            background-color: #ccc;
-        }
-        .trigger_popup_fricc {
-            cursor: pointer;
-            font-size: 20px;
-            margin: 20px;
-            display: inline-block;
-            font-weight: bold;
-        }
-        /* Popup box BEGIN */
-    </style>
+</style>
 </head>
 <body>
-    <a class="trigger_popup_fricc">Ordner erstellen</a>
-
-    <div class="hover_bkgr_fricc">
-        <span class="helper"></span>
-        <div>
-            <div class="popupCloseButton">X</div>
-            <p>Add any HTML content<br />inside the popup box!</p>
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn">Ordner erstellen</button>
+    <!-- The Modal -->
+    <div id="myM" class="modal">
+    <!-- Modal content -->
+        <div class="modal-content">
+            <span class="h1">Erstelle einen Ordner</span><span class="close">&times;</span>
+            <div class="formular">
+                <form action="folder.php" method="post">
+                <div class="input-group">
+                    <input type="text" name="ordnername" class="form-control" placeholder="Benenne deinen Ordner">
+                </div>
+                    <br/>
+                <button type="submit" value="sub" name="sub" class="btn btn-primary">
+                    <i class="fas fa-folder"></i> Erstellen
+                </button>
+            </div>
         </div>
     </div>
-   <script>
-       $(window).load(function () {
-    $(".trigger_popup_fricc").click(function(){
-    $('.hover_bkgr_fricc').show();
-    });
-    $('.hover_bkgr_fricc').click(function(){
-    $('.hover_bkgr_fricc').hide();
-    });
-    $('.popupCloseButton').click(function(){
-    $('.hover_bkgr_fricc').hide();
-    });
-    });
-   </script>
+    <script>
+       var modal = document.getElementById('myM');
+
+       var btn = document.getElementById("myBtn");
+
+       var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    };
+
+                                           span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    }
+    </script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
