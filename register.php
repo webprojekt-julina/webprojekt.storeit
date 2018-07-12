@@ -79,6 +79,7 @@ $showFormular = true;
         $email = $_POST['email'];
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
+        $bild = "standart.jpg";
 
         ?>
 
@@ -115,8 +116,8 @@ $showFormular = true;
         if (!$error) {
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password ) VALUES (:firstname, :surname, :email, :password)");
-            $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash));
+            $statement = $db->prepare("INSERT INTO webprojekt(firstname, surname, email, password, bild ) VALUES (:firstname, :surname, :email, :password, :bild)");
+            $result = $statement->execute(array('firstname' => $firstname, 'surname' => $surname, 'email' => $email, 'password' => $password_hash, 'bild' => $bild));
             if ($result) {
                 header("Location: successfull_sign_in.html");
             } else {
@@ -129,6 +130,7 @@ $showFormular = true;
             <?php }
         }
     }
+
     ?>
      <form action="?register=1" class="form-signin" method="post">
             <h2 class="h3 mb-3 font-weight-normal">Erstelle ein neues Konto</h2>
