@@ -5,7 +5,7 @@ require ("connection.php");
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
 }
-//Abfrage der Nutzer ID $userid= id des Absenders/Freigebenden
+//Abfrage der Nutzer ID $userid= id des Absenders/Freigebendenn
 $userid = $_SESSION['userid'];
 
 if(empty($_GET["dateiname"]))

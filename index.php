@@ -145,7 +145,7 @@ $userid = $_SESSION['userid'];
                             echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
 
                             ?>
-                            <!-- Datei löschen-->
+                            <!-- Datei löscheen-->
                             <td></td>
                             <td>
                                 <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
