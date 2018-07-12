@@ -35,7 +35,7 @@ if (isset($_GET['file_id'])) {
                 'MIME-Version: 1.0','Content-type: text/html; charset=iso-8859-1']);
 
 
-            //Teilen mit Nutzern -->
+            //Teilen mit NutzerInnen -->
         }
 
         if (strlen($_POST['emailUser']) > 4) {
