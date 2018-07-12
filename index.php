@@ -1,7 +1,7 @@
 
 
 <?php
-//extra für Jule
+//extra für Linus
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
