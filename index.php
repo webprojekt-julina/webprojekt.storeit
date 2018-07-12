@@ -127,12 +127,13 @@ $userid = $_SESSION['userid'];
                         echo "<th></th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0";
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=? AND file_delete=0'); // user id eingefügt mit der ich eingeloggt bin
@@ -142,23 +143,33 @@ $userid = $_SESSION['userid'];
                         while ($ts = $statement->fetchObject()) {
                             echo "<tbody>";
                             echo "<tr>";
-                            echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
+                            echo "<td>" . "<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
 
                             ?>
                             <!-- Datei löschen-->
-                            <td><form action="delete_to_trash.php?ordnerid=<?="$ts->ordnerid"?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit" >
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <form action="delete_to_trash.php?ordnerid=<?= "$ts->ordnerid" ?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
                             </td>
                             <?php
+                        }
                             while ($tr = $query1->fetchObject()) {
                                 echo "<tbody>";
                                 echo "<tr>";
                                 echo "<td>" . "$tr->name" . "</td>";
 
                                 ?>
+                                 <!--Verschieben nach-->
+                                <td>
+                                    <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
+                                        <p>Verschieben in Ordner: <input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" /></p>
+                                    </form>
+                                </td>
                                 <!--Dateidownload-->
                                 <td>
                                     <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
@@ -233,7 +244,6 @@ $userid = $_SESSION['userid'];
 
                                     echo "</tr>";
                                 }
-                            }
                         }?>
                     </table>
                 </div>
