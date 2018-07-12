@@ -144,7 +144,7 @@ $userid = $_SESSION['userid'];
                             echo "<td>" . "$ts->name" . "</td>";
 
                             ?>
-                            <!-- Datei löschen-->
+                            <!-- Datei löscheeeen-->
                             <td></td>
                             <td>
                                 <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
