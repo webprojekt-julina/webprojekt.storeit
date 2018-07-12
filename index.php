@@ -167,6 +167,13 @@ $userid = $_SESSION['userid'];
                                         </button>
                                     </form>
                                 </td>
+                                 <!-- Datei löschen-->
+                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit" >
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    </td>
                                 <!--Datei teilen-->
                                 <td>
                                     <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
@@ -185,10 +192,8 @@ $userid = $_SESSION['userid'];
                                                 </div>
                                                 <div class='modal-body'>
                                                     <br>
-                                                    <p>Mit anderen registrierten Nutzern teilen:</p>";
-
-
-                                                    <form action="share.php?filename=<?= "$tr->name" ?>" method="post">
+                                                    <p>Mit anderen registrierten Nutzern teilen:</p>
+                                                    <form action="share.php?dateiname=<?= "$tr->name" ?>" method="post">
                                                         <div class='input-group'>
                                                             <input type='email' name='emailUser' class='form-control'
                                                                    placeholder='E-Mail Addresse'>
@@ -217,13 +222,6 @@ $userid = $_SESSION['userid'];
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Datei löschen-->
-                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
-                                        <button class="btn btn-primary btn-sm" type="submit" >
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                    </td>
 
                                 <?php
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
