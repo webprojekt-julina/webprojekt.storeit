@@ -1,5 +1,3 @@
-
-
 <?php
 //extra für Jule
 //Session
@@ -129,7 +127,7 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
-                       $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
+                       $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
                          while ($tr = $query1->fetchObject()){
@@ -161,7 +159,7 @@ $userid = $_SESSION['userid'];
                                                                             <br>
                                                                             <p>Mit anderen registrierten Nutzern teilen:</p>";
 
-                                                                            <form action='share.php?file_id=<?="$tr->id"?>' method='post'>
+                                                                            <form actio n='share.php?file_id=<?="$tr->id"?>' method='post'>
                                                                                 <div class='input-group'>
                                                                                     <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
                                                                                 </div>
@@ -207,7 +205,6 @@ $userid = $_SESSION['userid'];
                                                         </div>
                                                     </div>
                                            </td>
-
 <?php
                              $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
                              $query2 = $db ->prepare($sql2);
@@ -306,4 +303,3 @@ $userid = $_SESSION['userid'];
 </script>
 </body>
 </html>
-
