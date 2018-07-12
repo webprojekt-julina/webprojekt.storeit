@@ -145,7 +145,7 @@ $userid = $_SESSION['userid'];
                             echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
 
                             ?>
-                            <!-- Datei löscheen-->
+                            <!-- Datei löschen-->
                             <td></td>
                             <td>
                                 <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
@@ -192,6 +192,13 @@ $userid = $_SESSION['userid'];
                                         </button>
                                     </form>
                                 </td>
+                                 <!-- Datei löschen-->
+                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit" >
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    </td>
                                 <!--Datei teilen-->
                                 <td>
                                     <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
@@ -240,13 +247,6 @@ $userid = $_SESSION['userid'];
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Datei löschen-->
-                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
-                                        <button class="btn btn-primary btn-sm" type="submit" >
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                    </td>
 
                                 <?php
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
