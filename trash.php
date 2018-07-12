@@ -1,5 +1,5 @@
 <?php
-//Session test
+//Session
 session_start();
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
@@ -17,9 +17,12 @@ $userid = $_SESSION['userid'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Startseite</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 </head>
@@ -32,7 +35,7 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
+            <a class="dropdown-item" href=""></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
@@ -50,8 +53,14 @@ $userid = $_SESSION['userid'];
             Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
-            <a class="dropdown-item" href="#">Einstellungen</a>
+            <a class="dropdown-item" href="settings.php"><?php require ("connection.php");$sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls1) as $row) ?></a>
+            <?php
+            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
+            $filename= $row['bild'];
+            $filepath=$directory.$filename;
+            ?>
+            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
+            <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
     </div>
@@ -66,12 +75,6 @@ $userid = $_SESSION['userid'];
                         <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
                             Alle Dateien <span class="sr-only"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=favourite.php>
-                            <span data-feather="star"></span>
-                            Favoriten
                         </a>
                     </li>
                     <li class="nav-item">
@@ -125,6 +128,7 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
+                        include ("header.php");
                         $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND file_delete=1";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
@@ -136,7 +140,7 @@ $userid = $_SESSION['userid'];
                             <td>
                                 <form action="delete.php?filename=<?="$tr->name"?>" method="post">
                                     <button class="btn btn-primary btn-sm" type="submit" >
-                                        <i class="far fa-cloud-download-alt"></i>
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
                             </td>
@@ -155,42 +159,6 @@ $userid = $_SESSION['userid'];
                         } ?>
                     </table>
                 </div>
-                <?php
-                /*
-                // Ordnername
-                $ordner = "/home/jt049/public_html/webprojekt.storeit/uploads/files/"; //auch komplette Pfade möglich ($ordner = "download/files";)
-
-                // Ordner auslesen und Array in Variable speichern
-                $alledateien = scandir($ordner); // Sortierung A-Z
-                // Sortierung Z-A mit scandir($ordner, 1)
-
-                // Schleife um Array "$alledateien" aus scandir Funktion auszugeben
-                // Einzeldateien werden dabei in der Variabel $datei abgelegt
-                foreach ($alledateien as $datei) {
-
-                    // Zusammentragen der Dateiinfo
-                    $dateiinfo = pathinfo($ordner."/".$datei);
-                    //Folgende Variablen stehen nach pathinfo zur Verfügung
-                    // $dateiinfo['filename'] =Dateiname ohne Dateiendung  *erst mit PHP 5.2
-                    // $dateiinfo['dirname'] = Verzeichnisname
-                    // $dateiinfo['extension'] = Dateityp -/endung
-                    // $dateiinfo['basename'] = voller Dateiname mit Dateiendung
-
-                    // Größe ermitteln zur Ausgabe
-                    $size = ceil(filesize($ordner."/".$datei)/1024);
-                    //1024 = kb | 1048576 = MB | 1073741824 = GB
-
-                    // scandir liest alle Dateien im Ordner aus, zusätzlich noch "." , ".." als Ordner
-                    // Nur echte Dateien anzeigen lassen und keine "Punkt" Ordner
-                    // _notes ist eine Ergänzung für Dreamweaver Nutzer, denn DW legt zur besseren Synchronisation diese Datei in den Orndern ab
-                    if ($datei != "." && $datei != ".."  && $datei != "_notes") {
-                        ?>
-                        <li><a href="download.php<?php echo "?filename=". $dateiinfo['basename']?>"><?php echo $dateiinfo['basename']; ?> | <?php echo $size ;?>kb) <?php include("buttons.php")?></a></li>
-                        <?php
-                    };
-                };
-                */?>
-            </ul>
         </main>
     </div>
 </div>

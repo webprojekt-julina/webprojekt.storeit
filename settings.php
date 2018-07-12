@@ -30,30 +30,19 @@ $userid = $_SESSION['userid'];
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Neu
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href=""><?php include("folder_formular.php")?></a>
-            <a class="dropdown-item" href="#">Datei hochladen
-                <form action="upload.php" method="post"
-                      enctype="multipart/form-data">
-                    <input type="file" name="uploadfile"
-                           id="uploadfile"><br>
-                    <input type="submit" value="Datei hochladen" name="submit">
-                </form>
-            </a>
-            <a class="dropdown-item" href="#">Ordner hochladen</a>
-        </div>
-    </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="settings.php"><img src="Platzhalter.jpeg" width="20px" height="30px"</a>
+            <a class="dropdown-item" href="settings.php"><?php require ("connection.php");$sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls1) as $row) ?></a>
+            <?php
+            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
+            $filename= $row['bild'];
+            $filepath=$directory.$filename;
+            ?>
+            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
             <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
@@ -62,14 +51,6 @@ $userid = $_SESSION['userid'];
 <div id="settings">
     <h1 id="lg">Einstellungen</h1>  <br><br>
     <h2 id="sm">Lade dein persönliches Profilbild hoch</h2>
-    <!--<form action="upload_profilepic.php">
-        <div class="input-file-container">
-            <input class="input-file" id="my-file" type="file">
-            <label tabindex="0" for="my-file" class="input-file-trigger">Datei auswählen</label>
-        </div>
-        <p class="file-return"></p>
-        <input type="submit" value="Datei hochladen" name="submit">
-    </form>-->
     <p class="txtcenter"><b>Achtung!</b><br />Die maximale Größe beträgt 50 MB.</p><br>
     <form action="upload_profilepic.php" method="post"
               enctype="multipart/form-data">

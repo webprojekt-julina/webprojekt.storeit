@@ -69,12 +69,6 @@ $userid = $_SESSION['userid'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=favourite.php>
-                            <span data-feather="star"></span>
-                            Favoriten
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href=my_files.php>
                             <span data-feather="user"></span>
                             Meine Uploads

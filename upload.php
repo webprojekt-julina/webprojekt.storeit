@@ -20,7 +20,7 @@ if($_FILES["uploadfile"]["name"]=="")
 }
 
 //Überprüfung der Dateigröße
-if ($_FILES["uploadfile"]["size"] > 50000000 ) {
+if ($_FILES["uploadfile"]["size"] > 500000000 ) {
     echo "Die Datei ist zu groß(max. Dateigröße:50MB).";
     die ();
 }
@@ -32,10 +32,6 @@ if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
     die ();
 }
-
-
-
-
 
 $new_path = $upload_folder.$fileName.'.'.$extension;
 
