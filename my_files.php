@@ -29,7 +29,7 @@ $userid = $_SESSION['userid'];
 
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">store.it</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Neu
@@ -125,11 +125,12 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid";
+                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         while ($tr = $query1->fetchObject()){
@@ -146,6 +147,13 @@ $userid = $_SESSION['userid'];
                                     </button>
                                 </form>
                             </td>
+                        <!-- Datei löschen-->
+                        <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                <button class="btn btn-primary btn-sm" type="submit" >
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
                             <!--Datei teilen-->
                             <td>
                                 <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
@@ -184,32 +192,6 @@ $userid = $_SESSION['userid'];
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Datei löschen-->
-                                <button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
-                                    <i class='fas fa-trash-alt'></i>
-                                </button>
-                                <div id='myDeleteModal' class='modal fade'>
-                                    <div class='modal-dialog modal-confirm'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <div class='icon-box'>
-                                                    <i class='fas fa-trash-alt'></i>
-                                                </div>
-                                                <h4 class='modal-title'>Bist Du sicher?</h4>
-                                                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                            </div>
-                                            <div class='modal-body'>
-                                                <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
-                                            </div>
-                                            <div class='modal-footer'>
-                                                <button type='button' class='btn btn-info' data-dismiss='modal'>Abbrechen</button>
-                                                <button type='button' class='btn btn-danger'>Löschen</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-
                             <?php
                             echo "<td>" . "$tr->size". "Bytes". "</td>";
                             echo "</tr>";

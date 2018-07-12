@@ -29,7 +29,7 @@ $userid = $_SESSION['userid'];
 
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">store.it</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Neu
@@ -129,7 +129,14 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND file_delete=1";
+
+                        $statement = $db->prepare("SELECT file_id FROM teilen WHERE userid=?");
+                        $statement->bindParam(1, $userid);
+                        $statement->execute();
+                        while($row=$statement->fetch()) {
+                            $fileid=$row['file_id']; }
+
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE file_delete=1 AND user_id=$userid OR id=$fileid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         while ($tr = $query1->fetchObject()){

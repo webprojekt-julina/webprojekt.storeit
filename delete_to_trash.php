@@ -6,14 +6,15 @@ $userid = $_SESSION ['userid'];
 //Variablen definieren
 if(isset($_GET['filename'])) {
     $dateiname = $_GET['filename'];
-    $statement = $db->prepare("UPDATE dateien SET file_delete=1 WHERE user_id=? AND name=?");
-    $statement->bindParam(1, $userid);
-    $statement->bindParam(2, $dateiname);
+    $statement = $db->prepare("UPDATE dateien SET file_delete=1 WHERE /*user_id=? AND*/ name=?");
+   /* $statement->bindParam(1, $userid);*/
+    $statement->bindParam(1, $dateiname);
     if (!$statement->execute()) {
         echo "Datenbank-Fehler:";
         die();
     } else {
-        echo 'Datei erfolgreich gelöscht';
+        echo 'Datei wurde in den Papierkorb gelegt';
+        header ("Location: index.php");
     }
 }
 if(isset($_GET['ordnerid'])) {
@@ -26,6 +27,7 @@ if(isset($_GET['ordnerid'])) {
         die();
     } else {
         echo 'Datei erfolgreich gelöscht';
+        header ("Location: index.php");
     }
 }
 ?>

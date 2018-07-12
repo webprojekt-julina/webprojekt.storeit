@@ -30,7 +30,7 @@ $userid = $_SESSION['userid'];
 
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0">store.it</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Neu
@@ -126,98 +126,69 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
                         echo "<th></th>";
-                        echo "<th></th>";
-                        echo "<th> erstellt von</th>";
+                        echo "<th> freigegeben von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT * FROM teilen WHERE user_id=$userid";
+                        $sql1 = "SELECT file_id FROM teilen WHERE userid=$userid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
+                            ?>
+                        <?php
                         while ($tr = $query1->fetchObject()) {
-                                echo "<tbody>";
-                                echo "<tr>";
-                                echo "<td>" . "$tr->file_id" . "</td>";
-
-                                ?>
-                                <!--Dateidownload-->
-                                <td>
-                                    <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
-                                        <button class="btn btn-primary btn-sm" type="submit">
-                                            <i class="fas fa-cloud-download-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                <!--Datei teilen-->
-                                <td>
-                                    <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
-                                            data-target='#myShareModal'>
-                                        <i class='fa fa-share-alt'></i>
-                                    </button>
-                                    <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog'
-                                         aria-labelledby='myModalLabel' aria-hidden='true'>
-                                        <div class='modal-dialog'>
-                                            <div class='modal-content'>
-                                                <div class='modal-header'>
-                                                    <button type='button' class='close' data-dismiss='modal'
-                                                            aria-hidden='true'>&times;
-                                                    </button>
-                                                    <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
-                                                </div>
-                                                <div class='modal-body'>
-                                                    <br>
-                                                    <p>Mit anderen registrierten Nutzern teilen:</p>";
+                        echo "<tbody>";
+                        echo "<tr>";
+                        $fileid= $tr->file_id;
 
 
-                                                    <form action="share.php?filename=<?= "$tr->name" ?>" method="post">
-                                                        <div class='input-group'>
-                                                            <input type='email' name='emailUser' class='form-control'
-                                                                   placeholder='E-Mail Addresse'>
-                                                        </div>
-                                                        <br/>
-                                                        <button type='submit' value='Teilen' name='subUser'
-                                                                class='btn btn-primary'><i class='fa fa-share'></i>
-                                                            Teilen
-                                                        </button>
-                                                        <!--------------------------   Nicht registrierte Benutzer ----------------->
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <p>Mit nicht-registrierten Personen teilen:</p>
-                                                        <div class='input-group'>
-                                                            <input type='email' name='email-noUser' class='form-control'
-                                                                   placeholder='E-Mail-Adresse'>
-                                                        </div>
-                                                        <br/>
-                                                        <button type='submit' value='Teilen' name='subNUser'
-                                                                class='btn btn-primary'><i class='fa fa-share'></i>
-                                                            Teilen
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Datei löschen-->
-                                <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
-                                        <button class="btn btn-primary btn-sm" type="submit" >
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                        $sql5 = "SELECT name, user_id FROM dateien WHERE id=$fileid AND file_delete=0";
+                        $query5 = $db ->prepare($sql5);
+                        $query5 ->execute();
+
+                        while ($tr = $query5->fetchObject()) {
+                        echo "<tbody>";
+                        echo "<tr>";
+                        echo "<td>" . "$tr->name" . "</td>";
+                        $owner= $tr->user_id;
+                        ?>
+
+                        <!--Dateidownload-->
+                        <td>
+                            <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fas fa-cloud-download-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <!-- Datei löschen-->
+                        <td>
+                            <form action="delete_to_trash.php?filename=<?="$tr->name" ?>" method="post">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
 
                                 <?php
-                               /* $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
-                                $query2 = $db->prepare($sql2);
-                                $query2->execute();
-                                while ($tr2 = $query2->fetchObject()) {
+                                $sql7 = "SELECT firstname, surname FROM webprojekt WHERE userid=$owner";
+                                $query7 = $db->prepare($sql7);
+                                $query7->execute();
+                                while ($tr2 = $query7->fetchObject()) {
                                     echo "<td>" . "$tr2->firstname" . " " . "$tr2->surname" . "</td>";
-                                    echo "<td>" . "$tr->size" . "Bytes" . "</td>";
+                                    ?>
 
+                                <?php
+                                $sql6 = "SELECT size FROM dateien WHERE id=$fileid";
+                                $query6 = $db ->prepare($sql6);
+                                $query6 ->execute();
+                                while ($tr = $query6->fetchObject()) {
+                                    echo "<td>" . "$tr->size" . "Bytes". "</td>";
                                     echo "</tr>";
-                                }*/
-                        }?>
+                                }
+                            }
+                            }
+                        } ?>
                     </table>
                 </div>
                 <?php

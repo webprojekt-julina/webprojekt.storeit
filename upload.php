@@ -60,5 +60,7 @@ if (!$statement->execute()){
     echo $statement->queryString;
     die();}
 echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
+header ("Location: index.php");
+
 
 ?>

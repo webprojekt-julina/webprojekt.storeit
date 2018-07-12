@@ -20,5 +20,6 @@ if(isset($_GET['filename'])){
         echo ("Datei $dateiname konnte nicht gelöscht werden!");
     }
     else {
-        echo("Datei $dateiname wurde erfolgreich gelöscht");
+        echo("Datei $dateiname wurde erfolgreich endgültig gelöscht");
+        header ("Location: index.php");
     }}
