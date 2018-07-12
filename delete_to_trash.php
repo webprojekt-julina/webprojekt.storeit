@@ -16,4 +16,16 @@ if(isset($_GET['filename'])) {
         echo 'Datei erfolgreich gelöscht';
     }
 }
+if(isset($_GET['ordnerid'])) {
+    $ordnerid = $_GET['ordnerid'];
+    $statement1 = $db->prepare("UPDATE ordner SET file_delete=1 WHERE user_id=? AND ordnerid=?");
+    $statement1->bindParam(1, $userid);
+    $statement1->bindParam(2, $ordnerid);
+    if (!$statement1->execute()) {
+        echo "Datenbank-Fehler:";
+        die();
+    } else {
+        echo 'Datei erfolgreich gelöscht';
+    }
+}
 ?>
