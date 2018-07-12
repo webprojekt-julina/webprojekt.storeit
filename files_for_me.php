@@ -130,13 +130,12 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                       $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND freigabe=1";
+                       $sql1 = "SELECT file_id FROM teilen WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
-                         while ($tr = $query1->fetchObject()){
-                             echo "<tbody>";
-                             echo "<tr>";
-                             echo "<td>" . "$tr->name". "</td>";
+                        while ($tr = $query1->fetchObject()){
+                            echo "<td>" . "$tr->file_id". "</td>";
+                            echo "</tr>";
 
                         ?>
                         <!--Dateidownload-->
@@ -212,7 +211,7 @@ $userid = $_SESSION['userid'];
                         </td>
 
 <?php
-                             $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
+                             $sql2 = "SELECT * FROM dateien WHERE userid=$userid AND file_id=id";
                              $query2 = $db ->prepare($sql2);
                              $query2 ->execute();
                              while ($tr2 = $query2->fetchObject()){
