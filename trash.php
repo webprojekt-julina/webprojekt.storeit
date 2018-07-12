@@ -1,5 +1,5 @@
 <?php
-//Session
+//Session test
 session_start();
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
