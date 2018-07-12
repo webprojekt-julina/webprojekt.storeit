@@ -29,7 +29,7 @@ $userid = $_SESSION['userid'];
 
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">store.it</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0"></a>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Neu
@@ -129,6 +129,7 @@ $userid = $_SESSION['userid'];
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
@@ -173,20 +174,19 @@ $userid = $_SESSION['userid'];
                                                 <div class='input-group'>
                                                     <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
                                                 </div>
-                                            <br />
-                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-
+                                                <br />
+                                            <button type='submit' value='Teilen' name='subUser' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
                                             <!--------------------------   Nicht registrierte Benutzer ----------------->
                                             <br>
                                             <br>
                                             <br>
                                             <p>Mit nicht-registrierten Personen teilen:</p>
-                                            <div class='input-group'>
-                                                <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
-                                            </div>
-                                            <br />
-                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-                                        </form>
+                                                    <div class='input-group'>
+                                                        <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
+                                                    </div>
+                                                <br />
+                                            <button type='submit' value='Teilen' name='subNUser' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
