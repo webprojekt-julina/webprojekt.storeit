@@ -131,52 +131,13 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
+                        $ordnerid=$_GET['ordnerid'];
+                        $sql1 = "SELECT name FROM dateien WHERE ordner_id=$ordnerid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
-                        $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=?'); // user id eingefügt mit der ich eingeloggt bin
-                        $statement->bindParam(1, $userid);
-                        $statement->execute();
 
-                        while ($ts = $statement->fetchObject()) {
-                            echo "<tbody>";
-                            echo "<tr>";
-                            echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
 
-                            ?>
-                            <!-- Datei löschen-->
-                            <td></td>
-                            <td>
-                                <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
-                                        data-target='#myDeleteModal'>
-                                    <i class='fas fa-trash-alt'></i>
-                                </button>
-                                <div id='myDeleteModal' class='modal fade'>
-                                    <div class='modal-dialog modal-confirm'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <div class='icon-box'>
-                                                    <i class='fas fa-trash-alt'></i>
-                                                </div>
-                                                <h4 class='modal-title'>Bist Du sicher?</h4>
-                                                <button type='button' class='close' data-dismiss='modal'
-                                                        aria-hidden='true'>&times;
-                                                </button>
-                                            </div>
-                                            <div class='modal-body'>
-                                                <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
-                                            </div>
-                                            <div class='modal-footer'>
-                                                <button type='button' class='btn btn-info' data-dismiss='modal'>
-                                                    Abbrechen
-                                                </button>
-                                                <button type='button' class='btn btn-danger'>Löschen</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <?php
+
                             while ($tr = $query1->fetchObject()) {
                                 echo "<tbody>";
                                 echo "<tr>";
@@ -282,7 +243,6 @@ $userid = $_SESSION['userid'];
 
                                     echo "</tr>";
                                 }
-                            }
                         }?>
                     </table>
                 </div>
