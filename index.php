@@ -36,7 +36,7 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href=""></a>
+            <a class="dropdown-item" href=""><? include ("folder_formular.php")?></a>
             <a class="dropdown-item" href="#">Datei hochladen
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
@@ -202,17 +202,15 @@ $userid = $_SESSION['userid'];
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
                                                 <div class='modal-header'>
+                                                    <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
                                                     <button type='button' class='close' data-dismiss='modal'
                                                             aria-hidden='true'>&times;
                                                     </button>
-                                                    <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
                                                 </div>
                                                 <div class='modal-body'>
                                                     <br>
-                                                    <p>Mit anderen registrierten Nutzern teilen:</p>";
-
-
-                                                    <form action="share.php?filename=<?= "$tr->name" ?>" method="post">
+                                                    <p>Mit anderen registrierten Nutzern teilen:</p>
+                                                    <form action="share.php?dateiname=<?= "$tr->name" ?>" method="post">
                                                         <div class='input-group'>
                                                             <input type='email' name='emailUser' class='form-control'
                                                                    placeholder='E-Mail Addresse'>
@@ -242,6 +240,7 @@ $userid = $_SESSION['userid'];
                                         </div>
                                     </div>
                                     <!-- Datei löschen-->
+                                    <td>
                                     <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
                                             data-target='#myDeleteModal'>
                                         <i class='fas fa-trash-alt'></i>
@@ -253,13 +252,15 @@ $userid = $_SESSION['userid'];
                                                     <div class='icon-box'>
                                                         <i class='fas fa-trash-alt'></i>
                                                     </div>
-                                                    <h4 class='modal-title'>Bist Du sicher?</h4>
+                                                    <br>
+                                                    <br>
+                                                    <h4 class='modal-title'>Datei in den Papierkorb verschieben</h4>
                                                     <button type='button' class='close' data-dismiss='modal'
                                                             aria-hidden='true'>&times;
                                                     </button>
                                                 </div>
                                                 <div class='modal-body'>
-                                                    <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
+                                                    <p>Willst Du die Datei wirklich in den <b>Papierkorb</b> verschieben?</p>
                                                 </div>
                                                 <div class='modal-footer'>
                                                     <button type='button' class='btn btn-info' data-dismiss='modal'>
@@ -270,7 +271,7 @@ $userid = $_SESSION['userid'];
                                             </div>
                                         </div>
                                     </div>
-                                </td>
+                                    </td>
 
                                 <?php
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";

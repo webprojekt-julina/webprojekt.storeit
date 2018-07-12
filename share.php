@@ -5,53 +5,63 @@ require ("connection.php");
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
 }
-
 //Abfrage der Nutzer ID $userid= id des Absenders/Freigebenden
 $userid = $_SESSION['userid'];
 
-if(empty($_GET["filename"]))
+if(empty($_GET["dateiname"]))
 {
     echo " keine Datei angegeben";
     die();
 }
 else {
-    $dateiname = $_GET['filename'];
+    $dateiname = $_GET['dateiname'];
+
 
     $statement = $db->prepare('SELECT * FROM dateien WHERE user_id=? AND name=?');
     $statement->bindParam(1, $userid);
     $statement->bindParam(2, $dateiname);
     $statement->execute();
     if ($statement->rowCount() != 0) {
-        $ergebnis=$statement->fetch();
+        $dateiid=$statement->fetch()['id'];
 
-        $statement = $db->prepare('UPDATE dateien SET freigabe=? WHERE name=?');   // Button Nicht-User
+        $statement = $db->prepare('INSERT INTO teilen (file_id, userid) VALUES (?,?)');   // Button Nicht-User
         $statement->bindParam(1, $freigabe);
         $statement->bindParam(2, $dateiname);
         $statement->execute();
 
-        if (strlen($_POST['email-noUser']) > 4) {   //Teilen mit Nicht-Usern WIESO 4?????
-            $email = $_POST['email-noUser'];
-            mail($email, 'Filesharing mit store.it', 'Hallo! Lade Dir jetzt diese für Dich freigegebene Datei herunter. <br><br> <a href="https://mars.iuk.hdm-stuttgart.de/' . $dateiname . '">Einfach hier klicken!</a><br><br> Dein store.it-Team', [
-                'MIME-Version: 1.0','Content-type: text/html; charset=iso-8859-1']);
-
-
-            //Teilen mit Nutzern -->
-        }
-
-        if (strlen($_POST['emailUser']) > 4) {
+         if (strlen($_POST['email-noUser']) > 6) {   //Teilen mit Nicht-Usern
+             $email = $_POST['email-noUser'];
+             $subject="Filesharing mit store.it";
+             $content= '<html>
+                            <head>
+                            </head>
+                                <body>
+                                  <h1>Hallo! Lade Dir jetzt diese für Dich freigegebene Datei herunter.</h1>  
+                                  <br><br> 
+                                  <a href="https://mars.iuk.hdm-stuttgart.de//home/jt049/public_html/webprojekt.storeit/uploads/files/download.php\' . $dateiname . \'">Einfach hier klicken!</a><br><br>
+                                  <p>Dein store.it-Team</p> 
+                                </body>';
+             $header="From: store.it <lb107@hdm-stuttgart>" . "\r\n" . "Reply-to: No Reply" . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=utf-8'. "\r\n". 'X-Mailer: PHP/' . phpversion();
+             mail($email, $subject, $content, $header);
+         }
+//Teilen mit Nutzern -->
+        if (strlen($_POST['emailUser']) > 6) {
             $email = $_POST['emailUser'];
 
-            $statement = $db->prepare('SELECT id FROM webprojekt WHERE email=?');
+            $statement = $db->prepare('SELECT * FROM webprojekt WHERE email=?');
             $statement->bindParam(1, $email);
             $statement->execute();
             if ($statement->rowCount() != 0) {
                 $empfaengerrid = $statement->fetch()['userid'];
 
+                echo $dateiid;
                 //Freigabeüberprüfung
                 $statement = $db->prepare('SELECT * FROM teilen WHERE userid=? AND file_id=?');
                 $statement->bindParam(1, $empfaengerrid);
                 $statement->bindParam(2, $dateiid);
                 $statement->execute();
+                $ergebnis=$statement->fetch();
+                //var_dump($ergebnis);
                 if ($statement->rowCount() == 0) {
 
                     $statement = $db->prepare('INSERT INTO teilen (file_id, userid) VALUES (?,?)');
