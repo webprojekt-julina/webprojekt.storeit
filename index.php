@@ -35,8 +35,14 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href=""></a>
-            <a class="dropdown-item" href="#">Datei hochladen
+            <a class="dropdown-item" href="#">
+                <form action="folder.php" method="post">
+                    <p> <input type="text" name="ordnername" placeholder="Benenne deinen Ordner"/> <input type="submit" value="Ordner erstellen"/>
+                    </p>
+                </form>
+            </a>
+
+            <a class="dropdown-item" href="#">
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
                     <input type="file" name="uploadfile"
@@ -44,7 +50,6 @@ $userid = $_SESSION['userid'];
                     <input type="submit" value="Datei hochladen" name="submit">
                 </form>
             </a>
-            <a class="dropdown-item" href="#">Ordner hochladen</a>
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
@@ -126,12 +131,13 @@ $userid = $_SESSION['userid'];
                         echo "<th></th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0";
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=? AND file_delete=0'); // user id eingefügt mit der ich eingeloggt bin
@@ -144,13 +150,30 @@ $userid = $_SESSION['userid'];
                             echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
 
                             ?>
-                            <?php }
+                            <!-- Datei löschen-->
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <form action="delete_to_trash.php?ordnerid=<?= "$ts->ordnerid" ?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <?php
+                        }
                             while ($tr = $query1->fetchObject()) {
                                 echo "<tbody>";
                                 echo "<tr>";
                                 echo "<td>" . "$tr->name" . "</td>";
 
                                 ?>
+                                 <!--Verschieben nach-->
+                                <td>
+                                    <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
+                                        <p><input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" value="Verschieben"/></p>
+                                    </form>
+                                </td>
                                 <!--Dateidownload-->
                                 <td>
                                     <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
