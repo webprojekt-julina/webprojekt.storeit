@@ -118,7 +118,7 @@ $userid = $_SESSION['userid'];
                 </div>
             </div>
 
-            <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
+            <!--Ordner auslesen und anzeigen-->
             <ul>
 
                 <div class="table-responsive">
@@ -137,96 +137,155 @@ $userid = $_SESSION['userid'];
                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid";
                          $query1 = $db ->prepare($sql1);
                          $query1 ->execute();
-                         while ($tr = $query1->fetchObject()){
-                             echo "<tbody>";
-                             echo "<tr>";
-                             echo "<td>" . "$tr->name". "</td>";
-                             echo "<td>" . "$tr->id". "</td>";
+                        $statement=$db->prepare('SELECT name FROM ordner WHERE user_id=?'); // user id eingefügt mit der ich eingeloggt bin
+                        $statement->bindParam(1, $userid);
+                        $statement->execute();
+
+                        while ($ts = $statement->fetchObject()) {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . "$ts->name" . "</td>";
+
+                            ?>
+                            <!-- Datei löschen-->
+                            <td></td>
+                            <td>
+                            <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
+                                    data-target='#myDeleteModal'>
+                                <i class='fas fa-trash-alt'></i>
+                            </button>
+                            <div id='myDeleteModal' class='modal fade'>
+                                <div class='modal-dialog modal-confirm'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <div class='icon-box'>
+                                                <i class='fas fa-trash-alt'></i>
+                                            </div>
+                                            <h4 class='modal-title'>Bist Du sicher?</h4>
+                                            <button type='button' class='close' data-dismiss='modal'
+                                                    aria-hidden='true'>&times;
+                                            </button>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <button type='button' class='btn btn-info' data-dismiss='modal'>
+                                                Abbrechen
+                                            </button>
+                                            <button type='button' class='btn btn-danger'>Löschen</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <!--Dateien auslesen und anzeigen-->
+                        <?php
+                        while ($tr = $query1->fetchObject()) {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . "$tr->name" . "</td>";
 
                              ?>
                              <!--Dateidownload-->
                              <td>
-                                 <form action="download.php?filename=<?="$tr->name"?>" method="post">
-                                     <button class="btn btn-primary btn-sm" type="submit" >
+                                 <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
+                                     <button class="btn btn-primary btn-sm" type="submit">
                                          <i class="fas fa-cloud-download-alt"></i>
                                      </button>
                                  </form>
                              </td>
                              <!--Datei teilen-->
-                                <td>
-                                <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
-                                <i class='fa fa-share-alt'></i>
-                                </button>
-                                <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                            <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                            <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
-                                            </div>
-                                                <div class='modal-body'>
-                                            <br>
-                                            <p>Mit anderen registrierten Nutzern teilen:</p>";
+                             <td>
+                                 <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
+                                         data-target='#myShareModal'>
+                                     <i class='fa fa-share-alt'></i>
+                                 </button>
+                                 <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog'
+                                      aria-labelledby='myModalLabel' aria-hidden='true'>
+                                     <div class='modal-dialog'>
+                                         <div class='modal-content'>
+                                             <div class='modal-header'>
+                                                 <button type='button' class='close' data-dismiss='modal'
+                                                         aria-hidden='true'>&times;
+                                                 </button>
+                                                 <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
+                                             </div>
+                                             <div class='modal-body'>
+                                                 <br>
+                                                 <p>Mit anderen registrierten Nutzern teilen:</p>";
 
 
-                                            <form action="share.php?filename=<?="$tr->name"?>" method="post">
-                                                <div class='input-group'>
-                                                    <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
-                                                </div>
-                                            <br />
-                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-
-                                            <!--------------------------   Nicht registrierte Benutzer ----------------->
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <p>Mit nicht-registrierten Personen teilen:</p>
-                                            <div class='input-group'>
-                                                <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
-                                            </div>
-                                            <br />
-                                            <button type='submit' value='sub' name='sub' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                                 <!-- Datei löschen-->
-                                                     <button class='btn btn-primary btn-sm'  title='Datei löschen' data-toggle='modal' data-target='#myDeleteModal'>
-                                                            <i class='fas fa-trash-alt'></i>
+                                                 <form action="share.php?filename=<?= "$tr->name" ?>" method="post">
+                                                     <div class='input-group'>
+                                                         <input type='email' name='emailUser' class='form-control'
+                                                                placeholder='E-Mail Addresse'>
+                                                     </div>
+                                                     <br/>
+                                                     <button type='submit' value='sub' name='sub'
+                                                             class='btn btn-primary'><i class='fa fa-share'></i> Teilen
                                                      </button>
-                                                     <div id='myDeleteModal' class='modal fade'>
-                                                        <div class='modal-dialog modal-confirm'>
-                                                            <div class='modal-content'>
-                                                                <div class='modal-header'>
-                                                                    <div class='icon-box'>
-                                                                        <i class='fas fa-trash-alt'></i>
-                                                                    </div>
-                                                                    <h4 class='modal-title'>Bist Du sicher?</h4>
-                                                                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                                                </div>
-                                                                <div class='modal-body'>
-                                                                    <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
-                                                                </div>
-                                                                <div class='modal-footer'>
-                                                                    <button type='button' class='btn btn-info' data-dismiss='modal'>Abbrechen</button>
-                                                                    <button type='button' class='btn btn-danger'>Löschen</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                           </td>
 
-<?php
+                                                     <!--------------------------   Nicht registrierte Benutzer ----------------->
+                                                     <br>
+                                                     <br>
+                                                     <br>
+                                                     <p>Mit nicht-registrierten Personen teilen:</p>
+                                                     <div class='input-group'>
+                                                         <input type='email' name='email-noUser' class='form-control'
+                                                                placeholder='E-Mail-Adresse'>
+                                                     </div>
+                                                     <br/>
+                                                     <button type='submit' value='sub' name='sub'
+                                                             class='btn btn-primary'><i class='fa fa-share'></i> Teilen
+                                                     </button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <!-- Datei löschen-->
+                                 <button class='btn btn-primary btn-sm' title='Datei löschen' data-toggle='modal'
+                                         data-target='#myDeleteModal'>
+                                     <i class='fas fa-trash-alt'></i>
+                                 </button>
+                                 <div id='myDeleteModal' class='modal fade'>
+                                     <div class='modal-dialog modal-confirm'>
+                                         <div class='modal-content'>
+                                             <div class='modal-header'>
+                                                 <div class='icon-box'>
+                                                     <i class='fas fa-trash-alt'></i>
+                                                 </div>
+                                                 <h4 class='modal-title'>Bist Du sicher?</h4>
+                                                 <button type='button' class='close' data-dismiss='modal'
+                                                         aria-hidden='true'>&times;
+                                                 </button>
+                                             </div>
+                                             <div class='modal-body'>
+                                                 <p>Willst Du die Datei wirklich <b>unwiderruflich</b> löschen?</p>
+                                             </div>
+                                             <div class='modal-footer'>
+                                                 <button type='button' class='btn btn-info' data-dismiss='modal'>
+                                                     Abbrechen
+                                                 </button>
+                                                 <button type='button' class='btn btn-danger'>Löschen</button>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </td>
+
+                             <?php
                              $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
-                             $query2 = $db ->prepare($sql2);
-                             $query2 ->execute();
-                             while ($tr2 = $query2->fetchObject()){
-                                 echo "<td>" . "$tr2->firstname"." ". "$tr2->surname"."</td>";
-                                 echo "<td>" . "$tr->size". "Bytes". "</td>";
+                             $query2 = $db->prepare($sql2);
+                             $query2->execute();
+                             while ($tr2 = $query2->fetchObject()) {
+                                 echo "<td>" . "$tr2->firstname" . " " . "$tr2->surname" . "</td>";
+                                 echo "<td>" . "$tr->size" . "Bytes" . "</td>";
 
                                  echo "</tr>";
                              }
+                         }
                         } ?>
                     </table>
                 </div>
