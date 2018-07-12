@@ -98,7 +98,7 @@ $userid = $_SESSION['userid'];
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Startseite</h1>
+                <h1 class="h2">Papierkorb</h1>
                 <div class="dropdown">
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sortieren nach
@@ -136,7 +136,7 @@ $userid = $_SESSION['userid'];
                             <td>
                                 <form action="delete.php?filename=<?="$tr->name"?>" method="post">
                                     <button class="btn btn-primary btn-sm" type="submit" >
-                                        <i class="fas fa-cloud-download-alt"></i>
+                                        <i class="far fa-cloud-download-alt"></i>
                                     </button>
                                 </form>
                             </td>
