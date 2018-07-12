@@ -1,35 +1,24 @@
-<head>
-    <link href="alertBox.css" rel="stylesheet">
+<?php
+session_start();
+include "connection.php";
+$userid = $_SESSION ['userid'];
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .congrats {
-        padding: 20px;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
+//Variablen definieren
+
+
+$upload_folder = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'; // Upload-Verzeichnis in Mars
+
+if(isset($_GET['filename'])){
+    $dateiname = $_GET['filename'];
+    $new_path = $upload_folder.$dateiname;
+
+    $statement= $db ->prepare("DELETE FROM dateien WHERE name=? AND user_id=?");
+    $statement ->bindParam(1,$dateiname);
+    $statement ->bindParam(2,$userid);
+    $statement ->execute();
+    if (!unlink($new_path)){
+        echo ("Datei $dateiname konnte nicht gelöscht werden!");
     }
-</style>
-</head>
- <?php
-    include ("connection.php");
-    $id = $_REQUEST['id'];
-    $sql = "DELETE FROM dateien WHERE id='$id'";
-    if($dsn ($db, $sql)){
-        ?>
-        <body>
-            <div class="congrats">
-                <span class="closebtn"  onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>Die Datei wurde erfolgreich gelöscht.</strong><br>
-            </div>
-        </body>
-<?php }
-    else{
-        ?>
-        <body>
-            <div class="alert">
-                <span class="closebtn"  onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>Die Datei konnte leider nicht gelöscht werden!</strong><br>
-            </div>
-        </body>
-<?php } ?>
+    else {
+        echo("Datei $dateiname wurde erfolgreich gelöscht");
+    }}

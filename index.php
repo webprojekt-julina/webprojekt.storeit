@@ -1,11 +1,14 @@
+
+
 <?php
+//extra für Jule
 //Session
 session_start();
 if(!isset($_SESSION['userid'])) {
     die( require_once("sign_in_nosession.html"));
 }
 
-//Abfrage der Nutzer ID vom Login ja
+//Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
 ?>
 
@@ -142,7 +145,6 @@ $userid = $_SESSION['userid'];
                              echo "<tbody>";
                              echo "<tr>";
                              echo "<td>" . "$tr->name". "</td>";
-                             echo "<td>" . "$tr->id". "</td>";
 
                              ?>
                              <!--Dateidownload-->
