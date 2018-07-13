@@ -21,5 +21,5 @@ if(isset($_GET['filename'])){
     }
     else {
         echo("Datei $dateiname wurde erfolgreich endgültig gelöscht");
-        header ("Location: index.php");
+        header ("Location: trash.php");
     }}
