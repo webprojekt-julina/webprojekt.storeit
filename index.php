@@ -54,27 +54,25 @@ $userid = $_SESSION['userid'];
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+    <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="33px" height="auto">
+
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Hallo, <!--Anzeigen des jeweiligen Nutzernamens, der angemeldet ist-->
             <?php require ("connection.php");
             $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
-            foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; }
-            ?>
+            foreach ($db->query($sqls) as $rows) {
+                echo $rows['firstname']; } ?>
         </button>
-
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="settings.php">
-                <!-- Anzeigen des Benutzerbilds, des eingeloggten Nutzers-->
-                <?php require ("connection.php");
-                $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
-                foreach ($db->query($sqls1) as $row) ?></a>
-            <?php
-            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
-            $filename= $row['bild'];
-            $filepath=$directory.$filename;
-            ?>
-            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
             <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
@@ -162,7 +160,6 @@ $userid = $_SESSION['userid'];
                             echo "<tbody>";
                             echo "<tr>";
                             echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
-
                             ?>
 
                             <!-- Datei löschen-->
