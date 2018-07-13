@@ -137,7 +137,7 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
+                        $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=? AND file_delete=0'); // user id eingefügt mit der ich eingeloggt bin
@@ -176,7 +176,7 @@ $userid = $_SESSION['userid'];
                                 </td>
                                 <!--Dateidownload-->
                                 <td>
-                                    <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
+                                    <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
                                         <button class="btn btn-primary btn-sm" type="submit">
                                             <i class="fas fa-cloud-download-alt"></i>
                                         </button>
