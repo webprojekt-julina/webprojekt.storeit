@@ -45,7 +45,7 @@ else {
              $header="From: store.it <lb107@hdm-stuttgart>" . "\r\n" . "Reply-to: No Reply" . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=utf-8'. "\r\n". 'X-Mailer: PHP/' . phpversion();
              mail($email, $subject, $content, $header);
          }
-//Teilen mit Nutzern -->
+//Teilen mit Nutzern  -->
         if (strlen($_POST['emailUser']) > 6) {
             $email = $_POST['emailUser'];
 
