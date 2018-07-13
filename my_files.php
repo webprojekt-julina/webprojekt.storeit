@@ -139,11 +139,12 @@ $userid = $_SESSION['userid'];
                         echo "<th></th>";
                         echo "<th></th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0 AND ordner_id=0";
+                        $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
 
@@ -170,66 +171,42 @@ $userid = $_SESSION['userid'];
 
                             <?php
                         }
-                        while ($tr = $query1->fetchObject()){
-                            echo "<tbody>";
-                            echo "<tr>";
-                            echo "<td>" . "$tr->name". "</td>";
+                        while ($tr = $query1->fetchObject()) {
+                        echo "<tbody>";
+                        echo "<tr>";
+                        echo "<td>" . "$tr->name" . "</td>"; //Name der Datei aus Zeile wird ausgegeben
+                        ?>
 
-                            ?>
-
-                            <!--Dateidownload-->
-                            <td>
-                                <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit" >
-                                        <i class="fas fa-cloud-download-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
+                        <!--Verschieben nach-->
+                        <td>
+                            <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
+                                <p><input type="text" name="ordnername" placeholder="Ordnername" required/> <input type="submit" value="Verschieben"/></p>
+                            </form>
+                        </td>
+                        <!--Dateidownload-->
+                        <td>
+                            <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fas fa-cloud-download-alt"></i>
+                                </button>
+                            </form>
+                        </td>
                         <!-- Datei löschen-->
-                        <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                        <td>
+                            <form action="delete_to_trash.php?filename=<?= "$tr->name" ?>" method="post"  name="dateiname">
                                 <button class="btn btn-primary btn-sm" type="submit" >
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </form>
                         </td>
-                            <!--Datei teilen-->
-                            <td>
-                                <button class='btn btn-primary btn-sm'  title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
+                        <!--Datei teilen-->
+                        <td>
+                            <form action="shareform.php?dateiname=<?="$tr->name"?>" method="post">
+                                <button class='btn btn-primary btn-sm' id="#share" title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
                                     <i class='fa fa-share-alt'></i>
                                 </button>
-                                <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-                                                <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
-                                            </div>
-                                            <div class='modal-body'>
-                                                <br>
-                                                <p>Mit anderen registrierten Nutzern teilen:</p>";
+                            </form>
 
-
-                                                <form action="share.php?filename=<?="$tr->name"?>" method="post">
-                                                    <div class='input-group'>
-                                                        <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse'>
-                                                    </div>
-                                                    <br />
-                                                    <button type='submit' value='Teilen' name='subUser' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-                                                    <!--------------------------   Nicht registrierte Benutzer ----------------->
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <p>Mit nicht-registrierten Personen teilen:</p>
-                                                    <div class='input-group'>
-                                                        <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse'>
-                                                    </div>
-                                                    <br />
-                                                    <button type='submit' value='Teilen' name='subNUser' class='btn btn-primary'><i class='fa fa-share'></i> Teilen</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             <?php
                             echo "<td>" . "$tr->size". "Bytes". "</td>";
                             echo "</tr>";

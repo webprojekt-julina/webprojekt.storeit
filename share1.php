@@ -2,9 +2,7 @@
 session_start();
 
 require ("connection.php");
-if(!isset($_SESSION['userid'])) {
-    die( require_once("sign_in_nosession.html"));
-}
+
 //Abfrage der Nutzer ID $userid= id des Absenders/Freigebendenn
 $userid = $_SESSION['userid'];
 
@@ -42,7 +40,9 @@ if ($_POST['emailUser']) {
         echo "Datenbank-Fehler:";
         die();
     } else {
-        echo 'Datei erfolgreich geteilt';
+        echo 'Datei erfolgreich geteilt';?>
+        <a href="index.php">Zurück zur Startseite</a>
+        <?php
     }
 }
 //Teilen mit Nicht-Usern
@@ -61,4 +61,8 @@ if ($_POST['email-noUser']) {
                                 </body>';
     $header="From: store.it <lb107@hdm-stuttgart>" . "\r\n" . "Reply-to: No Reply" . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=utf-8'. "\r\n". 'X-Mailer: PHP/' . phpversion();
     mail($email, $subject, $content, $header);
+    echo 'Datei erfolgreich geteilt';?>
+    <a href="index.php">Zurück zur Startseite</a>
+    <?php
 }
+

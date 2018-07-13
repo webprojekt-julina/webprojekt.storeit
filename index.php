@@ -170,41 +170,46 @@ $userid = $_SESSION['userid'];
                             <?php
                         }
                             while ($tr = $query1->fetchObject()) {
-                                echo "<tbody>";
-                                echo "<tr>";
-                                echo "<td>" . "$tr->name" . "</td>"; //Name der Datei aus Zeile wird ausgegeben
-                                ?>
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" . "$tr->name" . "</td>"; //Name der Datei aus Zeile wird ausgegeben
+                            ?>
 
-                                <!--Verschieben nach-->
-                                <td>
-                                    <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
-                                        <p><input type="text" name="ordnername" placeholder="Ordnername" required/> <input type="submit" value="Verschieben"/></p>
-                                    </form>
-                                </td>
-                                <!--Dateidownload-->
-                                <td>
-                                    <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
-                                        <button class="btn btn-primary btn-sm" type="submit">
-                                            <i class="fas fa-cloud-download-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                 <!-- Datei löschen-->
-                                <td>
-                                    <form action="delete_to_trash.php?filename=<?= "$tr->name" ?>" method="post"  name="dateiname">
-                                        <button class="btn btn-primary btn-sm" type="submit" >
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                <!--Datei teilen-->
-                                <td>
-                                    <form action="shareform.php?dateiname=<?="$tr->name"?>" method="post">
-                                        <button class='btn btn-primary btn-sm' id="#share" title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
-                                            <i class='fa fa-share-alt'></i>
-                                        </button>
-                                    </form>
-                                <?php
+                        <!--Verschieben nach-->
+                        <td>
+                            <form action="verschieben.php?filename=<?= "$tr->name" ?>" method="post">
+                                <p><input type="text" name="ordnername" placeholder="Ordnername" required/> <input
+                                            type="submit" value="Verschieben"/></p>
+                            </form>
+                        </td>
+
+                        <!--Dateidownload-->
+                        <td>
+                            <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>"
+                                  method="post">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fas fa-cloud-download-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <!-- Datei löschen-->
+                        <td>
+                            <form action="delete_to_trash.php?filename=<?= "$tr->name" ?>" method="post"
+                                  name="dateiname">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <!--Datei teilen-->
+                        <td>
+                            <form action="shareform.php?dateiname=<?= "$tr->name" ?>" method="post">
+                                <button class='btn btn-primary btn-sm' id="#share" title='Datei teilen'
+                                        data-toggle='modal' data-target='#myShareModal'>
+                                    <i class='fa fa-share-alt'></i>
+                                </button>
+                            </form>
+                            <?php
                                 //gibt Vor- & Nachname des Erstellers der Datei aus
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
                                 $query2 = $db->prepare($sql2);
@@ -216,69 +221,67 @@ $userid = $_SESSION['userid'];
                                     echo "</tr>";
                                 }
                         }
-                                //zeigt mir die für mich freigegebenen Dateien an
-                                $sql1 = "SELECT file_id FROM teilen WHERE userid=$userid";
-                                $query1 = $db ->prepare($sql1);
-                                $query1 ->execute();
-                                ?>
-                                <?php
-                                while ($tr = $query1->fetchObject()) {
+                        ?>
+                            <!--Freigegebene Dateien anzeigen-->
+                        <?php
+                        $sql1 = "SELECT * FROM teilen WHERE userid=$userid";
+                        $query1 = $db ->prepare($sql1);
+                        $query1 ->execute();
+                        ?>
+                        <?php
+                        while ($tr = $query1->fetchObject()) {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            $fileid= $tr->file_id;
+
+
+                            $sql5 = "SELECT * FROM dateien WHERE id=$fileid AND file_delete=0";
+                            $query5 = $db ->prepare($sql5);
+                            $query5 ->execute();
+
+                            while ($tr1 = $query5->fetchObject()) {
                                 echo "<tbody>";
                                 echo "<tr>";
-                                $fileid= $tr->file_id;
-
-
-                                $sql5 = "SELECT name, user_id FROM dateien WHERE id=$fileid AND file_delete=0";
-                                $query5 = $db ->prepare($sql5);
-                                $query5 ->execute();
-
-                                while ($tr = $query5->fetchObject()) {
-                                echo "<tbody>";
-                                echo "<tr>";
-                                echo "<td>" . "$tr->name" . "</td>";
-                                $owner= $tr->user_id;
-                                echo "<th></th>";
+                                echo "<td>" . "$tr1->name" . "</td>";
+                                $owner= $tr1->user_id;
                                 ?>
-
+                                <td></td>
                                 <!--Dateidownload-->
+                                <td>
+                                    <form action="download.php?filename=<?= "$tr1->name" ?>&userid=<?= "$tr->userid" ?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit">
+                                            <i class="fas fa-cloud-download-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <!-- Datei löschen-->
+                                <td>
+                                    <form action="delete_to_trash.php?filename=<?="$tr1->name" ?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                        <td></td>
+                                <?php
+                                $sql7 = "SELECT firstname, surname FROM webprojekt WHERE userid=$owner";
+                                $query7 = $db->prepare($sql7);
+                                $query7->execute();
+                                while ($tr2 = $query7->fetchObject()) {
+                                    echo "<td>" . "$tr2->firstname" . " " . "$tr2->surname" . "</td>";
+                                    ?>
 
-                            <td>
-                                <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit">
-                                        <i class="fas fa-cloud-download-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-
-                            <!-- Datei löschen-->
-                            <td>
-                                <form action="delete_to_trash.php?filename=<?="$tr->name" ?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-
-                            <?php
-                            $sql7 = "SELECT firstname, surname FROM webprojekt WHERE userid=$owner";
-                            $query7 = $db->prepare($sql7);
-                            $query7->execute();
-                            while ($tr2 = $query7->fetchObject()) {
-                            echo "<th></th>";
-                            echo "<td>" . "$tr2->firstname" . " " . "$tr2->surname" . "</td>";
-                            ?>
-
-                            <?php
-                            $sql6 = "SELECT size FROM dateien WHERE id=$fileid";
-                            $query6 = $db ->prepare($sql6);
-                            $query6 ->execute();
-                            while ($tr = $query6->fetchObject()) {
-                            echo "<td>" . "$tr->size" . "Bytes". "</td>";
-                            echo "</tr>";}
+                                    <?php
+                                    $sql6 = "SELECT size FROM dateien WHERE id=$fileid";
+                                    $query6 = $db ->prepare($sql6);
+                                    $query6 ->execute();
+                                    while ($tr6 = $query6->fetchObject()) {
+                                        echo "<td>" . "$tr6->size" . "Bytes". "</td>";
+                                        echo "</tr>";
+                                    }
+                                }
                             }
-                        }
-                    }
-                            ?>
+                        } ?>
                     </table>
                 </div>
                 <?php

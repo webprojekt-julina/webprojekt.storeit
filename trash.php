@@ -115,16 +115,6 @@ $userid = $_SESSION['userid'];
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Papierkorb</h1>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sortieren nach
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <a class="dropdown-item" href="#">Name</a>
-                        <a class="dropdown-item" href="#">Änderungsdatum</a>
-                        <a class="dropdown-item" href="#">Eigentümer</a>
-                    </div>
-                </div>
             </div>
 
             <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
@@ -195,7 +185,16 @@ $userid = $_SESSION['userid'];
                                 </form>
                             </td>
 
+                            <td>
+                                <form action="trash_cancel.php?filename=<?="$tr->name"?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit"> Wiederherstellen
+                                    </button>
+                                </form>
+                            </td>
+
+
                         <?php
+                        }
                         $sql1 = "SELECT id, name, size FROM dateien WHERE file_delete=1 AND user_id=$userid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
@@ -230,7 +229,7 @@ $userid = $_SESSION['userid'];
 
                                 echo "</tr>";
                             }
-                        }} ?>
+                        } ?>
                     </table>
                 </div>
         </main>
