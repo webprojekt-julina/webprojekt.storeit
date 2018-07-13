@@ -77,6 +77,7 @@ $userid = $_SESSION['userid'];
             </form>
         </div>
 </div>
+
 <script>
     document.querySelector("html").classList.add('js');
 
