@@ -29,7 +29,8 @@ else {
         $statement->bindParam(2, $dateiname);
         $statement->execute();
 
-         if (strlen($_POST['email-noUser']) > 6) {   //Teilen mit Nicht-Usern
+//Teilen mit Nicht-Usern
+         if (strlen($_POST['email-noUser']) > 6) {
              $email = $_POST['email-noUser'];
              $subject="Filesharing mit store.it";
              $content= '<html>
