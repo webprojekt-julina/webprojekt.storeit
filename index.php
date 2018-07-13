@@ -54,6 +54,7 @@ $userid = $_SESSION['userid'];
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+
     <?php require ("connection.php");
     $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
     foreach ($db->query($sqls1) as $row) ?>
@@ -115,16 +116,6 @@ $userid = $_SESSION['userid'];
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Startseite</h1>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sortieren nach
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <a class="dropdown-item" href="#">Name</a>
-                        <a class="dropdown-item" href="#">Änderungsdatum</a>
-                        <a class="dropdown-item" href="#">Eigentümer</a>
-                    </div>
-                </div>
             </div>
 
             <!--Dateien aus upload/files/ Ordner auslesen und anzeigen-->
