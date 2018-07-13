@@ -73,7 +73,7 @@ $userid = $_SESSION['userid'];
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href=index.php>
+                        <a class="nav-link" href=index.php>
                             <span data-feather="home"></span>
                             Alle Dateien <span class="sr-only"></span>
                         </a>
@@ -91,7 +91,7 @@ $userid = $_SESSION['userid'];
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=trash.php>
+                        <a class="nav-link active" href=trash.php>
                             <span data-feather="trash-2"></span>
                             Papierkorb
                         </a>
@@ -125,6 +125,7 @@ $userid = $_SESSION['userid'];
                         echo "<tr>";
                         echo "<th> Dateiname </th>";
                         echo "<th></th>";
+                        echo "<th></th>";
                         echo "<th> erstellt von</th>";
                         echo "<th> Dateigröße</th>";
                         echo "</thead>";
@@ -149,7 +150,15 @@ $userid = $_SESSION['userid'];
                                     </button>
                                 </form>
                             </td>
+
+                            <td>
+                                <form action="trash_cancel.php?ordnerid=<?="$ts->ordnerid"?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit"> Wiederherstellen
+                                    </button>
+                                </form>
+                            </td>
                             <?php
+
                         }
 
                         $statement = $db->prepare("SELECT file_id FROM teilen WHERE userid=?");
@@ -170,6 +179,13 @@ $userid = $_SESSION['userid'];
                                 <form action="delete.php?filename=<?="$tr->name"?>" method="post">
                                     <button class="btn btn-primary btn-sm" type="submit" >
                                         <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                <form action="trash_cancel.php?filename=<?="$tr->name"?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit"> Wiederherstellen
                                     </button>
                                 </form>
                             </td>
