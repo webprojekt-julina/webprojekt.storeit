@@ -7,7 +7,6 @@ if(!isset($_SESSION['userid'])) {
 //Abfrage der Nutzer ID vom Login
 $userid = $_SESSION['userid'];
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,15 +15,38 @@ $userid = $_SESSION['userid'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Einstellungen</title>
+    <title>Datei teilen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-    <link href="settings.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
+            color: #515151;
+            background: #FCFDFD;
+        }
+        #sm {
+            margin-bottom: 3%;
+            font-weight: normal;
+            text-align: center;
+            color: #007bff;
+        }
+        form {
+            width: 225px;
+            margin: 0 auto;
+            text-align:center;
+        }
+       .txtcenter {
+            margin-top: 5%;
+            font-size: 1.2em;
+            text-align: center;
+            color: #515151;
+        }
+    </style>
 </head>
 
-<body>
+<body class="text-center">
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
@@ -45,35 +67,49 @@ $userid = $_SESSION['userid'];
         </div>
     </div>
 </nav>
-<div id="settings">
-    <h1 id="lg">Einstellungen</h1>  <br><br>
-    <h2 id="sm">Lade dein persönliches Profilbild hoch</h2>
-    <p class="txtcenter"><b>Achtung!</b><br />Die maximale Größe beträgt 50 MB.</p><br>
-        <div id="inputs">
-            <form action="upload_profilepic.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="uploadfile" id="uploadfile" style="display:block;"><br>
-                <input type="submit" value="Datei hochladen" name="submit" style="display:block;">
-            </form>
-        </div>
+<div class='txtcenter' id="share">
+    <br>
+    <h2 id="sm">Teile Dateien mit anderen Personen</h2>
+    <p>Mit anderen registrierten Nutzern teilen:</p>
+    <?php $dname= $_GET['dateiname'] ?>
+        <form action="share.php?dateiname=<?= $dname ?>" method="post">
+                <div class='input-group'>
+                <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse' required>
+            </div>
+            <button type='submit' value='Teilen' name='subUser' class='btn btn-primary'>
+                    <i class='fa fa-share'></i> Teilen
+                </button>
+            <!--------------------------   Nicht registrierte Benutzer ----------------->
+            <br>
+            <br>
+            <br>
+            <p>Mit nicht-registrierten Personen teilen:</p>
+            <div class='input-group'>
+                <input type='email' name='email-noUser' class='form-control' placeholder='E-Mail-Adresse' required>
+            </div>
+            <button type='submit' value='Teilen' name='subNUser'
+                        class='btn btn-primary'><i class='fa fa-share'></i> Teilen
+                </button>
+        </form>
 </div>
 <script>
     document.querySelector("html").classList.add('js');
 
     var fileInput  = document.querySelector( ".input-file" ),
-    button     = document.querySelector( ".input-file-trigger" ),
-    the_return = document.querySelector(".file-return");
+        button     = document.querySelector( ".input-file-trigger" ),
+        the_return = document.querySelector(".file-return");
 
     button.addEventListener( "keydown", function( event ) {
-    if ( event.keyCode == 13 || event.keyCode == 32 ) {
-    fileInput.focus();
-    }
+        if ( event.keyCode == 13 || event.keyCode == 32 ) {
+            fileInput.focus();
+        }
     });
     button.addEventListener( "click", function( event ) {
-    fileInput.focus();
-    return false;
+        fileInput.focus();
+        return false;
     });
     fileInput.addEventListener( "change", function( event ) {
-    the_return.innerHTML = this.value;
+        the_return.innerHTML = this.value;
     });
 </script>
 <!-- Bootstrap core JavaScript
@@ -87,6 +123,15 @@ $userid = $_SESSION['userid'];
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script>
     feather.replace()
+</script>
+
+<!-- jQuery für Teilen - ein 'input' required zum abschicken des Formulars--->
+<script> jQuery(function ($) {
+        var $inputs = $('input[name=emailUser],input[name=email-noUser]');
+        $inputs.on('input', function () {
+            $inputs.not(this).prop('required', !$(this).val().length);
+        });
+    });
 </script>
 
 <!-- script für die dropdowns-->
@@ -121,4 +166,3 @@ $userid = $_SESSION['userid'];
 </script>
 </body>
 </html>
-

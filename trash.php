@@ -173,8 +173,7 @@ $userid = $_SESSION['userid'];
                                     </button>
                                 </form>
                             </td>
-
-<?php
+                            <?php
 
                             $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
                             $query2 = $db ->prepare($sql2);

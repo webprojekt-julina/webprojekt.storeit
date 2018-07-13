@@ -14,7 +14,7 @@ if(empty($_GET["dateiname"]))
     die();
 }
 else {
-    $dateiname = $_GET['dateiname'];
+    $dateiname = $_GET["dateiname"];
 
 
     $statement = $db->prepare('SELECT * FROM dateien WHERE user_id=? AND name=?');
@@ -36,10 +36,10 @@ else {
                             <head>
                             </head>
                                 <body>
-                                  <h1>Jemand möchte etwas mit dir teilen...</h1>
+                                  <h2>Jemand möchte etwas mit dir teilen...</h2>
                                   <br><br> 
                                   <span> Lade Dir jetzt die für Dich freigegebene Datei herunter.</span>
-                                  <a href="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/download.php?dateiname=' . $dateiname . '">Einfach hier klicken!</a><br><br>
+                                  <a href="https://mars.iuk.hdm-stuttgart.de/~lb107/webprojekt.storeit/download.php?dateiname=' . $dateiname . '"><button>Einfach hier klicken!</button></a><br><br>
                                   <p>Dein store.it-Team</p> 
                                 </body>';
              $header="From: store.it <lb107@hdm-stuttgart>" . "\r\n" . "Reply-to: No Reply" . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=utf-8'. "\r\n". 'X-Mailer: PHP/' . phpversion();
