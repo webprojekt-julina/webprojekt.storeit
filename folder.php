@@ -14,13 +14,4 @@ if (!$statement->execute()){
         echo 'Datei erfolgreich hochgeladen';
         header ("Location: index.php");
     }
-
-$directory = '/home/jt049/public_html/webprojekt.storeit/uploads/files/';
-
-$folder=$_POST['ordnername'];
-$folderpath=$directory.$folder;
-
-if (!file_exists($folderpath)) {
-    mkdir($folderpath);
-}
 ?>

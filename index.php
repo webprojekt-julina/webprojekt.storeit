@@ -140,6 +140,8 @@ $userid = $_SESSION['userid'];
                         $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
+
+                        //Ordner anzeigen
                         $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=? AND file_delete=0'); // user id eingefügt mit der ich eingeloggt bin
                         $statement->bindParam(1, $userid);
                         $statement->execute();

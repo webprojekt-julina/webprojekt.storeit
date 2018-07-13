@@ -130,6 +130,27 @@ $userid = $_SESSION['userid'];
                         require ("connection.php");
                         include ("header.php");
 
+                        $statement=$db->prepare('SELECT * FROM ordner WHERE file_delete=1 AND user_id=?'); // user id eingefügt mit der ich eingeloggt bin
+                        $statement->bindParam(1, $userid);
+                        $statement->execute();
+
+                        while ($ts = $statement->fetchObject()) {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
+
+                            ?>
+                            <!-- Datei löschen-->
+                            <td>
+                                <form action="delete.php?ordnerid=<?= "$ts->ordnerid" ?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <?php
+                        }
+
                         $statement = $db->prepare("SELECT file_id FROM teilen WHERE userid=?");
                         $statement->bindParam(1, $userid);
                         $statement->execute();

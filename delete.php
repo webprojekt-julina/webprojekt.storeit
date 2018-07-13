@@ -23,3 +23,19 @@ if(isset($_GET['filename'])){
         echo("Datei $dateiname wurde erfolgreich endgültig gelöscht");
         header ("Location: trash.php");
     }}
+
+
+if(isset($_GET['ordnerid'])) {
+    $ordnerid = $_GET['ordnerid'];
+    $statement1 = $db->prepare("DELETE FROM ordner WHERE ordnerid=? AND user_id=?");
+    $statement1->bindParam(1,$ordnerid );
+    $statement1->bindParam(2,$userid);
+    if (!$statement1->execute()) {
+        echo "Datenbank-Fehler:";
+        die();
+    } else {
+        echo("Ordner $ordnerid wurde erfolgreich endgültig gelöscht");
+        header ("Location: trash.php");
+    }
+}
+?>
