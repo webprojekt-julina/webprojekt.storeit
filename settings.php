@@ -48,6 +48,19 @@ $userid = $_SESSION['userid'];
 <div id="settings">
     <h1 id="lg">Einstellungen</h1>  <br><br>
     <h2 id="sm">Lade dein persönliches Profilbild hoch</h2>
+
+    <!--aktuelles Profilbild ausgeben-->
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+        <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="150px" height="auto">
+
+
     <p class="txtcenter"><b>Achtung!</b><br />Die maximale Größe beträgt 50 MB.</p><br>
         <div id="inputs">
             <form action="upload_profilepic.php" method="post" enctype="multipart/form-data">
@@ -56,6 +69,7 @@ $userid = $_SESSION['userid'];
             </form>
         </div>
 </div>
+
 <script>
     document.querySelector("html").classList.add('js');
 
