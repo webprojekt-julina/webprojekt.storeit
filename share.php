@@ -30,7 +30,7 @@ else {
         $statement->execute();
 
 //Teilen mit Nicht-Usern
-         if (strlen($_POST['email-noUser']) > 6) {
+         if (strlen($_POST['email-noUser']) > 5) {
              $email = $_POST['email-noUser'];
              $subject="Filesharing mit store.it";
              $content= '<html>
