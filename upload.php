@@ -26,7 +26,7 @@ if ($_FILES["uploadfile"]["size"] > 500000000 ) {
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('png', 'jpeg','jpg', 'gif', 'pdf', 'key','pages','numbers','xls','doc', 'ppt', 'zip');
+$allowed_extensions = array('png', 'jpeg','jpg', 'gif', 'pdf', 'key','pages','numbers','xls','doc','docx', 'xlsx', 'ppt', 'zip');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
