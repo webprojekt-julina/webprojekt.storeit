@@ -36,9 +36,10 @@ else {
                             <head>
                             </head>
                                 <body>
-                                  <h1>Hallo! Lade Dir jetzt diese für Dich freigegebene Datei herunter.</h1>  
+                                  <h1>Jemand möchte etwas mit dir teilen...</h1>
                                   <br><br> 
-                                  <a href="https://mars.iuk.hdm-stuttgart.de//home/jt049/public_html/webprojekt.storeit/uploads/files/download.php\' . $dateiname . \'">Einfach hier klicken!</a><br><br>
+                                  <span> Lade Dir jetzt die für Dich freigegebene Datei herunter.</span>
+                                  <a href="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/download.php?dateiname=' . $dateiname . '">Einfach hier klicken!</a><br><br>
                                   <p>Dein store.it-Team</p> 
                                 </body>';
              $header="From: store.it <lb107@hdm-stuttgart>" . "\r\n" . "Reply-to: No Reply" . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=utf-8'. "\r\n". 'X-Mailer: PHP/' . phpversion();

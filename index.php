@@ -248,7 +248,8 @@ $userid = $_SESSION['userid'];
 
                                     echo "</tr>";
                                 }
-                        }?>
+                        }
+                        ?>
                     </table>
                 </div>
                 <?php
