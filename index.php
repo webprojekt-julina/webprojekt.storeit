@@ -207,35 +207,7 @@ $userid = $_SESSION['userid'];
                                         </button>
                                     </form>
                                     </td>
-                                <!--Datei teilen-->
-                                <td>
-                                    <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
-                                            data-target='#myShareModal'>
 
-                            <!--Verschieben nach-->
-                            <td>
-                                <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
-                                    <p><input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" value="Verschieben"/></p>
-                                </form>
-                            </td>
-
-                            <!--Dateidownload-->
-                            <td>
-                                <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit">
-                                        <i class="fas fa-cloud-download-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-
-                            <!-- Datei löschen-->
-                            <td>
-                                <form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit" >
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
 
                             <!--Datei teilen-->
                             <td>
