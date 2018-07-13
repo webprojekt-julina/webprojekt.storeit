@@ -5,9 +5,8 @@ $userid = $_SESSION ['userid'];
 
 //Variablen definieren
 $upload_folder = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'; // Upload-Verzeichnis in Mars
-$fileName = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
+$fileName = strtolower(pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME)); //Infos über Dateipfad
 $extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
-$fileType=substr($fileName,strlen($fileName)-3,strlen($fileName) ); $fileName=substr($fileName,0,strlen($fileName)-4 );
 print_r($_FILES);
 
 //Sicherer Upload
@@ -27,7 +26,7 @@ if ($_FILES["uploadfile"]["size"] > 50000000) {
 }
 
 //Überprüfung der Dateiendung
-$allowed_extensions = array('png', 'jpeg', 'jpg');
+$allowed_extensions = array('png', 'jpeg','jpg');
 
 if (!in_array($extension, $allowed_extensions)) {
     echo "Dateiformat nicht zulässig.";
@@ -50,8 +49,9 @@ if(file_exists($new_path)) { //Neuer Dateiname falls die Datei bereits existiert
 //Verschieben der Datei an neuen Pfad
 move_uploaded_file($_FILES['uploadfile']['tmp_name'], $new_path);
 $bild=$_FILES['uploadfile']['name'];
+$new_pb_name=strtolower($bild);
 $statement= $db ->prepare("UPDATE webprojekt SET bild=? WHERE userid=$userid ");
-$statement ->bindParam(1,$bild);
+$statement ->bindParam(1,$new_pb_name);
 if (!$statement->execute()){
     echo "Datenbank-Fehler:";
     echo $statement->errorInfo()[2];

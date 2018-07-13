@@ -36,8 +36,14 @@ $userid = $_SESSION['userid'];
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" href=""></a>
-            <a class="dropdown-item" href="#">Datei hochladen
+            <a class="dropdown-item" href="#">
+                <form action="folder.php" method="post">
+                    <p> <input type="text" name="ordnername" placeholder="Benenne deinen Ordner"/> <input type="submit" value="Ordner erstellen"/>
+                    </p>
+                </form>
+            </a>
+
+            <a class="dropdown-item" href="#">
                 <form action="upload.php" method="post"
                       enctype="multipart/form-data">
                     <input type="file" name="uploadfile"
@@ -45,22 +51,28 @@ $userid = $_SESSION['userid'];
                     <input type="submit" value="Datei hochladen" name="submit">
                 </form>
             </a>
-            <a class="dropdown-item" href="#">Ordner hochladen</a>
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+    <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="33px" height="auto">
+
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
+            Hallo,
+            <?php require ("connection.php");
+            $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
+            foreach ($db->query($sqls) as $rows) {
+                echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="settings.php"><?php require ("connection.php");$sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls1) as $row) ?></a>
-            <?php
-            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
-            $filename= $row['bild'];
-            $filepath=$directory.$filename;
-            ?>
-            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
             <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
@@ -149,21 +161,40 @@ $userid = $_SESSION['userid'];
                                     </button>
                                 </form>
                             </td>
+                            <td></td>
+                            <td></td>
                             <?php
                         }
-
                         $statement = $db->prepare("SELECT file_id FROM teilen WHERE userid=?");
                         $statement->bindParam(1, $userid);
                         $statement->execute();
                         while($row=$statement->fetch()) {
                             $fileid=$row['file_id']; }
 
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE file_delete=1 AND user_id=$userid OR id=$fileid";
+                        //zeigt gelöschte Dateien, die mir gehören -> meine userid haben
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE file_delete=1 AND id=$fileid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                         while ($tr = $query1->fetchObject()){
                             echo "<tbody>";
                             echo "<tr>";
+                            echo "<td>" . "$tr->name". "</td>";
+                            ?>
+                            <td>
+                                <form action="delete.php?filename=<?="$tr->name"?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit" >
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+
+                        <?php
+                        $sql1 = "SELECT id, name, size FROM dateien WHERE file_delete=1 AND user_id=$userid";
+                        $query1 = $db ->prepare($sql1);
+                        $query1 ->execute();
+                        while ($tr = $query1->fetchObject()){
+                        echo "<tbody>";
+                        echo "<tr>";
                             echo "<td>" . "$tr->name". "</td>";
                             ?>
                             <td>
@@ -185,7 +216,7 @@ $userid = $_SESSION['userid'];
 
                                 echo "</tr>";
                             }
-                        } ?>
+                        }} ?>
                     </table>
                 </div>
         </main>

@@ -54,27 +54,25 @@ $userid = $_SESSION['userid'];
         </div>
     </div>
     <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+    <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="33px" height="auto">
+
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, <!--Anzeigen des jeweiligen Nutzernamens, der angemeldet ist-->
+            Hallo,
             <?php require ("connection.php");
             $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
-            foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; }
-            ?>
+            foreach ($db->query($sqls) as $rows) {
+                echo $rows['firstname']; } ?>
         </button>
-
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="settings.php">
-                <!-- Anzeigen des Benutzerbilds, des eingeloggten Nutzers-->
-                <?php require ("connection.php");
-                $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
-                foreach ($db->query($sqls1) as $row) ?></a>
-            <?php
-            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
-            $filename= $row['bild'];
-            $filepath=$directory.$filename;
-            ?>
-            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
             <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
@@ -207,35 +205,6 @@ $userid = $_SESSION['userid'];
                                         </button>
                                     </form>
                                     </td>
-                                <!--Datei teilen-->
-                                <td>
-                                    <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
-                                            data-target='#myShareModal'>
-
-                            <!--Verschieben nach-->
-                            <td>
-                                <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
-                                    <p><input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" value="Verschieben"/></p>
-                                </form>
-                            </td>
-
-                            <!--Dateidownload-->
-                            <td>
-                                <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit">
-                                        <i class="fas fa-cloud-download-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-
-                            <!-- Datei löschen-->
-                            <td>
-                                <form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit" >
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
 
                             <!--Datei teilen-->
                             <td>
