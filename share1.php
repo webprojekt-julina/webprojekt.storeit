@@ -45,7 +45,7 @@ if ($_POST['emailUser']) {
         echo 'Datei erfolgreich geteilt';
     }
 }
-//Teilen mit Nicht-Usern
+// Nicht-User
 if ($_POST['email-noUser']) {
     $email = $_POST['email-noUser'];
     $subject="Filesharing mit store.it";

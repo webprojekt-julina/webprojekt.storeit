@@ -25,12 +25,12 @@ $userid = $_SESSION['userid'];
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
-    <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+<nav class="navbar navbar-light flex-md-nowrap p-0 shadow" style="background-color: rgb(67,140,202);">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php" style="background-color: rgb(67,140,202); color: #ffffff;">store.it</a>
+    <input class="form-control form-control-dark w-10 search" type="text" aria-label="Search">
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo, <?php require ("connection.php");$sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls) as $rows) { echo $rows['firstname']; } ?>
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Einstellungen
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="settings.php"><?php require ("connection.php");$sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls1) as $row) ?></a>

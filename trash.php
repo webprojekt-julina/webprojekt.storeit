@@ -29,10 +29,10 @@ $userid = $_SESSION['userid'];
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
+<nav class="navbar navbar-light flex-md-nowrap p-0 shadow" style="background-color: rgb(67,140,202);">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php" style="background-color: rgb(67,140,202); color: #ffffff;">store.it</a>
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Neu
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
@@ -53,7 +53,8 @@ $userid = $_SESSION['userid'];
             </a>
         </div>
     </div>
-    <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+    <input class="form-control form-control-dark w-10 search" aria-label="Search">
+
     <?php require ("connection.php");
     $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
     foreach ($db->query($sqls1) as $row) ?>
@@ -65,8 +66,8 @@ $userid = $_SESSION['userid'];
     <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="33px" height="auto">
 
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo,
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hallo, <!--Anzeigen des jeweiligen Nutzernamens, der angemeldet ist-->
             <?php require ("connection.php");
             $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
             foreach ($db->query($sqls) as $rows) {
@@ -84,20 +85,20 @@ $userid = $_SESSION['userid'];
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href=index.php>
+                    <li class="nav-item"><div></div>
+                        <a class="nav-link active" href=index.php>
                             <span data-feather="home"></span>
                             Alle Dateien <span class="sr-only"></span>
                         </a>
-                    </li>
+                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=my_files.php>
+                        <a class="nav-link active" href=my_files.php>
                             <span data-feather="user"></span>
                             Meine Uploads
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=files_for_me.php>
+                        <a class="nav-link active" href=files_for_me.php>
                             <span data-feather="users"></span>
                             Für mich freigegeben
                         </a>
