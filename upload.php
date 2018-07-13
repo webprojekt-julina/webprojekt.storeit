@@ -7,15 +7,16 @@ $userid = $_SESSION ['userid'];
 $upload_folder = '/home/jt049/public_html/webprojekt.storeit/uploads/files/'; // Upload-Verzeichnis in Mars
 $fileName = pathinfo ($_FILES['uploadfile']['name'], PATHINFO_FILENAME); //Infos über Dateipfad
 $extension = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
-print_r($_FILES);
 
 //Sicherer Upload
 
 //Überprüfung des Dateinamen
-echo "Dateiname: ".$_FILES["uploadfile"]["name"]."<br>";
 if($_FILES["uploadfile"]["name"]=="")
 {
-    echo "Fehlerhafter Dateiname";
+    echo "Fehlerhafter Dateiname";?>
+    <a href="index.php">Zurück zur Startseite</a>
+
+    <?php
     die ();
 }
 
@@ -59,7 +60,6 @@ if (!$statement->execute()){
     echo $statement->errorInfo()[2];
     echo $statement->queryString;
     die();}
-echo 'Datei erfolgreich hochgeladen <a href="'.$new_path.'">'.$new_path. '</a>';
 header ("Location: index.php");
 
 

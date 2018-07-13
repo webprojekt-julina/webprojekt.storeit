@@ -25,21 +25,29 @@ $userid = $_SESSION['userid'];
 </head>
 
 <body>
-<nav class="navbar navbar-light flex-md-nowrap p-0 shadow" style="background-color: rgb(67,140,202);">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php" style="background-color: rgb(67,140,202); color: #ffffff;">store.it</a>
-    <input class="form-control form-control-dark w-10 search" type="text" aria-label="Search">
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">store.it</a>
+    <input class="form-control form-control-dark w-10 search" type="text" placeholder="Search" aria-label="Search">
+
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+        <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="33px" height="auto">
+
     <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Einstellungen
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hallo, <!--Anzeigen des jeweiligen Nutzernamens, der angemeldet ist-->
+            <?php require ("connection.php");
+            $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
+            foreach ($db->query($sqls) as $rows) {
+                echo $rows['firstname']; } ?>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="settings.php"><?php require ("connection.php");$sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid"; foreach ($db->query($sqls1) as $row) ?></a>
-            <?php
-            $directory="/home/jt049/public_html/webprojekt.storeit/uploads/files/";
-            $filename= $row['bild'];
-            $filepath=$directory.$filename;
-            ?>
-            <a class="dropdown-item" href="#"><img src='<?="$filepath"?>' width="50px" height="80px"</a>
             <a class="dropdown-item" href="settings.php">Einstellungen</a>
             <a class="dropdown-item" href="logout.php">Abmelden</a>
         </div>
@@ -48,6 +56,19 @@ $userid = $_SESSION['userid'];
 <div id="settings">
     <h1 id="lg">Einstellungen</h1>  <br><br>
     <h2 id="sm">Lade dein persönliches Profilbild hoch</h2>
+
+    <!--aktuelles Profilbild ausgeben-->
+    <?php require ("connection.php");
+    $sqls1 = "SELECT bild FROM webprojekt WHERE userid=$userid";
+    foreach ($db->query($sqls1) as $row) ?>
+        <?php
+    $directory="https://mars.iuk.hdm-stuttgart.de/~jt049/webprojekt.storeit/uploads/files/";
+    $filename= $row['bild'];
+    $filepath=$directory.$filename;
+    ?>
+    <input class="profilbild" type="image" <img src='<?="$filepath"?>' width="150px" height="auto">
+
+
     <p class="txtcenter"><b>Achtung!</b><br />Die maximale Größe beträgt 50 MB.</p><br>
         <div id="inputs">
             <form action="upload_profilepic.php" method="post" enctype="multipart/form-data">
@@ -56,6 +77,7 @@ $userid = $_SESSION['userid'];
             </form>
         </div>
 </div>
+
 <script>
     document.querySelector("html").classList.add('js');
 
