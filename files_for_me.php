@@ -132,7 +132,7 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT file_id FROM teilen WHERE userid=$userid";
+                        $sql1 = "SELECT * FROM teilen WHERE userid=$userid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
                             ?>
@@ -143,20 +143,20 @@ $userid = $_SESSION['userid'];
                         $fileid= $tr->file_id;
 
 
-                        $sql5 = "SELECT name, user_id FROM dateien WHERE id=$fileid AND file_delete=0";
+                        $sql5 = "SELECT * FROM dateien WHERE id=$fileid AND file_delete=0";
                         $query5 = $db ->prepare($sql5);
                         $query5 ->execute();
 
-                        while ($tr = $query5->fetchObject()) {
+                        while ($tr1 = $query5->fetchObject()) {
                         echo "<tbody>";
                         echo "<tr>";
-                        echo "<td>" . "$tr->name" . "</td>";
-                        $owner= $tr->user_id;
+                        echo "<td>" . "$tr1->name" . "</td>";
+                        $owner= $tr1->user_id;
                         ?>
 
                         <!--Dateidownload-->
                         <td>
-                            <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
+                            <form action="download.php?filename=<?= "$tr1->name" ?>&userid=<?= "$tr->userid" ?>" method="post">
                                 <button class="btn btn-primary btn-sm" type="submit">
                                     <i class="fas fa-cloud-download-alt"></i>
                                 </button>
@@ -164,7 +164,7 @@ $userid = $_SESSION['userid'];
                         </td>
                         <!-- Datei löschen-->
                         <td>
-                            <form action="delete_to_trash.php?filename=<?="$tr->name" ?>" method="post">
+                            <form action="delete_to_trash.php?filename=<?="$tr1->name" ?>" method="post">
                                 <button class="btn btn-primary btn-sm" type="submit">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -183,8 +183,8 @@ $userid = $_SESSION['userid'];
                                 $sql6 = "SELECT size FROM dateien WHERE id=$fileid";
                                 $query6 = $db ->prepare($sql6);
                                 $query6 ->execute();
-                                while ($tr = $query6->fetchObject()) {
-                                    echo "<td>" . "$tr->size" . "Bytes". "</td>";
+                                while ($tr6 = $query6->fetchObject()) {
+                                    echo "<td>" . "$tr6->size" . "Bytes". "</td>";
                                     echo "</tr>";
                                 }
                             }

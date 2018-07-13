@@ -131,18 +131,41 @@ $userid = $_SESSION['userid'];
                         echo "</thead>";
                         require ("connection.php");
                         include ("header.php");
-                        $sql1 = "SELECT name, size FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0 AND ordner_id=0";
+                        $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND freigabe=0 AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
+
+                        $statement=$db->prepare('SELECT * FROM ordner WHERE user_id=? AND file_delete=0'); // user id eingefügt mit der ich eingeloggt bin
+                        $statement->bindParam(1, $userid);
+                        $statement->execute();
+
+                        while ($ts = $statement->fetchObject()) {
+                            echo "<tbody>";
+                            echo "<tr>";
+                            echo "<td>" ."<a href='folder_content.php?ordnerid=$ts->ordnerid'>$ts->name</a>" . "</td>";
+
+                            ?>
+                            <!-- Datei löschen-->
+                            <td></td>
+                            <td>
+                                <form action="delete_to_trash.php?ordnerid=<?= "$ts->ordnerid" ?>" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <?php
+                        }
                         while ($tr = $query1->fetchObject()){
                             echo "<tbody>";
                             echo "<tr>";
                             echo "<td>" . "$tr->name". "</td>";
 
                             ?>
+
                             <!--Dateidownload-->
                             <td>
-                                <form action="download.php?filename=<?="$tr->name"?>" method="post">
+                                <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
                                     <button class="btn btn-primary btn-sm" type="submit" >
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </button>

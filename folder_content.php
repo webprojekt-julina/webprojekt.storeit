@@ -132,7 +132,7 @@ $userid = $_SESSION['userid'];
                         require ("connection.php");
                         include ("header.php");
                         $ordnerid=$_GET['ordnerid'];
-                        $sql1 = "SELECT name FROM dateien WHERE ordner_id=$ordnerid";
+                        $sql1 = "SELECT * FROM dateien WHERE ordner_id=$ordnerid";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
 
@@ -146,7 +146,7 @@ $userid = $_SESSION['userid'];
                                 ?>
                                 <!--Dateidownload-->
                                 <td>
-                                    <form action="download.php?filename=<?= "$tr->name" ?>" method="post">
+                                    <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
                                         <button class="btn btn-primary btn-sm" type="submit">
                                             <i class="fas fa-cloud-download-alt"></i>
                                         </button>

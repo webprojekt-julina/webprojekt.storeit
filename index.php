@@ -148,7 +148,7 @@ $userid = $_SESSION['userid'];
                         require ("connection.php");
                         include ("header.php");
                         //gibt Dateien aus, die meine Userid, weder gelöscht oder in einem Ordner sind & meine haben und in Dateien-Tabelle stehen
-                        $sql1 = "SELECT id, name, size FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
+                        $sql1 = "SELECT * FROM dateien WHERE user_id=$userid AND file_delete=0 AND ordner_id=0";
                         $query1 = $db ->prepare($sql1);
                         $query1 ->execute();
 
@@ -185,6 +185,32 @@ $userid = $_SESSION['userid'];
                                 echo "<tr>";
                                 echo "<td>" . "$tr->name" . "</td>"; //Name der Datei aus Zeile wird ausgegeben
                                 ?>
+
+                                <!--Verschieben nach-->
+                                <td>
+                                    <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
+                                        <p><input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" value="Verschieben"/></p>
+                                    </form>
+                                </td>
+                                <!--Dateidownload-->
+                                <td>
+                                    <form action="download.php?filename=<?= "$tr->name" ?>&userid=<?= "$tr->user_id" ?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit">
+                                            <i class="fas fa-cloud-download-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                 <!-- Datei löschen-->
+                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                        <button class="btn btn-primary btn-sm" type="submit" >
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    </td>
+                                <!--Datei teilen-->
+                                <td>
+                                    <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal'
+                                            data-target='#myShareModal'>
 
                             <!--Verschieben nach-->
                             <td>

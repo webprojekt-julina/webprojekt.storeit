@@ -21,20 +21,24 @@ $userid = $_SESSION['userid'];
         'application/mspowerpoint',
         'application/zip');
 
-if(empty($_GET["filename"]))
-{
-    echo " keine Datei angegeben";
-    die();
-}
-else
-{
-    $filename=$_GET["filename"];
-}
-$filepath=$directory.$filename;
-header("Content-Type:".$mimetype);
-header('Content-Disposition: attachment;filename="'.$filename.'"');
-header("Content-Transfer-Encoding: binary ");
-header("Content-Length: ".filesize($filepath));
-readfile($filepath);
+    $ownerid=$_GET['userid'];
+    if($ownerid!==$userid) {
+        echo "Die Datei steht Ihnen nicht zum Download zur Verfügung!";
 
-?>
+        if (empty($_GET["filename"])) {
+            echo " keine Datei angegeben";
+            die();
+        }
+    }
+    else
+    {
+        $filename=$_GET["filename"];
+    }
+    $filepath=$directory.$filename;
+    header("Content-Type:".$mimetype);
+    header('Content-Disposition: attachment;filename="'.$filename.'"');
+    header("Content-Transfer-Encoding: binary ");
+    header("Content-Length: ".filesize($filepath));
+    readfile($filepath);
+
+    ?>
