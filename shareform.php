@@ -72,7 +72,7 @@ $userid = $_SESSION['userid'];
     <h2 id="sm">Teile Dateien mit anderen Personen</h2>
     <p>Mit anderen registrierten Nutzern teilen:</p>
     <?php $dname= $_GET['dateiname'] ?>
-        <form action="share.php?dateiname=<?= $dname ?>" method="post">
+        <form action="share1.php?dateiname=<?= $dname ?>" method="post">
                 <div class='input-group'>
                 <input type='email' name='emailUser' class='form-control' placeholder='E-Mail Addresse' required>
             </div>
