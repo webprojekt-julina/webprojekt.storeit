@@ -34,6 +34,11 @@ if(isset($_GET['ordnerid'])) {
         echo "Datenbank-Fehler:";
         die();
     } else {
+        $statement2 = $db->prepare("DELETE FROM dateien WHERE ordner_id=? AND user_id=?");
+        $statement2->bindParam(1,$ordnerid );
+        $statement2->bindParam(2,$userid);
+        $statement2->execute();
+
         echo("Ordner $ordnerid wurde erfolgreich endgültig gelöscht");
         header ("Location: trash.php");
     }

@@ -38,7 +38,7 @@ $userid = $_SESSION['userid'];
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <a class="dropdown-item" href="#">
                 <form action="folder.php" method="post">
-                    <p> <input type="text" name="ordnername" placeholder="Benenne deinen Ordner"/> <input type="submit" value="Ordner erstellen"/>
+                    <p> <input type="text" name="ordnername" placeholder="Benenne deinen Ordner" required/> <input type="submit" value="Ordner erstellen"/>
                     </p>
                 </form>
             </a>
@@ -66,7 +66,7 @@ $userid = $_SESSION['userid'];
 
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Hallo,
+            Hallo, <!--Anzeigen des jeweiligen Nutzernamens, der angemeldet ist-->
             <?php require ("connection.php");
             $sqls = "SELECT firstname FROM webprojekt WHERE userid=$userid";
             foreach ($db->query($sqls) as $rows) {
@@ -163,7 +163,7 @@ $userid = $_SESSION['userid'];
                             ?>
 
                             <!-- Datei löschen-->
-                       <td></td>
+                            <td></td>
                             <td></td>
                             <td>
                                 <form action="delete_to_trash.php?ordnerid=<?= "$ts->ordnerid" ?>" method="post">
@@ -187,7 +187,7 @@ $userid = $_SESSION['userid'];
                                 <!--Verschieben nach-->
                                 <td>
                                     <form action="verschieben.php?filename=<?="$tr->name"?>" method="post">
-                                        <p><input type="text" name="ordnername" placeholder="Ordnername"/> <input type="submit" value="Verschieben"/></p>
+                                        <p><input type="text" name="ordnername" placeholder="Ordnername" required/> <input type="submit" value="Verschieben"/></p>
                                     </form>
                                 </td>
                                 <!--Dateidownload-->
@@ -199,61 +199,20 @@ $userid = $_SESSION['userid'];
                                     </form>
                                 </td>
                                  <!-- Datei löschen-->
-                                    <td><form action="delete_to_trash.php?filename=<?="$tr->name"?>" method="post">
+                                <td>
+                                    <form action="delete_to_trash.php?filename=<?= "$tr->name" ?>" method="post"  name="dateiname">
                                         <button class="btn btn-primary btn-sm" type="submit" >
                                             <i class="far fa-trash-alt"></i>
                                         </button>
                                     </form>
-                                    </td>
-
-                            <!--Datei teilen-->
-                            <td>
-                                    <button class='btn btn-primary btn-sm' title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
-                                        <i class='fa fa-share-alt'></i>
-                                    </button>
-                                    <div class='modal fade' id='myShareModal' tabindex='-1' role='dialog'
-                                         aria-labelledby='myModalLabel' aria-hidden='true'>
-                                        <div class='modal-dialog'>
-                                            <div class='modal-content'>
-                                                <div class='modal-header'>
-                                                    <button type='button' class='close' data-dismiss='modal'
-                                                            aria-hidden='true'>&times;
-                                                    </button>
-                                                    <h2><i class='fa fa-envelope'></i> Datei teilen:</h2>
-                                                </div>
-                                                <div class='modal-body'>
-                                                    <br>
-                                                    <p>Mit anderen registrierten Nutzern teilen:</p>
-                                                    <form action="share.php?dateiname=<?= "$tr->name" ?>" method="post">
-                                                        <div class='input-group'>
-                                                            <input type='email' name='emailUser' class='form-control'
-                                                                   placeholder='E-Mail Addresse'>
-                                                        </div>
-                                                        <br/>
-                                                        <button type='submit' value='Teilen' name='subUser'
-                                                                class='btn btn-primary'><i class='fa fa-share'></i>
-                                                            Teilen
-                                                        </button>
-                                                        <!--------------------------   Nicht registrierte Benutzer ----------------->
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <p>Mit nicht-registrierten Personen teilen:</p>
-                                                        <div class='input-group'>
-                                                            <input type='email' name='email-noUser' class='form-control'
-                                                                   placeholder='E-Mail-Adresse'>
-                                                        </div>
-                                                        <br/>
-                                                        <button type='submit' value='Teilen' name='subNUser'
-                                                                class='btn btn-primary'><i class='fa fa-share'></i>
-                                                            Teilen
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                </td>
+                                <!--Datei teilen-->
+                                <td>
+                                    <form action="shareform.php?dateiname=<?="$tr->name"?>" method="post">
+                                        <button class='btn btn-primary btn-sm' id="#share" title='Datei teilen' data-toggle='modal' data-target='#myShareModal'>
+                                            <i class='fa fa-share-alt'></i>
+                                        </button>
+                                    </form>
                                 <?php
                                 //gibt Vor- & Nachname des Erstellers der Datei aus
                                 $sql2 = "SELECT firstname, surname FROM webprojekt WHERE userid=$userid";
@@ -340,7 +299,7 @@ $userid = $_SESSION['userid'];
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<!-- Scripts zur Ladegeschwindigkeitsoptimierung-->
+<!-- Script-Quellen-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
